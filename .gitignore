@@ -1,0 +1,17 @@
+# Frontend
+/frontend/.angular/cache
+/frontend/node_modules
+/frontend/npm-debug.log
+/frontend/yarn-error.log
+/frontend/.vscode/*
+/frontend/.history/*
+/frontend/.angular/cache
+/frontend.sass-cache/
+/frontend/connect.lock
+/frontend/coverage
+/frontend/libpeerconnection.log
+/frontendtestem.log
+/frontend/typings
+
+# Backend
+/Backend/node_modules
