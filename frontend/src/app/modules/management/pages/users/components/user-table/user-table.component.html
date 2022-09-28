@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <thead class="table table-dark">
+        <tr>
+            <td scope="col">Nro</td>
+            <td scope="col">Nombre</td>
+            <td scope="col">Apellidos</td>
+            <td scope="col">Telefono</td>
+            <td scope="col">Email</td>
+            <td scope="col">Opciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{user.name}}</td>
+            <td>{{user.lastnames}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.email}}</td>
+            <td>
+                <button class="btn btn-success me-4">Editar</button>
+                <button class="btn btn-danger">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
