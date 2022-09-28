@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <thead class="table table-dark">
+        <tr>
+            <td scope="col">Nro</td>
+            <td scope="col">Titulo</td>
+            <td scope="col">Genero</td>
+            <td scope="col">Clasificacion</td>
+            <td scope="col">Duracion</td>
+            <td scope="col">Opciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let movie of movies; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{movie.title}}</td>
+            <td>{{movie.genre}}</td>
+            <td>{{movie.rating}}</td>
+            <td>{{movie.length}}</td>
+            <td>
+                <button class="btn btn-success me-4">Editar</button>
+                <button class="btn btn-danger">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
