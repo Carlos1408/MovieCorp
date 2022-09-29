@@ -12,8 +12,6 @@
 /frontend/libpeerconnection.log
 /frontendtestem.log
 /frontend/typings
-/frontend/package-lock.json
 
 # Backend
-/backend/node_modules
-/backend/package-lock.json
+/Backend/node_modules
