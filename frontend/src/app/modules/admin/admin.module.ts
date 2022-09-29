@@ -10,9 +10,23 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CinemasComponent } from './pages/cinemas/cinemas.component';
 import { CinemaTableComponent } from './pages/cinemas/components/cinema-table/cinema-table.component';
 import { CinemaFormComponent } from './pages/cinemas/components/cinema-form/cinema-form.component';
+import { RoomsComponent } from './pages/rooms/rooms.component';
+import { RoomTableComponent } from './pages/rooms/components/room-table/room-table.component';
+import { RoomFormComponent } from './pages/rooms/components/room-form/room-form.component';
 
 @NgModule({
-  declarations: [AdminComponent, MoviesComponent, MovieFormComponent, MovieTableComponent, CinemasComponent, CinemaTableComponent, CinemaFormComponent],
+  declarations: [
+    AdminComponent, 
+    MoviesComponent, 
+    MovieFormComponent, 
+    MovieTableComponent, 
+    CinemasComponent, 
+    CinemaTableComponent, 
+    CinemaFormComponent,
+    RoomsComponent,
+    RoomFormComponent,
+    RoomTableComponent
+  ],
   imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule],
 })
 export class AdminModule {}
