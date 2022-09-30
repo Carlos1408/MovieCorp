@@ -18,7 +18,7 @@
             <td>{{user.email}}</td>
             <td>
                 <button class="btn btn-success me-4">Editar</button>
-                <button class="btn btn-danger">Eliminar</button>
+                <button (click)="handleDelete(user._id)" class="btn btn-danger">Eliminar</button>
             </td>
         </tr>
     </tbody>

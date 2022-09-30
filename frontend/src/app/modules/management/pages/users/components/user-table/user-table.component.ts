@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/shared/interfaces/user';
 
 @Component({
@@ -9,7 +9,16 @@ import { User } from 'src/app/shared/interfaces/user';
 export class UserTableComponent implements OnInit {
   @Input() users!: User[];
 
+  @Output() deleteUser = new EventEmitter<string>();
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  handleDelete(_id?: string) {
+    console.log(_id);
+    if (confirm('Seguro que quiere eliminar el usuario?')) {
+      this.deleteUser.emit(_id);
+    }
+  }
 }
