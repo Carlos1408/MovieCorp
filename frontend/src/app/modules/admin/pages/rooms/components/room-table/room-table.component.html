@@ -2,20 +2,20 @@
     <thead class="table table-dark">
         <tr>
             <th>Nro</th>
+            <th>Numero de Sala</th>
             <th>Cantidad Filas</th>
             <th>Cantidad Columnas</th>
             <th>Precio de la Entrada</th>
-            <th>Numero de Sala</th>
             <th>Opciones</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let room of rooms; index as i">
             <th scope="row">{{i+1}}</th>
+            <td>{{room.roomNum}}</td>
             <td>{{room.nRows}}</td>
             <td>{{room.nCol}}</td>
             <td>{{room.price}}</td>
-            <td>{{room.roomNum}}</td>
             <td>
                 <button class="btn btn-success me-4">Editar</button>
                 <button class="btn btn-danger">Eliminar</button>
