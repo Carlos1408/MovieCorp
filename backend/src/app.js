@@ -12,5 +12,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use("/api/v1/users", require("./routes/users.routes"));
+app.use("/api/v1/cinemas",require("./routes/cinemas.routes"));
 
 module.exports = app;
