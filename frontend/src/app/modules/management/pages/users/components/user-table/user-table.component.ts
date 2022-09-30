@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/shared/interfaces/user';
 
 @Component({
   selector: 'app-user-table',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserTableComponent implements OnInit {
 
-  users = [
+  @Input() users!: User[]
+
+  auxusers = [
     {
       name: 'Carlos',
       lastnames: 'Claure Vargas',
