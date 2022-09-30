@@ -10,4 +10,4 @@ const cinemaSchema = new Schema(
         versionKey: false,
     });
 
-module.exports = model("cinemas", cinemaSchema);
+module.exports = model("cinema", cinemaSchema);
