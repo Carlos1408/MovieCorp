@@ -21,8 +21,10 @@
     "@angular/router": "^14.1.0",
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.11.6",
-    "bootstrap": "^5.2.1",
     "jquery": "^3.6.1",
+    "primeflex": "^3.2.1",
+    "primeicons": "^6.0.1",
+    "primeng": "^14.1.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
