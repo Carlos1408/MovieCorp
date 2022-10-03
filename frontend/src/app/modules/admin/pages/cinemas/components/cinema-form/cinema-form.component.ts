@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Cinema } from 'src/app/shared/interfaces/cinema';
 
 @Component({
   selector: 'app-cinema-form',
@@ -7,18 +8,22 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./cinema-form.component.scss']
 })
 export class CinemaFormComponent implements OnInit {
-  cinemaForm = new FormGroup({
+  @Output() createCinema = new EventEmitter<Cinema>();
+
+  cinemaForm: FormGroup= new FormGroup({
     name: new FormControl(''),
     address: new FormControl(''),
-    nRooms: new FormControl(''),
-    nMovies: new FormControl('')
   });
   constructor() { }
 
   ngOnInit(): void {
   }
   handleSubmit(){
-    console.log(this.cinemaForm.value)
+    this.createCinema.emit(this.cinemaForm.value);
+    this.cinemaForm.reset();
   }
+   handleCancel(){
+    this.cinemaForm.reset();
+   }
 
 }
