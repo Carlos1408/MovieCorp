@@ -34,4 +34,13 @@ export class CinemasComponent implements OnInit {
     });
   }
 
+  deleteCinema(_id: string): void {
+    this.cinemaService.deleteCinema(_id).subscribe({
+      next: (res) => {
+        this.getCinemas();
+      },
+      error: (err) => console.log(err),
+    })
+  }
+
 }

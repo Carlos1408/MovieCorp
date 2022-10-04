@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
 
 @Component({
@@ -8,37 +8,19 @@ import { Cinema } from 'src/app/shared/interfaces/cinema';
 })
 export class CinemaTableComponent implements OnInit {
    @Input() cinemas!: Cinema[];
+   @Output() deletCinema = new EventEmitter<string>();
 
-  /*cinemas = [{
-    name: "Cochabamba",
-    address: "Cochabamba",
-    nRooms: 4,
-    nMovies: 15
-  },{
-    name: "Cochabamba",
-    address: "Cochabamba",
-    nRooms: 4,
-    nMovies: 15
-  },{
-    name: "Cochabamba",
-    address: "Cochabamba",
-    nRooms: 4,
-    nMovies: 15
-  },{
-    name: "Cochabamba",
-    address: "Cochabamba",
-    nRooms: 4,
-    nMovies: 15
-  },{
-    name: "Cochabamba",
-    address: "Cochabamba",
-    nRooms: 4,
-    nMovies: 15
-  },]*/
+
+  
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  handleDelete(_id?: string): void{
+    if(confirm('Seguro que desea eliminar?')){
+      this.deletCinema.emit(_id);
+    }
+  }
 }

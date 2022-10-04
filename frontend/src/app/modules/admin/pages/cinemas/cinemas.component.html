@@ -7,6 +7,6 @@
         <app-cinema-form (createCinema)="createCinema($event)"></app-cinema-form>
     </div>
     <div class="col-8">
-        <app-cinema-table [cinemas]="cinemas"></app-cinema-table>
+        <app-cinema-table [cinemas]="cinemas" (deletCinema)="deleteCinema($event)"></app-cinema-table>
     </div>
 </div>
