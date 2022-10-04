@@ -7,6 +7,6 @@
         <app-user-form (createUser)="createUser($event)"></app-user-form>
     </div>
     <div class="col-8">
-        <app-user-table [users]="users"></app-user-table>
+        <app-user-table (deleteUser)="deleteUser($event)" [users]="users"></app-user-table>
     </div>
 </div>
