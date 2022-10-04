@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Cinema } from 'src/app/shared/interfaces/cinema';
 
 @Component({
   selector: 'app-cinema-table',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cinema-table.component.scss']
 })
 export class CinemaTableComponent implements OnInit {
+   @Input() cinemas!: Cinema[];
 
-  cinemas = [{
+  /*cinemas = [{
     name: "Cochabamba",
     address: "Cochabamba",
     nRooms: 4,
@@ -32,7 +34,7 @@ export class CinemaTableComponent implements OnInit {
     address: "Cochabamba",
     nRooms: 4,
     nMovies: 15
-  },]
+  },]*/
 
   constructor() { }
 
