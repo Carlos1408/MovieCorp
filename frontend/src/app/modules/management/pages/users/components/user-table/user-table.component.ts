@@ -10,6 +10,7 @@ export class UserTableComponent implements OnInit {
   @Input() users!: User[];
 
   @Output() deleteUser = new EventEmitter<string>();
+  @Output() editUser = new EventEmitter<User>();
 
   constructor() {}
 
@@ -20,5 +21,10 @@ export class UserTableComponent implements OnInit {
     if (confirm('Seguro que quiere eliminar el usuario?')) {
       this.deleteUser.emit(_id);
     }
+  }
+
+  handleEdit(user?: User): void {
+    console.log('edit ', user);
+    this.editUser.emit(user);
   }
 }

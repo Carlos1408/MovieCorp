@@ -9,12 +9,22 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+  handledUser: User = {
+    _id: '',
+    name: '',
+    lastnames: '',
+    birthdate: '',
+    phone: 0,
+    email: '',
+    password: '',
+  };
+
   users: User[] = [];
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.getUsers();
+    this.getUsers();    
   }
 
   getUsers(): void {
@@ -42,5 +52,17 @@ export class UsersComponent implements OnInit {
       },
       error: (err) => console.log(err),
     });
+  }
+
+  fillForm(user: User) {
+    this.handledUser = {
+      _id: user._id,
+      name: user.name,
+      lastnames: user.lastnames,
+      birthdate: user.birthdate,
+      phone: user.phone,
+      email: user.email,
+      password: user.password,
+    };
   }
 }
