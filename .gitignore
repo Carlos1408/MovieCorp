@@ -17,3 +17,4 @@
 # Backend
 /backend/node_modules
 /backend/package-lock.json
+/backend/uploads
