@@ -43,4 +43,17 @@ export class CinemasComponent implements OnInit {
     })
   }
 
+  updateCinema(cinema: Cinema): void {
+    this.cinemaService.updateCinema(cinema).subscribe({
+      next: (res) => {
+        this.getCinemas();
+      },
+      error: (err) => console.log(err),
+    });
+  }
+
+  fileCinemaForm(cinema: Cinema): void {
+    this.cinemaService.fileCinemaForm(cinema);
+  }
+
 }
