@@ -34,6 +34,16 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  updateUser(user: User): void {
+    this.userService.updateUser(user).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getUsers();
+      },
+      error: (err) => console.log(err),
+    });
+  }
+
   deleteUser(_id: string): void {
     this.userService.deleteUser(_id).subscribe({
       next: (res) => {
@@ -42,5 +52,9 @@ export class UsersComponent implements OnInit {
       },
       error: (err) => console.log(err),
     });
+  }
+
+  fillUserForm(user: User): void {
+    this.userService.fillUserForm(user);
   }
 }
