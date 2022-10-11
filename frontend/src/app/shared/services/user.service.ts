@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { User } from '../interfaces/user';
 import { Observable } from 'rxjs';
@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class UserService {
+  $fillUserForm = new EventEmitter<User>();
+
   private URL_API = `${environment.API_BASE_URL}/api/v1/users`;
 
   constructor(private http: HttpClient) {}
@@ -30,5 +32,9 @@ export class UserService {
 
   deleteUser(_id: string): Observable<User> {
     return this.http.delete<User>(`${this.URL_API}/${_id}`);
+  }
+
+  fillUserForm(user: User) {
+    this.$fillUserForm.emit(user);
   }
 }

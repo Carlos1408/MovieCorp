@@ -9,6 +9,7 @@ import { User } from 'src/app/shared/interfaces/user';
 export class UserTableComponent implements OnInit {
   @Input() users!: User[];
 
+  @Output() editUser = new EventEmitter<User>();
   @Output() deleteUser = new EventEmitter<string>();
 
   constructor() {}
@@ -20,5 +21,9 @@ export class UserTableComponent implements OnInit {
     if (confirm('Seguro que quiere eliminar el usuario?')) {
       this.deleteUser.emit(_id);
     }
+  }
+
+  handleEdit(user: User) {
+    this.editUser.emit(user);
   }
 }
