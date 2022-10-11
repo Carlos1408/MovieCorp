@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Cinema } from '../interfaces/cinema';
 import { Observable } from 'rxjs';
@@ -8,6 +8,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class CinemaService {
+  $fillCinemaForm = new EventEmitter<Cinema>();
+
   private URL_API = `${environment.API_BASE_URL}/api/v1/cinemas`
   
   constructor(private http: HttpClient) { }
@@ -30,5 +32,9 @@ export class CinemaService {
   
   deleteCinema(_id: string): Observable<Cinema> {
     return this.http.delete<Cinema>(`${this.URL_API}/${_id}`);
+  }
+
+  fileCinemaForm(cinema: Cinema) {
+    this.$fillCinemaForm.emit(cinema);
   }
 }
