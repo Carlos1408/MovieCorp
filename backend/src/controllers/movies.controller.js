@@ -52,7 +52,11 @@ const updateMovie = async (req, res) => {
     trailer,
   } = req.body;
   const oldMovie = await Movie.findById(id);
-  if (oldMovie) await fs.unlink(path.resolve(oldMovie.imagePath));
+  if (oldMovie) {
+    await fs.unlink(path.resolve(oldMovie.imagePath), (err) => {
+      console.log(err);
+    });
+  }
   const movie = await Movie.findByIdAndUpdate(
     id,
     {
@@ -74,8 +78,11 @@ const updateMovie = async (req, res) => {
 const deleteMovie = async (req, res) => {
   const { id } = req.params;
   const movie = await Movie.findByIdAndRemove(id);
-  console.log(movie);
-  if (movie) await fs.unlink(path.resolve(movie.imagePath));
+  if (movie) {
+    await fs.unlink(path.resolve(movie.imagePath), (err) => {
+      console.log(err);
+    });
+  }
   res.json(movie);
 };
 
