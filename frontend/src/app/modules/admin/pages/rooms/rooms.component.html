@@ -4,9 +4,9 @@
 
 <div class="row">
     <div class="col-4">
-        <app-room-form></app-room-form>        
+        <app-room-form (createRoom)="createRooms($event)"></app-room-form>        
     </div>
     <div class="col-8">
-        <app-room-table></app-room-table>
+        <app-room-table [rooms]="rooms"></app-room-table>
     </div>
 </div>
