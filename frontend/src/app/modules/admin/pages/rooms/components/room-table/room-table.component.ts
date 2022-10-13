@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Room } from 'src/app/shared/interfaces/room';
 
 @Component({
   selector: 'app-room-table',
@@ -6,37 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./room-table.component.scss']
 })
 export class RoomTableComponent implements OnInit {
-  rooms=[{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  },{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  },{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  },{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  },{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  },{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  }]
+  @Input() rooms!: Room[];
+
   constructor() { }
 
   ngOnInit(): void {

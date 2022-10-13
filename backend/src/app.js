@@ -17,5 +17,6 @@ app.use("/uploads", express.static(path.resolve("uploads")));
 app.use("/api/v1/users", require("./routes/users.routes"));
 app.use("/api/v1/cinemas", require("./routes/cinemas.routes"));
 app.use("/api/v1/movies", require("./routes/movies.routes"));
+app.use("/api/v1/rooms",require("./routes/rooms.routes"));
 
 module.exports = app;
