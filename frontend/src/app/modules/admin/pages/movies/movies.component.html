@@ -3,6 +3,10 @@
 </div>
 
 <div class="row">
-    <div class="col-4"><app-movie-form></app-movie-form></div>
-    <div class="col-8"><app-movie-table></app-movie-table></div>
+    <div class="col-4">
+        <app-movie-form (createMovie)="createMovie($event)"></app-movie-form>
+    </div>
+    <div class="col-8">
+        <app-movie-table [movies]="movies"></app-movie-table>
+    </div>
 </div>

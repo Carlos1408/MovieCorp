@@ -1,4 +1,3 @@
-import { AbstractControl, FormGroup } from "@angular/forms";
 export interface Cinema {
     _id?: string;
     name: string;
