@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/shared/interfaces/user';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -23,13 +23,19 @@ export class UserFormComponent implements OnInit {
 
   userForm: FormGroup = new FormGroup({
     _id: new FormControl(''),
-    name: new FormControl(''),
-    lastnames: new FormControl(''),
-    birthdate: new FormControl(''),
-    phone: new FormControl(''),
-    email: new FormControl(''),
-    password: new FormControl(''),
-    passwordConfirm: new FormControl(''),
+    name: new FormControl('', Validators.required),
+    lastnames: new FormControl('', Validators.required),
+    birthdate: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
+    passwordConfirm: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
   });
 
   constructor(private userService: UserService) {}
@@ -53,16 +59,20 @@ export class UserFormComponent implements OnInit {
   }
 
   handleSubmit() {
-    if (this.userForm.get('_id')?.value) {
-      this.editUser.emit(this.userForm.value);
+    if (this.userForm.valid) {
+      if (this.userForm.get('_id')?.value) {
+        this.editUser.emit(this.userForm.value);
+      } else {
+        if (
+          this.userForm.value.password === this.userForm.value.passwordConfirm
+        ) {
+          this.createUser.emit(this.userForm.value);
+        } else console.log('passwords diferentes');
+      }
+      this.userForm.reset();
     } else {
-      if (
-        this.userForm.value.password === this.userForm.value.passwordConfirm
-      ) {
-        this.createUser.emit(this.userForm.value);
-      } else console.log('passwords diferentes');
+      console.log('invalid');
     }
-    this.userForm.reset();
   }
 
   handleCancel() {
