@@ -4,9 +4,9 @@
 
 <div class="row">
     <div class="col-4">
-        <app-room-form (createRoom)="createRooms($event)"></app-room-form>        
+        <app-room-form (editRoom)="updateRoom($event)" (createRoom)="createRooms($event)"></app-room-form>        
     </div>
     <div class="col-8">
-        <app-room-table (deleteRoom)="deleteRoom($event)" [rooms]="rooms"></app-room-table>
+        <app-room-table (editRoom)="fillRoomForm($event)" (deleteRoom)="deleteRoom($event)" [rooms]="rooms"></app-room-table>
     </div>
 </div>

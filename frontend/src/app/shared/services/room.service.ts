@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class RoomService {
+  $fillRoomForm = new EventEmitter<Room>();
 
   private URL_API = `${environment.API_BASE_URL}/api/v1/rooms`
   
@@ -32,6 +33,9 @@ export class RoomService {
   
   deleteRoom(_id: string): Observable<Room> {
     return this.http.delete<Room>(`${this.URL_API}/${_id}`);
+  }
+  fillRoomForm(room: Room){
+    this.$fillRoomForm.emit(room);
   }
 
 }

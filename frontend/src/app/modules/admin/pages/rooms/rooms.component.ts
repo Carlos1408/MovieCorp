@@ -39,4 +39,17 @@ export class RoomsComponent implements OnInit {
       error: (err) => console.log(err),
     })
   }
+
+  updateRoom(room: Room): void{
+    this.roomService.updateRoom(room).subscribe({
+      next: (res) => {
+        this.getRooms();
+      },
+      error: (err) => console.log(err),
+    });
+  }
+
+  fillRoomForm(room: Room): void{
+    this.roomService.fillRoomForm(room);
+  }
 }
