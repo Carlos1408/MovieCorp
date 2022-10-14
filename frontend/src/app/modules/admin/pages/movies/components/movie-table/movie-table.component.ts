@@ -9,11 +9,16 @@ import { Movie } from 'src/app/shared/interfaces/movie';
 export class MovieTableComponent implements OnInit {
   @Input() movies!: Movie[];
 
+  @Output() editMovie = new EventEmitter<Movie>();
   @Output() deleteMovie = new EventEmitter<string>();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  handleEdit(movie: Movie) {
+    this.editMovie.emit(movie);
+  }
 
   handleDelete(_id?: string) {
     console.log(_id);
