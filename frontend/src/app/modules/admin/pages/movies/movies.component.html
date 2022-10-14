@@ -4,9 +4,10 @@
 
 <div class="row">
     <div class="col-4">
-        <app-movie-form (createMovie)="createMovie($event)"></app-movie-form>
+        <app-movie-form (createMovie)="createMovie($event)" (updateMovie)="updateMovie($event)"></app-movie-form>
     </div>
     <div class="col-8">
-        <app-movie-table (deleteMovie)="deleteMovie($event)" [movies]="movies"></app-movie-table>
+        <app-movie-table (editMovie)="fillMovieForm($event)" (deleteMovie)="deleteMovie($event)" [movies]="movies">
+        </app-movie-table>
     </div>
 </div>
