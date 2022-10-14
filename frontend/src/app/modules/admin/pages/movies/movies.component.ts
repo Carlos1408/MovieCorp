@@ -33,4 +33,14 @@ export class MoviesComponent implements OnInit {
       error: (err) => console.log(err),
     });
   }
+
+  deleteMovie(_id: string): void {
+    this.movieService.deleteMovie(_id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getMovies();
+      },
+      error: (err) => console.log(err),
+    });
+  }
 }
