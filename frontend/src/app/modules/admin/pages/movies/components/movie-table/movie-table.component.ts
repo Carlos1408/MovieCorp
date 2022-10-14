@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Movie } from 'src/app/shared/interfaces/movie';
 
 @Component({
@@ -9,7 +9,16 @@ import { Movie } from 'src/app/shared/interfaces/movie';
 export class MovieTableComponent implements OnInit {
   @Input() movies!: Movie[];
 
+  @Output() deleteMovie = new EventEmitter<string>();
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  handleDelete(_id?: string) {
+    console.log(_id);
+    if (confirm('Seguro que quiere eliminar la pelicula?')) {
+      this.deleteMovie.emit(_id);
+    }
+  }
 }
