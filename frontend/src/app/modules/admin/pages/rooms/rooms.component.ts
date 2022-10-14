@@ -31,4 +31,12 @@ export class RoomsComponent implements OnInit {
     });
   }
 
+  deleteRoom(_id: string): void{
+    this.roomService.deleteRoom(_id).subscribe({
+      next: (res) => {
+        this.getRooms();
+      },
+      error: (err) => console.log(err),
+    })
+  }
 }

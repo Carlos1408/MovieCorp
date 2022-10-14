@@ -7,6 +7,6 @@
         <app-room-form (createRoom)="createRooms($event)"></app-room-form>        
     </div>
     <div class="col-8">
-        <app-room-table [rooms]="rooms"></app-room-table>
+        <app-room-table (deleteRoom)="deleteRoom($event)" [rooms]="rooms"></app-room-table>
     </div>
 </div>

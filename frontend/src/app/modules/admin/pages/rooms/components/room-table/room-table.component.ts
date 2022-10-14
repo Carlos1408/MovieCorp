@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Room } from 'src/app/shared/interfaces/room';
 
 @Component({
@@ -8,10 +8,17 @@ import { Room } from 'src/app/shared/interfaces/room';
 })
 export class RoomTableComponent implements OnInit {
   @Input() rooms!: Room[];
+  @Output() deleteRoom = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  handleDelete(_id?: string): void{
+    if(confirm('Seguro que desea eliminar?')){
+      this.deleteRoom.emit(_id);
+    }
   }
 
 }
