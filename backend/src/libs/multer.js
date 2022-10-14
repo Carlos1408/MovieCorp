@@ -4,8 +4,10 @@ const path = require("path");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    const urlArr = req.originalUrl.split("/");
-    cb(null, `uploads/${urlArr[urlArr.length - 1]}`);
+    let dir;
+    if(req.originalUrl.includes('movies')) dir = 'movies';
+    if(req.originalUrl.includes('cinemas')) dir = 'cinemas';
+    cb(null, `uploads/${dir}`);
   },
   filename: (req, file, cb) => {
     cb(null, uuid() + path.extname(file.originalname));
