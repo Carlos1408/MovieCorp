@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Movie } from 'src/app/shared/interfaces/movie';
 import { MovieService } from 'src/app/shared/services/movie.service';
 
@@ -30,16 +30,16 @@ export class MovieFormComponent implements OnInit {
 
   movieForm: FormGroup = new FormGroup({
     _id: new FormControl(''),
-    title: new FormControl(''),
-    synopsis: new FormControl(''),
-    genre: new FormControl(''),
-    rating: new FormControl(''),
-    length: new FormControl(''),
-    protagonists: new FormControl(''),
-    director: new FormControl(''),
-    image: new FormControl(''),
-    imageSrc: new FormControl(''),
-    trailer: new FormControl(''),
+    title: new FormControl('', Validators.required),
+    synopsis: new FormControl('', Validators.required),
+    genre: new FormControl('', Validators.required),
+    rating: new FormControl('', Validators.required),
+    length: new FormControl('', Validators.required),
+    protagonists: new FormControl('', Validators.required),
+    director: new FormControl('', Validators.required),
+    image: new FormControl('', Validators.required),
+    imageSrc: new FormControl('', Validators.required),
+    trailer: new FormControl('', Validators.required),
   });
 
   constructor(private movieService: MovieService) {}
@@ -68,12 +68,16 @@ export class MovieFormComponent implements OnInit {
   }
 
   handleSubmit() {
-    if (this.movieForm.get('_id')?.value) {
-      this.updateMovie.emit(this.movieForm.value);
+    if(this.movieForm.valid) {
+      if (this.movieForm.get('_id')?.value) {
+        this.updateMovie.emit(this.movieForm.value);
+      } else {
+        this.createMovie.emit(this.movieForm.value);
+      }
+      this.movieForm.reset();
     } else {
-      this.createMovie.emit(this.movieForm.value);
+      console.log('invalid');
     }
-    this.movieForm.reset();
   }
 
   onFileChange(event: any): void {
