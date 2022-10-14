@@ -20,8 +20,16 @@ export class MovieService {
     return this.http.get<Movie>(`${this.URL_API}/${_id}`);
   }
 
-  createMovie(movie: Movie): Observable<Movie> {
-    return this.http.post<Movie>(this.URL_API, movie);
+  createMovie(form: any): Observable<Movie> {
+    const formData = new FormData();
+
+    for (const key of Object.keys(form)) {
+      if (key != 'imageSrc') {
+        formData.append(key, form[key]);
+      }
+    }
+
+    return this.http.post<Movie>(this.URL_API, formData);
   }
 
   updateMovie(movie: Movie): Observable<Movie> {
