@@ -1,21 +1,5 @@
-<nav class="navbar navbar-expand bg-danger mb-4">
-    <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1 text-light">MovieCorp</span>
-        <div class="collapse navbar-collapse">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a routerLink="/admin/cinemas" class="mx-2 btn btn-sm btn-outline-light">Cines</a>
-                </li>
-                <li class="nav-item">
-                    <a routerLink="/admin/rooms" class="mx-2 btn btn-sm btn-outline-light">Salas</a>
-                </li>
-                <li class="nav-item">
-                    <a routerLink="/admin/movies" class="mx-2 btn btn-sm btn-outline-light">Peliculas</a>
-                </li>
-                <li class="nav-item">
-                    <a routerLink="/management/users" class="mx-2 btn btn-sm btn-outline-light">Usuarios</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<p-menubar styleClass="bg-red-600 mb-4" [model]="items">
+    <ng-template pTemplate="start">
+        <h2 class="text-0 my-0 mx-4">MovieCorp</h2>
+    </ng-template>
+</p-menubar>

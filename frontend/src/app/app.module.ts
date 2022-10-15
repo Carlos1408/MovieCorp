@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { PrimengModule } from './shared/primeng.module';
 
 @NgModule({
   declarations: [AppComponent, NavbarComponent],
@@ -14,6 +15,7 @@ import { NavbarComponent } from './shared/components/navbar/navbar.component';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    PrimengModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
