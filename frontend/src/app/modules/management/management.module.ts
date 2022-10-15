@@ -7,19 +7,20 @@ import { UsersComponent } from './pages/users/users.component';
 import { UserFormComponent } from './pages/users/components/user-form/user-form.component';
 import { UserTableComponent } from './pages/users/components/user-table/user-table.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { PrimengModule } from 'src/app/shared/primeng.module';
 
 @NgModule({
   declarations: [
     ManagementComponent,
     UsersComponent,
     UserFormComponent,
-    UserTableComponent
+    UserTableComponent,
   ],
   imports: [
     CommonModule,
     ManagementRoutingModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    PrimengModule,
+  ],
 })
-export class ManagementModule { }
+export class ManagementModule {}

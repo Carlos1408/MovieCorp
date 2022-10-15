@@ -9,6 +9,8 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
+  @Input() showForm!: boolean;
+
   handledUser: User = {
     name: '',
     lastnames: '',
@@ -17,6 +19,8 @@ export class UserFormComponent implements OnInit {
     email: '',
     password: '',
   };
+
+  @Output() closeForm = new EventEmitter();
 
   @Output() createUser = new EventEmitter<User>();
   @Output() editUser = new EventEmitter<User>();
@@ -49,6 +53,19 @@ export class UserFormComponent implements OnInit {
     });
   }
 
+  onShow(): void {
+    console.log('show');
+  }
+
+  onHide(): void {
+    this.closeForm.emit();
+  }
+
+  closeDialog(): void {
+    this.userForm.reset();
+    this.onHide();
+  }
+
   fillUserForm() {
     this.userForm.get('_id')?.setValue(this.handledUser._id);
     this.userForm.get('name')?.setValue(this.handledUser.name);
@@ -61,21 +78,20 @@ export class UserFormComponent implements OnInit {
   handleSubmit() {
     if (this.userForm.valid) {
       if (this.userForm.get('_id')?.value) {
-        this.editUser.emit(this.userForm.value);
+        // this.editUser.emit(this.userForm.value);
+        console.log('edit');
+        
       } else {
         if (
           this.userForm.value.password === this.userForm.value.passwordConfirm
         ) {
+          console.log('create ', this.userForm.value);
           this.createUser.emit(this.userForm.value);
         } else console.log('passwords diferentes');
       }
-      this.userForm.reset();
+      this.closeDialog();
     } else {
       console.log('invalid');
     }
-  }
-
-  handleCancel() {
-    this.userForm.reset();
   }
 }
