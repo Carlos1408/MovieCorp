@@ -13,6 +13,7 @@ import { CinemaFormComponent } from './pages/cinemas/components/cinema-form/cine
 import { RoomsComponent } from './pages/rooms/rooms.component';
 import { RoomTableComponent } from './pages/rooms/components/room-table/room-table.component';
 import { RoomFormComponent } from './pages/rooms/components/room-form/room-form.component';
+import { PrimengModule } from 'src/app/shared/primeng.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,11 @@ import { RoomFormComponent } from './pages/rooms/components/room-form/room-form.
     RoomFormComponent,
     RoomTableComponent,
   ],
-  imports: [CommonModule, AdminRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    AdminRoutingModule,
+    ReactiveFormsModule,
+    PrimengModule,
+  ],
 })
 export class AdminModule {}

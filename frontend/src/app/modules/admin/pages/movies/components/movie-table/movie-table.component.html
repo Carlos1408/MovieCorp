@@ -1,25 +1,27 @@
-<table class="table table-striped">
-    <thead class="table table-dark">
+<p-table [value]="movies" [rows]="10" [paginator]="true" responsiveLayout="scroll" [rowHover]="true">
+    <ng-template pTemplate="header">
         <tr>
-            <td scope="col">Nro</td>
-            <td scope="col">Titulo</td>
-            <td scope="col">Genero</td>
-            <td scope="col">Clasificacion</td>
-            <td scope="col">Duracion</td>
-            <td scope="col">Opciones</td>
+            <th>Nro</th>
+            <th>Titulo</th>
+            <th>Genero</th>
+            <th>Clasificacion</th>
+            <th>Duracion</th>
+            <th>Opciones</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let movie of movies; index as i">
-            <th scope="row">{{ i + 1 }}</th>
+    </ng-template>
+    <ng-template pTemplate="body" let-movie>
+        <tr>
+            <td>{{movies.indexOf(movie)+1}}</td>
             <td>{{movie.title}}</td>
             <td>{{movie.genre}}</td>
             <td>{{movie.rating}}</td>
             <td>{{movie.length}}</td>
             <td>
-                <button (click)="handleEdit(movie)" class="btn btn-success me-4">Editar</button>
-                <button (click)="handleDelete(movie._id) " class="btn btn-danger">Eliminar</button>
+                <p-button label="Editar" iconPos="right" icon="pi pi-pencil"
+                    styleClass="p-button-sm p-button-success mr-2"></p-button>
+                <p-button label="Eliminar" iconPos="right" icon="pi pi-trash" styleClass="p-button-sm p-button-danger">
+                </p-button>
             </td>
         </tr>
-    </tbody>
-</table>
+    </ng-template>
+</p-table>

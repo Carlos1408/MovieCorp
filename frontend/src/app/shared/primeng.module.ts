@@ -13,6 +13,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { DropdownModule } from 'primeng/dropdown';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [],
@@ -30,6 +32,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ConfirmDialogModule,
     ToastModule,
     DropdownModule,
+    InputTextareaModule,
+    FileUploadModule,
   ],
 })
 export class PrimengModule {}
