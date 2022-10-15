@@ -3,12 +3,16 @@
 <div class="card">
     <p-toolbar styleClass="mb-4">
         <ng-template pTemplate="left">
-            <p-button label="Nuevo usuario" (onClick)="openForm()" iconPos="right" icon="pi pi-plus" styleClass="p-button-primary"></p-button>
+            <p-button label="Nuevo usuario" (onClick)="openForm()" iconPos="right" icon="pi pi-plus"
+                styleClass="p-button-primary"></p-button>
         </ng-template>
     </p-toolbar>
 
-    <app-user-table (editUser)="fillUserForm($event)" (deleteUser)="deleteUser($event)" [users]="users">
+    <app-user-table (editUser)="fillUserForm($event)" (deleteUser)="confirmDelete($event)" [users]="users">
     </app-user-table>
 
     <app-user-form (createUser)="createUser($event)" [showForm]="showForm" (closeForm)="closeForm()"></app-user-form>
 </div>
+
+<p-confirmDialog [style]="{width: '400px'}" rejectButtonStyleClass="p-button-danger"></p-confirmDialog>
+<p-toast></p-toast>

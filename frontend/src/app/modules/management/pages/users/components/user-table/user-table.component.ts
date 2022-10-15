@@ -17,10 +17,7 @@ export class UserTableComponent implements OnInit {
   ngOnInit(): void {}
 
   handleDelete(_id?: string) {
-    console.log(_id);
-    if (confirm('Seguro que quiere eliminar el usuario?')) {
-      this.deleteUser.emit(_id);
-    }
+    this.deleteUser.emit(_id);
   }
 
   handleEdit(user: User) {
