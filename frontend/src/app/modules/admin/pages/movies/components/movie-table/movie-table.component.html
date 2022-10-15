@@ -3,6 +3,7 @@
         <tr>
             <th>Nro</th>
             <th>Titulo</th>
+            <th>Portada</th>
             <th>Genero</th>
             <th>Clasificacion</th>
             <th>Duracion</th>
@@ -13,6 +14,7 @@
         <tr>
             <td>{{movies.indexOf(movie)+1}}</td>
             <td>{{movie.title}}</td>
+            <td><p-image [src]="'http://localhost:4000/' + movie.imagePath" height="150" [preview]="true"></p-image></td>
             <td>{{movie.genre}}</td>
             <td>{{movie.rating}}</td>
             <td>{{movie.length}}</td>
