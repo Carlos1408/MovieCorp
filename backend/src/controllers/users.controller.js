@@ -15,7 +15,7 @@ const getUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { name, lastnames, birthdate, phone, email, password } = req.body;
+  const { name, lastnames, birthdate, phone, email, rol, password } = req.body;
   const hash = await bcryptjs.hash(password, 8);
   const newUser = new User({
     name,
@@ -23,6 +23,7 @@ const createUser = async (req, res) => {
     birthdate,
     phone,
     email,
+    rol,
     password: hash,
   });
   await newUser.save();
@@ -32,7 +33,7 @@ const createUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const { id } = req.params;
-  const { name, lastnames, birthdate, phone, email } = req.body;
+  const { name, lastnames, birthdate, phone, email, rol } = req.body;
   const user = await User.findByIdAndUpdate(
     id,
     {
@@ -41,6 +42,7 @@ const updateUser = async (req, res) => {
       birthdate,
       phone,
       email,
+      rol,
     },
     { new: true }
   );
