@@ -1,5 +1,6 @@
-import { Component,EventEmitter, OnInit, Output } from '@angular/core';
+import { Component,EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Room } from 'src/app/shared/interfaces/room';;
 import { RoomService } from 'src/app/shared/services/room.service';
 @Component({
@@ -8,14 +9,18 @@ import { RoomService } from 'src/app/shared/services/room.service';
   styleUrls: ['./room-form.component.scss']
 })
 export class RoomFormComponent implements OnInit {
+
   
   handleRoom: Room = {
     roomNum: '',
     nRows: 0,
     nCol: 0,
-    price: 0,
+    price: 0.00,
   };
+  
+  @Input() showForm!: boolean;
 
+  @Output() closeForm = new EventEmitter();
   @Output() createRoom = new EventEmitter<Room>();
   @Output() editRoom = new EventEmitter<Room>();
 
@@ -27,13 +32,17 @@ export class RoomFormComponent implements OnInit {
     price: new FormControl(''),
   });
 
-  constructor(private roomService: RoomService) { }
+  constructor(private messageService: MessageService) { }
 
-  ngOnInit(): void {
-    this.roomService.$fillRoomForm.subscribe((room)=>{
-      this.handleRoom = room;
-      this.fillRoomForm();
-    });
+  ngOnInit(): void {}
+
+  onShow(): void {
+    this.fillRoomForm();
+  }
+
+  closeDialog(): void {
+    this.roomForm.reset();
+    this.closeForm.emit();
   }
 
   fillRoomForm(){
