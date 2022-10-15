@@ -32,7 +32,7 @@
             </div>
             <div class="field">
                 <h4>Portada</h4>
-                <p-fileUpload [auto]="true" removeStyleClass="p-button-sm"></p-fileUpload>
+                <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)" removeStyleClass="p-button-sm"></p-fileUpload>
                 <!-- <input type="file" formControlName="imageSrc" (change)="onFileChange($event)"> -->
             </div>
             <div class="field">
@@ -43,6 +43,6 @@
     </ng-template>
     <ng-template pTemplate="footer">
         <p-button label="Cancelar" (onClick)="closeDialog()" styleClass="p-button-danger"></p-button>
-        <p-button label="Guardar" styleClass="p-button-primary"></p-button>
+        <p-button label="Guardar" (onClick)="handleSubmit()" styleClass="p-button-primary"></p-button>
     </ng-template>
 </p-dialog>

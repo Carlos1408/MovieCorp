@@ -42,7 +42,6 @@ export class MovieFormComponent implements OnInit {
     protagonists: new FormControl('', Validators.required),
     director: new FormControl('', Validators.required),
     image: new FormControl('', Validators.required),
-    imageSrc: new FormControl('', Validators.required),
     trailer: new FormControl('', Validators.required),
   });
 
@@ -60,7 +59,13 @@ export class MovieFormComponent implements OnInit {
   }
 
   closeDialog() {
+    this.movieForm.reset();
     this.closeForm.emit();
+  }
+
+  evento(event: any){
+    console.log('evento ', event.currentFiles);
+    
   }
 
   fillMovieForm(): void {
@@ -75,26 +80,30 @@ export class MovieFormComponent implements OnInit {
       ?.setValue(this.handledMovie.protagonists);
     this.movieForm.get('director')?.setValue(this.handledMovie.director);
     this.movieForm.get('image')?.setValue('');
-    this.movieForm.get('imageSrc')?.setValue('');
     this.movieForm.get('trailer')?.setValue(this.handledMovie.trailer);
   }
 
-  handleSubmit() {
-    if(this.movieForm.valid) {
-      if (this.movieForm.get('_id')?.value) {
-        this.updateMovie.emit(this.movieForm.value);
-      } else {
-        this.createMovie.emit(this.movieForm.value);
-      }
-      this.movieForm.reset();
-    } else {
-      console.log('invalid');
-    }
+  // handleSubmit() {
+  //   if (this.movieForm.valid) {
+  //     if (this.movieForm.get('_id')?.value) {
+  //       this.updateMovie.emit(this.movieForm.value);
+  //     } else {
+  //       this.createMovie.emit(this.movieForm.value);
+  //     }
+  //     this.movieForm.reset();
+  //   } else {
+  //     console.log('invalid');
+  //   }
+  // }
+
+  handleSubmit(): void {
+    this.createMovie.emit(this.movieForm.value)
+    this.closeDialog();
   }
 
   onFileChange(event: any): void {
-    if (event.target.files.length > 0) {
-      const file = event.target.files[0];
+    if (event.currentFiles.length > 0) {
+      const file = event.currentFiles[0];
       this.movieForm.patchValue({ image: file });
     }
   }

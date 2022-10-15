@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { Movie } from 'src/app/shared/interfaces/movie';
 import { MovieService } from 'src/app/shared/services/movie.service';
@@ -7,12 +8,17 @@ import { MovieService } from 'src/app/shared/services/movie.service';
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss'],
+  providers: [ConfirmationService, MessageService],
 })
 export class MoviesComponent implements OnInit {
   movies!: Movie[];
   showForm: boolean = false;
 
-  constructor(private movieService: MovieService) {}
+  constructor(
+    private movieService: MovieService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit(): void {
     this.getMovies();
@@ -36,7 +42,11 @@ export class MoviesComponent implements OnInit {
   createMovie(movie: any): void {
     this.movieService.createMovie(movie).subscribe({
       next: (res) => {
-        console.log(res);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Pelicula nueva',
+          detail: 'La pelicula ha sido creada exitosamente',
+        });
         this.getMovies();
       },
       error: (err) => console.log(err),
