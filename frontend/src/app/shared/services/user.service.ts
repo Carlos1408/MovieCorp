@@ -33,8 +33,4 @@ export class UserService {
   deleteUser(_id: string): Observable<User> {
     return this.http.delete<User>(`${this.URL_API}/${_id}`);
   }
-
-  fillUserForm(user: User) {
-    this.$fillUserForm.emit(user);
-  }
 }

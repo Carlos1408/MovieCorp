@@ -1,4 +1,5 @@
-<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" header="Nuevo usuario" [modal]="true" styleClass="p-fluid" [draggable]="false" (onShow)="onShow()" (onHide)="onHide()">
+<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" header="Nuevo usuario" [modal]="true" styleClass="p-fluid"
+    [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
     <ng-template pTemplate="content">
         <form [formGroup]="userForm">
             <div class="field">
@@ -11,7 +12,7 @@
             </div>
             <div class="field">
                 <label>Fecha de nacimiento</label>
-                <p-calendar [showIcon]="true" formControlName="birthdate"></p-calendar>
+                <p-calendar dataType="string" dateFormat="yy-mm-dd" [showIcon]="true" formControlName="birthdate"></p-calendar>
             </div>
             <div class="field">
                 <label>Telefono</label>
@@ -20,6 +21,10 @@
             <div class="field">
                 <label>Email</label>
                 <input type="email" pInputText formControlName="email">
+            </div>
+            <div class="field">
+                <label>Rol</label>
+                <p-dropdown [options]="roles" placeholder="Selecione un rol" formControlName="rol"></p-dropdown>
             </div>
             <div class="field">
                 <label>Contraseña</label>

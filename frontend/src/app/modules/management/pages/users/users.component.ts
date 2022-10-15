@@ -15,6 +15,16 @@ import {
   providers: [ConfirmationService, MessageService],
 })
 export class UsersComponent implements OnInit {
+  handledUser: User = {
+    name: '',
+    lastnames: '',
+    birthdate: '',
+    phone: 0,
+    email: '',
+    rol: '',
+    password: '',
+  };
+
   users: User[] = [];
   showForm: boolean = false;
 
@@ -34,6 +44,15 @@ export class UsersComponent implements OnInit {
 
   closeForm() {
     this.showForm = false;
+    this.handledUser = {
+      name: '',
+      lastnames: '',
+      birthdate: '',
+      phone: 0,
+      email: '',
+      rol: '',
+      password: '',
+    };
   }
 
   confirmDelete(_id: string) {
@@ -43,11 +62,6 @@ export class UsersComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.deleteUser(_id);
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Usuario eliminado',
-          detail: 'El usuario ha sido eliminado',
-        });
       },
     });
   }
@@ -62,7 +76,11 @@ export class UsersComponent implements OnInit {
   createUser(user: User): void {
     this.userService.createUser(user).subscribe({
       next: (res) => {
-        console.log(res);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Usuario nuevo',
+          detail: 'El usuario ha sido creado exitosamente',
+        });
         this.getUsers();
       },
       error: (err) => console.log(err),
@@ -72,7 +90,11 @@ export class UsersComponent implements OnInit {
   updateUser(user: User): void {
     this.userService.updateUser(user).subscribe({
       next: (res) => {
-        console.log(res);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Usuario actualizado',
+          detail: 'El usuario ha sido actualizado exitosamente',
+        });
         this.getUsers();
       },
       error: (err) => console.log(err),
@@ -82,7 +104,11 @@ export class UsersComponent implements OnInit {
   deleteUser(_id: string): void {
     this.userService.deleteUser(_id).subscribe({
       next: (res) => {
-        console.log(res);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Usuario eliminado',
+          detail: 'El usuario ha sido eliminado exitosamente',
+        });
         this.getUsers();
       },
       error: (err) => console.log(err),
@@ -90,6 +116,7 @@ export class UsersComponent implements OnInit {
   }
 
   fillUserForm(user: User): void {
-    this.userService.fillUserForm(user);
+    this.handledUser = user;
+    this.openForm();
   }
 }

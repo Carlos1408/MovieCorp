@@ -11,7 +11,8 @@
     <app-user-table (editUser)="fillUserForm($event)" (deleteUser)="confirmDelete($event)" [users]="users">
     </app-user-table>
 
-    <app-user-form (createUser)="createUser($event)" [showForm]="showForm" (closeForm)="closeForm()"></app-user-form>
+    <app-user-form (createUser)="createUser($event)" (editUser)="updateUser($event)" [showForm]="showForm" (closeForm)="closeForm()"
+        [handledUser]="handledUser"></app-user-form>
 </div>
 
 <p-confirmDialog [style]="{width: '400px'}" rejectButtonStyleClass="p-button-danger"></p-confirmDialog>

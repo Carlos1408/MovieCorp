@@ -12,6 +12,7 @@ import { PasswordModule } from 'primeng/password';
 import { CalendarModule } from 'primeng/calendar';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [],
@@ -28,6 +29,7 @@ import { ToastModule } from 'primeng/toast';
     CalendarModule,
     ConfirmDialogModule,
     ToastModule,
+    DropdownModule,
   ],
 })
 export class PrimengModule {}
