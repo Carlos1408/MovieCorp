@@ -1,12 +1,18 @@
-<div class="row mb-3">
-    <h1>Cines</h1>
-</div>
+<h1>Cines</h1>
 
-<div class="row">
-    <div class="col-4">
-        <app-cinema-form (editCinema)="updateCinema($event)" (createCinema)="createCinema($event)"></app-cinema-form>
-    </div>
-    <div class="col-8">
-        <app-cinema-table (editCinema)="fileCinemaForm($event)" (deletCinema)="deleteCinema($event)" [cinemas]="cinemas"></app-cinema-table>
-    </div>
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <p-button label="Nuevo Cine" (onClick)="openForm()" iconPos="right" icon="pi pi-plus"
+                styleClass="p-button-primary"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <app-cinema-table [cinemas]="cinemas">
+    </app-cinema-table>
+    <app-cinema-form 
+        (createCinema)="createCinema($event)" 
+        [showForm]="showForm"
+        (closeForm)="closeForm()"
+    ></app-cinema-form>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
 import { CinemaService } from 'src/app/shared/services/cinema.service';
@@ -6,16 +7,29 @@ import { CinemaService } from 'src/app/shared/services/cinema.service';
 @Component({
   selector: 'app-cinemas',
   templateUrl: './cinemas.component.html',
-  styleUrls: ['./cinemas.component.scss']
+  styleUrls: ['./cinemas.component.scss'],
+  providers: [MessageService],
 })
 export class CinemasComponent implements OnInit {
 
   cinemas: Cinema[] = [];
+  showForm: boolean = false;
 
-  constructor( private cinemaService: CinemaService) { }
+  constructor( 
+    private cinemaService: CinemaService,
+    private messageSerice: MessageService
+  ) { }
 
   ngOnInit(): void {
     this.getCinemas();
+  }
+
+  openForm(): void{
+    this.showForm = true;
+  }
+
+  closeForm(): void{
+    this.showForm = false;
   }
 
   getCinemas(): void {
@@ -28,6 +42,11 @@ export class CinemasComponent implements OnInit {
   createCinema( cinema: Cinema): void {
     this.cinemaService.createCinema(cinema).subscribe({
       next: (res) => {
+        this.messageSerice.add({
+          severity: 'success',
+          summary: 'Nuevo Cine',
+          detail: 'Datos agregados correctamente'
+        });
         this.getCinemas();
       },
       error: (err) => console.log(err),
@@ -46,6 +65,7 @@ export class CinemasComponent implements OnInit {
   updateCinema(cinema: Cinema): void {
     this.cinemaService.updateCinema(cinema).subscribe({
       next: (res) => {
+        
         this.getCinemas();
       },
       error: (err) => console.log(err),

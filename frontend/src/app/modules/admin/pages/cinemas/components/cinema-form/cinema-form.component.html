@@ -1,18 +1,19 @@
-<form class="card bg-dark text-light" [formGroup]="cinemaForm">
-    <div class="card-body">
-        <div class="mb-3">
-            <label class="form-label">Nombre</label>
-            <input type="text" class="form-control" formControlName="name">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Direccion</label>
-            <input type="text" class="form-control" formControlName="address">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div class="d-flex justify-content-around">
-            <button (click)="handleSubmit()" class="btn btn-primary">Ingresar</button>
-            <button (click)="handleCancel()" class="btn btn-danger">Cancelar</button>
-        </div>
-    </div>
-</form>
+<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" header="Nuevo Cine" [modal]="true" styleClass="p-fluid"
+    [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
+    <ng-template pTemplate="content">
+        <form [formGroup]="cinemaForm">
+            <div class="field">
+                <h4>Nombre</h4>
+                <input type="text" pInputText formControlName="name">
+            </div>
+            <div class="field">
+                <h4>Direccion</h4>
+                <input type="text" pInputText formControlName="address">
+            </div>
+        </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-button label="Cancelar" (onClick)="closeDialog()" styleClass="p-button-danger"></p-button>
+        <p-button label="Guardar" styleClass="p-button-primary"></p-button>
+    </ng-template>
+</p-dialog>

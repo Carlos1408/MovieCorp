@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
 import { CinemaService } from 'src/app/shared/services/cinema.service';
 
@@ -14,6 +15,8 @@ export class CinemaFormComponent implements OnInit {
     name: '',
     address: '',
   };
+  @Input() showForm!: boolean;
+  @Output() closeForm = new EventEmitter();
 
   @Output() createCinema = new EventEmitter<Cinema>();
   @Output() editCinema = new EventEmitter<Cinema>();
@@ -23,14 +26,17 @@ export class CinemaFormComponent implements OnInit {
     name: new FormControl(''),
     address: new FormControl(''),
   });
-  constructor(private cinemaService: CinemaService) { }
+  constructor(private messageService: MessageService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-    this.cinemaService.$fillCinemaForm.subscribe((cinema)=>{
-      this.handleCinema = cinema;
-      this.fillcinemaForm();
-    });
+  onShow(): void {
+    this.fillcinemaForm();
+  }
+
+  closeDialog(): void {
+    this.cinemaForm.reset();
+    this.closeForm.emit();
   }
 
   fillcinemaForm() {
@@ -41,16 +47,16 @@ export class CinemaFormComponent implements OnInit {
 
   handleSubmit(){
 
-    if ( this.cinemaForm.get('_id')?.value) {
-      this.editCinema.emit(this.cinemaForm.value);
-    } else {
-      this.createCinema.emit(this.cinemaForm.value);
+    if (this.cinemaForm.valid){
+      if ( this.cinemaForm.get('_id')?.value) {
+        this.editCinema.emit(this.cinemaForm.value);
+        this.closeDialog();
+      } else {
+        this.createCinema.emit(this.cinemaForm.value);
+        this.closeDialog();
+      }
+    }else{
+      console.log('invalid')
     }
-
-    this.cinemaForm.reset();
   }
-   handleCancel(){
-    this.cinemaForm.reset();
-   }
-
 }
