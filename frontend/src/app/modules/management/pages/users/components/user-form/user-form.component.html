@@ -3,35 +3,35 @@
     <ng-template pTemplate="content">
         <form [formGroup]="userForm">
             <div class="field">
-                <label>Nombre</label>
+                <h4>Nombre</h4>
                 <input type="text" pInputText formControlName="name">
             </div>
             <div class="field">
-                <label>Apellidos</label>
+                <h4>Apellidos</h4>
                 <input type="text" pInputText formControlName="lastnames">
             </div>
             <div class="field">
-                <label>Fecha de nacimiento</label>
+                <h4>Fecha de nacimiento</h4>
                 <p-calendar dataType="string" dateFormat="yy-mm-dd" [showIcon]="true" formControlName="birthdate"></p-calendar>
             </div>
             <div class="field">
-                <label>Telefono</label>
-                <p-inputNumber [useGrouping]="false" formControlName="phone"></p-inputNumber>
+                <h4>Telefono</h4>
+                <p-inputNumber [useGrouping]="true" formControlName="phone"></p-inputNumber>
             </div>
             <div class="field">
-                <label>Email</label>
+                <h4>Email</h4>
                 <input type="email" pInputText formControlName="email">
             </div>
             <div class="field">
-                <label>Rol</label>
+                <h4>Rol</h4>
                 <p-dropdown [options]="roles" placeholder="Selecione un rol" formControlName="rol"></p-dropdown>
             </div>
             <div class="field">
-                <label>Contraseña</label>
+                <h4>Contraseña</h4>
                 <p-password [feedback]="false" [toggleMask]="true" formControlName="password"></p-password>
             </div>
             <div class="field">
-                <label>Confirme contraseña</label>
+                <h4>Confirme contraseña</h4>
                 <p-password [feedback]="false" [toggleMask]="true" formControlName="passwordConfirm"></p-password>
             </div>
         </form>

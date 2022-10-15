@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Movie } from 'src/app/shared/interfaces/movie';
 import { MovieService } from 'src/app/shared/services/movie.service';
@@ -25,6 +25,10 @@ export class MovieFormComponent implements OnInit {
     trailer: '',
   };
 
+  @Input() showForm!: boolean;
+
+  @Output() closeForm = new EventEmitter();
+
   @Output() createMovie = new EventEmitter<any>();
   @Output() updateMovie = new EventEmitter<any>();
 
@@ -49,6 +53,14 @@ export class MovieFormComponent implements OnInit {
       this.handledMovie = movie;
       this.fillMovieForm();
     });
+  }
+
+  onShow() {
+    console.log('show');
+  }
+
+  closeDialog() {
+    this.closeForm.emit();
   }
 
   fillMovieForm(): void {

@@ -10,11 +10,20 @@ import { MovieService } from 'src/app/shared/services/movie.service';
 })
 export class MoviesComponent implements OnInit {
   movies!: Movie[];
+  showForm: boolean = false;
 
   constructor(private movieService: MovieService) {}
 
   ngOnInit(): void {
     this.getMovies();
+  }
+
+  openForm(): void {
+    this.showForm = true;
+  }
+
+  closeForm(): void {
+    this.showForm = false;
   }
 
   getMovies(): void {
