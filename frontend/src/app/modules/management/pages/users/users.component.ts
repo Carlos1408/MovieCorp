@@ -10,11 +10,20 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class UsersComponent implements OnInit {
   users: User[] = [];
+  showForm: boolean = false;
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.getUsers();
+  }
+
+  openForm() {
+    this.showForm = true;
+  }
+
+  closeForm() {
+    this.showForm = false;
   }
 
   getUsers(): void {

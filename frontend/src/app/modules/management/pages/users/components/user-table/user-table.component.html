@@ -1,4 +1,4 @@
-<table class="table table-striped">
+<!-- <table class="table table-striped">
     <thead class="table table-dark">
         <tr>
             <td scope="col">Nro</td>
@@ -22,4 +22,32 @@
             </td>
         </tr>
     </tbody>
-</table>
+</table> -->
+
+<p-table [value]="users" [rows]="10" [paginator]="true" responsiveLayout="scroll" [rowHover]="true">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nro</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Telefono</th>
+            <th>Email</th>
+            <th>Opciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+        <tr>
+            <td>{{users.indexOf(user) + 1}}</td>
+            <td>{{user.name}}</td>
+            <td>{{user.lastnames}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.email}}</td>
+            <td class="flex">
+                <p-button label="Editar" iconPos="right" icon="pi pi-pencil"
+                    styleClass="p-button-sm p-button-success mr-2"></p-button>
+                <p-button label="Eliminar" iconPos="right" icon="pi pi-trash" styleClass="p-button-sm p-button-danger">
+                </p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
