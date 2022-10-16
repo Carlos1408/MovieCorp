@@ -11,6 +11,18 @@ import { MovieService } from 'src/app/shared/services/movie.service';
   providers: [ConfirmationService, MessageService],
 })
 export class MoviesComponent implements OnInit {
+  handledMovie: Movie = {
+    title: '',
+    synopsis: '',
+    genre: '',
+    rating: '',
+    length: 0,
+    protagonists: '',
+    director: '',
+    imagePath: '',
+    trailer: '',
+  };
+
   movies!: Movie[];
   showForm: boolean = false;
 
@@ -30,6 +42,28 @@ export class MoviesComponent implements OnInit {
 
   closeForm(): void {
     this.showForm = false;
+    this.handledMovie = {
+      title: '',
+      synopsis: '',
+      genre: '',
+      rating: '',
+      length: 0,
+      protagonists: '',
+      director: '',
+      imagePath: '',
+      trailer: '',
+    };
+  }
+
+  confirmDelete(_id: string): void {
+    this.confirmationService.confirm({
+      message: 'Esta seguro que quiere eliminar la pelicula?',
+      header: 'Eliminar pelicula',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.deleteMovie(_id);
+      },
+    });
   }
 
   getMovies(): void {
@@ -56,7 +90,11 @@ export class MoviesComponent implements OnInit {
   updateMovie(movie: Movie): void {
     this.movieService.updateMovie(movie).subscribe({
       next: (res) => {
-        console.log(res);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Pelicula actualizada',
+          detail: 'La pelicula ha sido actualizada exitosamente',
+        });
         this.getMovies();
       },
       error: (err) => console.log(err),
@@ -66,7 +104,11 @@ export class MoviesComponent implements OnInit {
   deleteMovie(_id: string): void {
     this.movieService.deleteMovie(_id).subscribe({
       next: (res) => {
-        console.log(res);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Pelicula eliminada',
+          detail: 'La pelicula ha sido eliminada exitosamente',
+        });
         this.getMovies();
       },
       error: (err) => console.log(err),
@@ -74,6 +116,7 @@ export class MoviesComponent implements OnInit {
   }
 
   fillMovieForm(movie: Movie): void {
-    this.movieService.fillMovieForm(movie);
+    this.handledMovie = movie;
+    this.openForm();
   }
 }

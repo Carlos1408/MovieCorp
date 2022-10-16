@@ -13,19 +13,8 @@ interface HtmlInputEvent extends Event {
   styleUrls: ['./movie-form.component.scss'],
 })
 export class MovieFormComponent implements OnInit {
-  handledMovie: Movie = {
-    title: '',
-    synopsis: '',
-    genre: '',
-    rating: '',
-    length: 0,
-    protagonists: '',
-    director: '',
-    imagePath: '',
-    trailer: '',
-  };
-
   @Input() showForm!: boolean;
+  @Input() handledMovie!: Movie;
 
   @Output() closeForm = new EventEmitter();
 
@@ -45,27 +34,18 @@ export class MovieFormComponent implements OnInit {
     trailer: new FormControl('', Validators.required),
   });
 
-  constructor(private movieService: MovieService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.movieService.$fillMovieForm.subscribe((movie) => {
-      this.handledMovie = movie;
-      this.fillMovieForm();
-    });
+  ngOnInit(): void {}
+
+  onShow(): void {
+    this.fillMovieForm();
+    console.log(this.movieForm.value);
   }
 
-  onShow() {
-    console.log('show');
-  }
-
-  closeDialog() {
+  closeDialog(): void {
     this.movieForm.reset();
     this.closeForm.emit();
-  }
-
-  evento(event: any){
-    console.log('evento ', event.currentFiles);
-    
   }
 
   fillMovieForm(): void {
@@ -83,22 +63,27 @@ export class MovieFormComponent implements OnInit {
     this.movieForm.get('trailer')?.setValue(this.handledMovie.trailer);
   }
 
-  // handleSubmit() {
-  //   if (this.movieForm.valid) {
-  //     if (this.movieForm.get('_id')?.value) {
-  //       this.updateMovie.emit(this.movieForm.value);
-  //     } else {
-  //       this.createMovie.emit(this.movieForm.value);
-  //     }
-  //     this.movieForm.reset();
-  //   } else {
-  //     console.log('invalid');
-  //   }
-  // }
-
   handleSubmit(): void {
-    this.createMovie.emit(this.movieForm.value)
-    this.closeDialog();
+    if (this.movieForm.valid) {
+      if (this.movieForm.get('_id')?.value) {
+        this.updateMovie.emit(this.movieForm.value);
+      } else {
+        this.createMovie.emit(this.movieForm.value);
+      }
+      this.closeDialog();
+    } else {
+      console.log('invalid');
+    }
+  }
+
+  devSubmit() {
+    if (this.movieForm.get('_id')?.value) {
+      console.log(this.movieForm.value);
+
+      console.log('edit');
+    } else {
+      console.log('create');
+    }
   }
 
   onFileChange(event: any): void {

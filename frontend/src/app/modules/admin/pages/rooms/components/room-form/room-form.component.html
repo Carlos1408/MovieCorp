@@ -3,6 +3,11 @@
     <ng-template pTemplate="content">
         <form [formGroup]="roomForm">
             <div class="field">
+                <h4>Cine</h4>
+                <p-dropdown placeholder="Seleccione el cine correspondiente" [options]="cinemas" optionLabel="name"
+                    optionValue="_id" formControlName="cinema_id"></p-dropdown>
+            </div>
+            <div class="field">
                 <h4>Numero de Sala</h4>
                 <input type="text" pInputText formControlName="roomNum">
             </div>
@@ -16,7 +21,8 @@
             </div>
             <div class="field">
                 <h4>Precio de la Entrada</h4>
-                <p-inputNumber formControlName="price" mode="currency" currency="BOB" locale="es-BO" [useGrouping]="false"></p-inputNumber>
+                <p-inputNumber formControlName="price" mode="currency" currency="BOB" locale="es-BO"
+                    [useGrouping]="false"></p-inputNumber>
             </div>
         </form>
     </ng-template>

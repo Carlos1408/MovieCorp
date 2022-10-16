@@ -4,7 +4,6 @@ import { User } from 'src/app/shared/interfaces/user';
 import { UserService } from 'src/app/shared/services/user.service';
 import {
   ConfirmationService,
-  ConfirmEventType,
   MessageService,
 } from 'primeng/api';
 
@@ -57,8 +56,8 @@ export class UsersComponent implements OnInit {
 
   confirmDelete(_id: string) {
     this.confirmationService.confirm({
-      message: 'Esta seguro que quiere eliminar el usuario?',
       header: 'Eliminar usuario',
+      message: 'Esta seguro que quiere eliminar el usuario?',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.deleteUser(_id);
