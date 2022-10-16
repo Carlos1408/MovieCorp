@@ -14,5 +14,7 @@
     <app-room-form 
         [showForm]="showForm" 
         (closeForm)="closeForm()"
+        (createRoom)="createRoom($event)"
     ></app-room-form>
 </div>
+<p-toast></p-toast>

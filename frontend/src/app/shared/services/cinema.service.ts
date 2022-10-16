@@ -34,7 +34,7 @@ export class CinemaService {
     return this.http.delete<Cinema>(`${this.URL_API}/${_id}`);
   }
 
-  fileCinemaForm(cinema: Cinema) {
+  fillCinemaForm(cinema: Cinema) {
     this.$fillCinemaForm.emit(cinema);
   }
 }

@@ -11,6 +11,14 @@ import { RoomService } from 'src/app/shared/services/room.service';
   providers: [MessageService],
 })
 export class RoomsComponent implements OnInit {
+  handleRoom: Room = {
+    roomNum: '',
+    nRows: 0,
+    nCol: 0,
+    price: 0,
+  };
+  
+
   rooms: Room[] = [];
   showForm: boolean = false;
 
@@ -38,9 +46,14 @@ export class RoomsComponent implements OnInit {
     .subscribe();
   }
 
-  createRooms(room: Room): void {
+  createRoom(room: Room): void {
     this.roomService.createRoom(room).subscribe({
       next: (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sala nueva',
+          detail: 'Datos ingresados correctamente',
+        });
         this.getRooms();
       },
       error: (err) => console.log(err),

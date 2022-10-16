@@ -11,13 +11,11 @@ import { CinemaService } from 'src/app/shared/services/cinema.service';
 })
 export class CinemaFormComponent implements OnInit {
 
-  handleCinema: Cinema = {
-    name: '',
-    address: '',
-  };
+  
   @Input() showForm!: boolean;
-  @Output() closeForm = new EventEmitter();
+  @Input() handleCinema!: Cinema;
 
+  @Output() closeForm = new EventEmitter();
   @Output() createCinema = new EventEmitter<Cinema>();
   @Output() editCinema = new EventEmitter<Cinema>();
 
@@ -46,17 +44,7 @@ export class CinemaFormComponent implements OnInit {
   }
 
   handleSubmit(){
-
-    if (this.cinemaForm.valid){
-      if ( this.cinemaForm.get('_id')?.value) {
-        this.editCinema.emit(this.cinemaForm.value);
-        this.closeDialog();
-      } else {
-        this.createCinema.emit(this.cinemaForm.value);
-        this.closeDialog();
-      }
-    }else{
-      console.log('invalid')
-    }
+    this.createCinema.emit(this.cinemaForm.value);
+    this.closeDialog();
   }
 }
