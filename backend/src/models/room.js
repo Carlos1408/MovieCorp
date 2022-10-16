@@ -6,6 +6,7 @@ const roomSchema = new Schema(
         nRows: {type: Number, require: true},
         nCol: {type: Number, require: true},
         price: {type: Number, require: true},
+        cinema_id: {type: String, require: true},
     },
     {
         timestamps: true,
