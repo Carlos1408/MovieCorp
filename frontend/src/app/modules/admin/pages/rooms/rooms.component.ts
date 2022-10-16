@@ -42,6 +42,12 @@ export class RoomsComponent implements OnInit {
 
   closeForm() {
     this.showForm = false;
+    this.handleRoom = {
+      roomNum: '',
+      nRows: 0,
+      nCol: 0,
+      price: 0,
+    };
   }
 
   getRooms(): void {
@@ -100,6 +106,11 @@ export class RoomsComponent implements OnInit {
   updateRoom(room: Room): void {
     this.roomService.updateRoom(room).subscribe({
       next: (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Datos de sala actualizado',
+          detail: 'Los datos de la sala han sido actualizados',
+        });
         this.getRooms();
       },
       error: (err) => console.log(err),
@@ -107,6 +118,7 @@ export class RoomsComponent implements OnInit {
   }
 
   fillRoomForm(room: Room): void {
-    this.roomService.fillRoomForm(room);
+    this.handleRoom = room;
+    this.openForm();
   }
 }

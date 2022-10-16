@@ -8,6 +8,7 @@ import { Room } from 'src/app/shared/interfaces/room';
 })
 export class RoomTableComponent implements OnInit {
   @Input() rooms!: Room[];
+  
   @Output() deleteRoom = new EventEmitter<string>();
   @Output() editRoom = new EventEmitter<Room>();
 

@@ -27,13 +27,11 @@ export class RoomFormComponent implements OnInit {
     price: new FormControl(''),
   });
 
-  constructor() {}
+  constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {}
 
   onShow(): void {
-    console.log(this.cinemas);
-
     this.fillRoomForm();
   }
 
@@ -51,8 +49,15 @@ export class RoomFormComponent implements OnInit {
   }
 
   handleSubmit() {
-    this.createRoom.emit(this.roomForm.value);
-    this.closeDialog();
+    if (this.roomForm.valid) {
+      if (this.roomForm.get('_id')?.value) {
+        this.editRoom.emit(this.roomForm.value);
+        this.closeDialog();
+      } else {
+        this.createRoom.emit(this.roomForm.value);
+        this.closeDialog();
+      }
+    }
   }
 
   handleCancel() {
