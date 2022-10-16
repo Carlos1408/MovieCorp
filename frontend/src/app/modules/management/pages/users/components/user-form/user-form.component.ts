@@ -2,7 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { User } from 'src/app/shared/interfaces/user';
-import { UserService } from 'src/app/shared/services/user.service';
+
+interface Rol {
+  name: string;
+  code: string;
+}
 
 @Component({
   selector: 'app-user-form',
@@ -10,7 +14,15 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
-  roles: string[] = ['Admninistrador', 'Gerente'];
+  roles: Rol[] = [
+    {
+      name: 'Administrador',
+      code: 'admin',
+    },
+    { name: 'Gerente',
+      code: 'manager'
+    },
+  ];
 
   @Input() showForm!: boolean;
   @Input() handledUser!: User;
@@ -83,5 +95,9 @@ export class UserFormComponent implements OnInit {
     } else {
       console.log('invalid');
     }
+  }
+
+  devSubmit(){
+    console.log(this.userForm.value);
   }
 }
