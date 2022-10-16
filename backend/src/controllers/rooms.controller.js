@@ -13,7 +13,6 @@ const getRoom = async (req, res) => {
 };
 
 const createRoom = async (req, res) => {
-  //Busca cine y agrega id de sala a su campo rooms
   const { roomNum, nRows, nCol, price, cinema_id } = req.body;
   const newRoom = new Room({
     roomNum,
@@ -23,13 +22,10 @@ const createRoom = async (req, res) => {
   });
   await newRoom.save();
   const cinema = await Cinema.findById(cinema_id);
-  console.log(cinema);
   await cinema.updateOne(
-    {rooms: [...cinema.rooms, newRoom._id]},
-    { new: true }
+    { rooms: [...cinema.rooms, newRoom._id] }
   );
   cinema.save();
-  console.log(cinema);
   res.json(newRoom);
 };
 
