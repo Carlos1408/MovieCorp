@@ -35,6 +35,10 @@ export class CinemasComponent implements OnInit {
 
   closeForm(): void{
     this.showForm = false;
+    this.handleCinema = {
+      name: '',
+      address: '',
+    };
   }
 
   confirmDelete(_id: string){
@@ -86,7 +90,11 @@ export class CinemasComponent implements OnInit {
   updateCinema(cinema: Cinema): void {
     this.cinemaService.updateCinema(cinema).subscribe({
       next: (res) => {
-        
+        this.messageSerice.add({
+          severity: 'success',
+          summary: 'Datos actualizados',
+          detail: 'Los datos del cine han sido actualizados exitosamente',
+        });
         this.getCinemas();
       },
       error: (err) => console.log(err),
@@ -94,7 +102,8 @@ export class CinemasComponent implements OnInit {
   }
 
   fillCinemaForm(cinema: Cinema): void {
-    this.cinemaService.fillCinemaForm(cinema);
+    this.handleCinema = cinema;
+    this.openForm();
   }
 
 }
