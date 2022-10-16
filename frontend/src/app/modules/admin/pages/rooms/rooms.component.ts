@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
 import { Room } from 'src/app/shared/interfaces/room';
@@ -10,7 +10,7 @@ import { RoomService } from 'src/app/shared/services/room.service';
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss'],
-  providers: [MessageService],
+  providers: [ConfirmationService, MessageService],
 })
 export class RoomsComponent implements OnInit {
   handleRoom: Room = {
@@ -27,7 +27,8 @@ export class RoomsComponent implements OnInit {
   constructor(
     private roomService: RoomService,
     private cinemaService: CinemaService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -57,6 +58,17 @@ export class RoomsComponent implements OnInit {
       .subscribe();
   }
 
+  confirmDelete(_id: string) {
+    this.confirmationService.confirm({
+      header: 'Eliminar Sala',
+      message: 'Esta seguro que quiere eliminar la sala?',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.deleteRoom(_id);
+      },
+    });
+  }
+
   createRoom(room: Room): void {
     this.roomService.createRoom(room).subscribe({
       next: (res) => {
@@ -74,6 +86,11 @@ export class RoomsComponent implements OnInit {
   deleteRoom(_id: string): void {
     this.roomService.deleteRoom(_id).subscribe({
       next: (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Sala eliminada',
+          detail: 'La sala ha sido eliminada correctamente',
+        });
         this.getRooms();
       },
       error: (err) => console.log(err),

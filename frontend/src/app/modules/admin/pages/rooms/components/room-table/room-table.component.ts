@@ -17,14 +17,9 @@ export class RoomTableComponent implements OnInit {
   }
 
   handleDelete(_id?: string): void{
-    if(confirm('Seguro que desea eliminar?')){
-      this.deleteRoom.emit(_id);
-    }
+    this.deleteRoom.emit(_id);
   }
   handleEdit(room: Room){
     this.editRoom.emit(room);
   }
-
-
-
 }
