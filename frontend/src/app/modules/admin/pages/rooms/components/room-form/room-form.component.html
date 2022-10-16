@@ -4,7 +4,7 @@
         <form [formGroup]="roomForm">
             <div class="field">
                 <h4>Numero de Sala</h4>
-                <input type="text" pInputText formControlName="rommNum">
+                <input type="text" pInputText formControlName="roomNum">
             </div>
             <div class="field">
                 <h4>Cantidad Filas</h4>
@@ -22,6 +22,6 @@
     </ng-template>
     <ng-template pTemplate="footer">
         <p-button label="Cancelar" (onClick)="closeDialog()" styleClass="p-button-danger"></p-button>
-        <p-button label="Guardar" styleClass="p-button-primary"></p-button>
+        <p-button label="Guardar" (onClick)="handleSubmit()" styleClass="p-button-primary"></p-button>
     </ng-template>
 </p-dialog>
