@@ -8,9 +8,11 @@
         </ng-template>
     </p-toolbar>
 
-    <app-movie-table [movies]="movies"></app-movie-table>
+    <app-movie-table [movies]="movies" (deleteMovie)="confirmDelete($event)"></app-movie-table>
 
-    <app-movie-form [showForm]="showForm" (createMovie)="createMovie($event)" (closeForm)="closeForm()"></app-movie-form>
+    <app-movie-form [showForm]="showForm" (createMovie)="createMovie($event)" (closeForm)="closeForm()">
+    </app-movie-form>
 </div>
 
+<p-confirmDialog [style]="{width: '450px'}" rejectButtonStyleClass="p-button-danger" acceptLabel="Si"></p-confirmDialog>
 <p-toast></p-toast>
