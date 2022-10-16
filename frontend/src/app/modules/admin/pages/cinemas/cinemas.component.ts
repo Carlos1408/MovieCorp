@@ -11,6 +11,10 @@ import { CinemaService } from 'src/app/shared/services/cinema.service';
   providers: [MessageService],
 })
 export class CinemasComponent implements OnInit {
+  handleCinema: Cinema = {
+    name: '',
+    address: '',
+  };
 
   cinemas: Cinema[] = [];
   showForm: boolean = false;
@@ -72,8 +76,8 @@ export class CinemasComponent implements OnInit {
     });
   }
 
-  fileCinemaForm(cinema: Cinema): void {
-    this.cinemaService.fileCinemaForm(cinema);
+  fillCinemaForm(cinema: Cinema): void {
+    this.cinemaService.fillCinemaForm(cinema);
   }
 
 }

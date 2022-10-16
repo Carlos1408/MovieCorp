@@ -15,7 +15,7 @@ export class RoomFormComponent implements OnInit {
     roomNum: '',
     nRows: 0,
     nCol: 0,
-    price: 0.00,
+    price: 0,
   };
   
   @Input() showForm!: boolean;
