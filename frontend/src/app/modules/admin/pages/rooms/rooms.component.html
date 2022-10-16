@@ -8,10 +8,11 @@
         </ng-template>
     </p-toolbar>
 
-    <app-room-table [rooms]="rooms">
+    <app-room-table [rooms]="rooms" (deleteRoom)="confirmDelete($event)">
     </app-room-table>
 
     <app-room-form [showForm]="showForm" (closeForm)="closeForm()" (createRoom)="createRoom($event)"
         [cinemas]="cinemas"></app-room-form>
 </div>
+<p-confirmDialog [style]="{width: '450px'}" rejectButtonStyleClass="p-button-danger" acceptLabel="Si"></p-confirmDialog>
 <p-toast></p-toast>
