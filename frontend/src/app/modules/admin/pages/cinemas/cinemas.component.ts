@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
 import { CinemaService } from 'src/app/shared/services/cinema.service';
@@ -8,7 +8,7 @@ import { CinemaService } from 'src/app/shared/services/cinema.service';
   selector: 'app-cinemas',
   templateUrl: './cinemas.component.html',
   styleUrls: ['./cinemas.component.scss'],
-  providers: [MessageService],
+  providers: [ConfirmationService, MessageService],
 })
 export class CinemasComponent implements OnInit {
   handleCinema: Cinema = {
@@ -21,7 +21,8 @@ export class CinemasComponent implements OnInit {
 
   constructor( 
     private cinemaService: CinemaService,
-    private messageSerice: MessageService
+    private messageSerice: MessageService,
+    private confirmationService: ConfirmationService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +35,17 @@ export class CinemasComponent implements OnInit {
 
   closeForm(): void{
     this.showForm = false;
+  }
+
+  confirmDelete(_id: string){
+    this.confirmationService.confirm({
+      message: 'Esta seguro que quiere eliminar el cine?',
+      header: 'Eliminar usuario',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.deleteCinema(_id);
+      },
+    });
   }
 
   getCinemas(): void {
@@ -60,6 +72,11 @@ export class CinemasComponent implements OnInit {
   deleteCinema(_id: string): void {
     this.cinemaService.deleteCinema(_id).subscribe({
       next: (res) => {
+        this.messageSerice.add({
+          severity: 'success',
+          summary: 'Elminar cine',
+          detail: 'Los datos del cine han sido elminados correctamente'
+        });
         this.getCinemas();
       },
       error: (err) => console.log(err),
