@@ -8,8 +8,6 @@ import { Movie } from '../interfaces/movie';
   providedIn: 'root',
 })
 export class MovieService {
-  $fillMovieForm = new EventEmitter<Movie>();
-
   private URL_API = `${environment.API_BASE_URL}/api/v1/movies`;
 
   constructor(private http: HttpClient) {}
@@ -36,10 +34,6 @@ export class MovieService {
 
   deleteMovie(_id: string): Observable<Movie> {
     return this.http.delete<Movie>(`${this.URL_API}/${_id}`);
-  }
-
-  fillMovieForm(movie: Movie) {
-    this.$fillMovieForm.emit(movie);
   }
 
   formGroup2formData(form: any): FormData {

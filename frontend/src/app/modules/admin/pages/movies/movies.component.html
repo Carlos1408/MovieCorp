@@ -8,9 +8,10 @@
         </ng-template>
     </p-toolbar>
 
-    <app-movie-table [movies]="movies" (deleteMovie)="confirmDelete($event)"></app-movie-table>
+    <app-movie-table [movies]="movies" (editMovie)="fillMovieForm($event)" (deleteMovie)="confirmDelete($event)">
+    </app-movie-table>
 
-    <app-movie-form [showForm]="showForm" (createMovie)="createMovie($event)" (closeForm)="closeForm()">
+    <app-movie-form [showForm]="showForm" [handledMovie]="handledMovie" (createMovie)="createMovie($event)" (updateMovie)="updateMovie($event)" (closeForm)="closeForm()">
     </app-movie-form>
 </div>
 
