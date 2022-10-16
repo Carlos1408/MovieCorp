@@ -11,14 +11,9 @@ import { RoomService } from 'src/app/shared/services/room.service';
 export class RoomFormComponent implements OnInit {
 
   
-  handleRoom: Room = {
-    roomNum: '',
-    nRows: 0,
-    nCol: 0,
-    price: 0.00,
-  };
   
   @Input() showForm!: boolean;
+  @Input() handleRoom!: Room;
 
   @Output() closeForm = new EventEmitter();
   @Output() createRoom = new EventEmitter<Room>();
@@ -32,7 +27,7 @@ export class RoomFormComponent implements OnInit {
     price: new FormControl(''),
   });
 
-  constructor(private messageService: MessageService) { }
+  constructor() { }
 
   ngOnInit(): void {}
 
@@ -54,16 +49,12 @@ export class RoomFormComponent implements OnInit {
   }
 
   handleSubmit(){
-    if (this.roomForm.get('_id')?.value){
-      this.editRoom.emit(this.roomForm.value);
-    } else {
-      this.createRoom.emit(this.roomForm.value);
-    }
-    this.roomForm.reset();
+    this.createRoom.emit(this.roomForm.value);
+    this.closeDialog();
   }
 
   handleCancel(){
-    this.roomForm.reset();
+    this.closeDialog();
   }
 
 }
