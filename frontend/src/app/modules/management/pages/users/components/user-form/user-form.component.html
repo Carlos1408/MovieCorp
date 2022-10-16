@@ -16,7 +16,7 @@
             </div>
             <div class="field">
                 <h4>Telefono</h4>
-                <p-inputNumber [useGrouping]="true" formControlName="phone"></p-inputNumber>
+                <p-inputNumber [useGrouping]="false" formControlName="phone"></p-inputNumber>
             </div>
             <div class="field">
                 <h4>Email</h4>
@@ -24,7 +24,7 @@
             </div>
             <div class="field">
                 <h4>Rol</h4>
-                <p-dropdown [options]="roles" placeholder="Selecione un rol" formControlName="rol"></p-dropdown>
+                <p-dropdown [options]="roles" optionLabel="name" optionValue="code" placeholder="Selecione un rol" formControlName="rol"></p-dropdown>
             </div>
             <div class="field">
                 <h4>Contraseña</h4>
