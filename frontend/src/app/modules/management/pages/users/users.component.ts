@@ -4,7 +4,6 @@ import { User } from 'src/app/shared/interfaces/user';
 import { UserService } from 'src/app/shared/services/user.service';
 import {
   ConfirmationService,
-  ConfirmEventType,
   MessageService,
 } from 'primeng/api';
 

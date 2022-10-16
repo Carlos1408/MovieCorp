@@ -21,9 +21,6 @@ export class MovieTableComponent implements OnInit {
   }
 
   handleDelete(_id?: string) {
-    console.log(_id);
-    if (confirm('Seguro que quiere eliminar la pelicula?')) {
-      this.deleteMovie.emit(_id);
-    }
+    this.deleteMovie.emit(_id);
   }
 }

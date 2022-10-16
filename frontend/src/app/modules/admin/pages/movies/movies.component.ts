@@ -32,6 +32,17 @@ export class MoviesComponent implements OnInit {
     this.showForm = false;
   }
 
+  confirmDelete(_id: string): void {
+    this.confirmationService.confirm({
+      message: 'Esta seguro que quiere eliminar la pelicula?',
+      header: 'Eliminar pelicula',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.deleteMovie(_id);
+      },
+    });
+  }
+
   getMovies(): void {
     this.movieService
       .getAllMovies()
@@ -66,7 +77,11 @@ export class MoviesComponent implements OnInit {
   deleteMovie(_id: string): void {
     this.movieService.deleteMovie(_id).subscribe({
       next: (res) => {
-        console.log(res);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Pelicula eliminada',
+          detail: 'La pelicula ha sido eliminada exitosamente'
+        })
         this.getMovies();
       },
       error: (err) => console.log(err),
