@@ -44,7 +44,14 @@ export class CinemaFormComponent implements OnInit {
   }
 
   handleSubmit(){
-    this.createCinema.emit(this.cinemaForm.value);
-    this.closeDialog();
+    if (this.cinemaForm.valid) {
+      if (this.cinemaForm.get('_id')?.value) {
+        this.editCinema.emit(this.cinemaForm.value);
+        this.closeDialog();
+      } else {
+        this.createCinema.emit(this.cinemaForm.value);
+        this.closeDialog();
+      }
+    }
   }
 }
