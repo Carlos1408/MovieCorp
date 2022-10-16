@@ -1,12 +1,18 @@
-<div class="row mb-3">
-    <h1>Salas</h1>
-</div>
+<h1>Salas</h1>
 
-<div class="row">
-    <div class="col-4">
-        <app-room-form (editRoom)="updateRoom($event)" (createRoom)="createRooms($event)"></app-room-form>        
-    </div>
-    <div class="col-8">
-        <app-room-table (editRoom)="fillRoomForm($event)" (deleteRoom)="deleteRoom($event)" [rooms]="rooms"></app-room-table>
-    </div>
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <p-button label="Nueva Sala" (onClick)="openForm()" iconPos="right" icon="pi pi-plus"
+                styleClass="p-button-primary"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <app-room-table [rooms]="rooms">
+    </app-room-table>
+
+    <app-room-form 
+        [showForm]="showForm" 
+        (closeForm)="closeForm()"
+    ></app-room-form>
 </div>

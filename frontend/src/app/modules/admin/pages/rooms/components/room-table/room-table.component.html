@@ -1,25 +1,26 @@
-<table class="table table-striped">
-    <thead class="table table-dark">
+<p-table [value]="rooms" [rows]="10" [paginator]="true" responsiveLayout="scroll" [rowHover]="true">
+    <ng-template pTemplate="header">
         <tr>
             <th>Nro</th>
             <th>Numero de Sala</th>
             <th>Cantidad Filas</th>
             <th>Cantidad Columnas</th>
             <th>Precio de la Entrada</th>
-            <th>Opciones</th>
         </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let room of rooms; index as i">
-            <th scope="row">{{i+1}}</th>
+    </ng-template>
+    <ng-template pTemplate="body" let-room>
+        <tr>
+            <td>{{rooms.indexOf(room)+1}}</td>
             <td>{{room.roomNum}}</td>
             <td>{{room.nRows}}</td>
             <td>{{room.nCol}}</td>
-            <td>{{room.price}}</td>
+            <td>Bs {{room.price}}</td>
             <td>
-                <button (click)="handleEdit(room)" class="btn btn-success me-4">Editar</button>
-                <button (click)="handleDelete(room._id)" class="btn btn-danger">Eliminar</button>
+                <p-button label="Editar" iconPos="right" icon="pi pi-pencil"
+                    styleClass="p-button-sm p-button-success mr-2"></p-button>
+                <p-button label="Eliminar" iconPos="right" icon="pi pi-trash" styleClass="p-button-sm p-button-danger">
+                </p-button>
             </td>
         </tr>
-    </tbody>
-</table>
+    </ng-template>
+</p-table>
