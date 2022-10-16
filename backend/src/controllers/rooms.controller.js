@@ -19,12 +19,11 @@ const createRoom = async (req, res) => {
     nRows,
     nCol,
     price,
+    cinema_id: cinema_id,
   });
   await newRoom.save();
   const cinema = await Cinema.findById(cinema_id);
-  await cinema.updateOne(
-    { rooms: [...cinema.rooms, newRoom._id] }
-  );
+  await cinema.updateOne({ rooms: [...cinema.rooms, newRoom._id] });
   cinema.save();
   res.json(newRoom);
 };
@@ -49,7 +48,14 @@ const updateRoom = async (req, res) => {
 
 const deleteRoom = async (req, res) => {
   const { id } = req.params;
-  const room = await Room.findByIdAndDelete(id);
+  const room = await Room.findByIdAndRemove(id);
+  const cinema = await Cinema.findById(room.cinema_id);
+  await cinema.updateOne({
+    rooms: cinema.rooms.filter((r) => {
+      return r.toString() !== room._id.toString();
+    }),
+  });
+  cinema.save();
   res.json(room);
 };
 
