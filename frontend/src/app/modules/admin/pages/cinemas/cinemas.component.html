@@ -8,7 +8,7 @@
         </ng-template>
     </p-toolbar>
 
-    <app-cinema-table [cinemas]="cinemas">
+    <app-cinema-table [cinemas]="cinemas" (deletCinema)="confirmDelete($event)">
     </app-cinema-table>
     <app-cinema-form 
         (createCinema)="createCinema($event)" 
@@ -16,4 +16,5 @@
         (closeForm)="closeForm()"
     ></app-cinema-form>
 </div>
+<p-confirmDialog [style]="{width: '400px'}" rejectButtonStyleClass="p-button-danger" acceptLabel="Si"></p-confirmDialog>
 <p-toast></p-toast>
