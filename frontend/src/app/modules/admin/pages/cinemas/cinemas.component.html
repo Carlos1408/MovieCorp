@@ -10,14 +10,9 @@
 
     <app-cinema-table [cinemas]="cinemas" (deletCinema)="confirmDelete($event)" (editCinema)="fillCinemaForm($event)">
     </app-cinema-table>
-    
-    <app-cinema-form 
-        (createCinema)="createCinema($event)" 
-        [showForm]="showForm"
-        (closeForm)="closeForm()"
-        (editCinema)="updateCinema($event)"
-        [handleCinema]="handleCinema"
-    ></app-cinema-form>
+
+    <app-cinema-form (createCinema)="createCinema($event)" [showForm]="showForm" [movies]="movies"
+        (closeForm)="closeForm()" (editCinema)="updateCinema($event)" [handleCinema]="handleCinema"></app-cinema-form>
 </div>
 <p-confirmDialog [style]="{width: '400px'}" rejectButtonStyleClass="p-button-danger" acceptLabel="Si"></p-confirmDialog>
 <p-toast></p-toast>
