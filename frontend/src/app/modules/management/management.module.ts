@@ -9,12 +9,15 @@ import { UserTableComponent } from './pages/users/components/user-table/user-tab
 import { ReactiveFormsModule } from '@angular/forms';
 import { PrimengModule } from 'src/app/shared/primeng.module';
 
+import { OptionCardComponent } from 'src/app/shared/components/option-card/option-card.component';
+
 @NgModule({
   declarations: [
     ManagementComponent,
     UsersComponent,
     UserFormComponent,
     UserTableComponent,
+    OptionCardComponent
   ],
   imports: [
     CommonModule,
