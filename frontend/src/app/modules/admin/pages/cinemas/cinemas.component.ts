@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
+import { Movie } from 'src/app/shared/interfaces/movie';
 import { CinemaService } from 'src/app/shared/services/cinema.service';
+import { MovieService } from 'src/app/shared/services/movie.service';
 
 @Component({
   selector: 'app-cinemas',
@@ -14,34 +16,39 @@ export class CinemasComponent implements OnInit {
   handleCinema: Cinema = {
     name: '',
     address: '',
+    movies: []
   };
 
   cinemas: Cinema[] = [];
+  movies: Movie[] = [];
   showForm: boolean = false;
 
-  constructor( 
+  constructor(
     private cinemaService: CinemaService,
+    private movieService: MovieService,
     private messageSerice: MessageService,
     private confirmationService: ConfirmationService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getCinemas();
+    this.getMovies();
   }
 
-  openForm(): void{
+  openForm(): void {
     this.showForm = true;
   }
 
-  closeForm(): void{
+  closeForm(): void {
     this.showForm = false;
     this.handleCinema = {
       name: '',
       address: '',
+      movies: []
     };
   }
 
-  confirmDelete(_id: string){
+  confirmDelete(_id: string) {
     this.confirmationService.confirm({
       message: 'Esta seguro que quiere eliminar el cine?',
       header: 'Eliminar usuario',
@@ -54,18 +61,25 @@ export class CinemasComponent implements OnInit {
 
   getCinemas(): void {
     this.cinemaService
-    .getAllCinemas()
-    .pipe(tap((cinemas: Cinema[]) => (this.cinemas = cinemas)))
-    .subscribe();
+      .getAllCinemas()
+      .pipe(tap((cinemas: Cinema[]) => (this.cinemas = cinemas)))
+      .subscribe();
   }
 
-  createCinema( cinema: Cinema): void {
+  getMovies(): void {
+    this.movieService
+      .getAllMovies()
+      .pipe(tap((movies: Movie[]) => (this.movies = movies)))
+      .subscribe();
+  }
+
+  createCinema(cinema: Cinema): void {
     this.cinemaService.createCinema(cinema).subscribe({
       next: (res) => {
         this.messageSerice.add({
           severity: 'success',
           summary: 'Nuevo Cine',
-          detail: 'Datos agregados correctamente'
+          detail: 'Datos agregados correctamente',
         });
         this.getCinemas();
       },
@@ -79,12 +93,12 @@ export class CinemasComponent implements OnInit {
         this.messageSerice.add({
           severity: 'success',
           summary: 'Elminar cine',
-          detail: 'Los datos del cine han sido elminados correctamente'
+          detail: 'Los datos del cine han sido elminados correctamente',
         });
         this.getCinemas();
       },
       error: (err) => console.log(err),
-    })
+    });
   }
 
   updateCinema(cinema: Cinema): void {
@@ -105,5 +119,4 @@ export class CinemasComponent implements OnInit {
     this.handleCinema = cinema;
     this.openForm();
   }
-
 }

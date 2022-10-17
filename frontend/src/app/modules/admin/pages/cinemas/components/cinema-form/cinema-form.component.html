@@ -3,6 +3,10 @@
     <ng-template pTemplate="content">
         <form [formGroup]="cinemaForm">
             <div class="field">
+                <h4>Peliculas disponibles</h4>
+                <p-multiSelect [options]="movies" optionLabel="title" optionValue="_id" display="chip" formControlName="movies"></p-multiSelect>
+            </div>
+            <div class="field">
                 <h4>Nombre</h4>
                 <input type="text" pInputText formControlName="name">
             </div>

@@ -17,6 +17,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { CardModule } from 'primeng/card';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [],
@@ -38,6 +39,7 @@ import { CardModule } from 'primeng/card';
     FileUploadModule,
     ImageModule,
     CardModule,
+    MultiSelectModule,
   ],
 })
 export class PrimengModule {}
