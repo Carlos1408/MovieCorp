@@ -6,6 +6,7 @@
             <th>Direccion</th>
             <th>Cantidad Salas</th>
             <th>Cantidad Peliculas</th>
+            <th>Opciones</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-cinema>
@@ -13,7 +14,7 @@
             <td>{{cinemas.indexOf(cinema) + 1}}</td>
             <td>{{cinema.name}}</td>
             <td>{{cinema.address}}</td>
-            <td>0</td>
+            <td>{{cinema.rooms.length}}</td>
             <td>0</td>
             <td class="flex">
                 <p-button label="Editar" (onClick)="handleEdit(cinema)" iconPos="right" icon="pi pi-pencil"

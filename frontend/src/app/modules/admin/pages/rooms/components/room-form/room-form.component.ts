@@ -31,6 +31,10 @@ export class RoomFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  public get editMode(): boolean {
+    return this.roomForm.get('_id')?.value;
+  }
+
   onShow(): void {
     this.fillRoomForm();
   }
@@ -42,6 +46,7 @@ export class RoomFormComponent implements OnInit {
 
   fillRoomForm() {
     this.roomForm.get('_id')?.setValue(this.handleRoom._id);
+    this.roomForm.get('cinema_id')?.setValue(this.handleRoom.cinema_id);
     this.roomForm.get('roomNum')?.setValue(this.handleRoom.roomNum);
     this.roomForm.get('nRows')?.setValue(this.handleRoom.nRows);
     this.roomForm.get('nCol')?.setValue(this.handleRoom.nCol);

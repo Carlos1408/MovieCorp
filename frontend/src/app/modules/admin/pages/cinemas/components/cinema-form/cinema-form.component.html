@@ -1,5 +1,5 @@
-<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" header="Nuevo Cine" [modal]="true" styleClass="p-fluid"
-    [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
+<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" [header]="(editMode? 'Actualizar': 'Nuevo') + ' Cine'"
+    [modal]="true" styleClass="p-fluid" [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
     <ng-template pTemplate="content">
         <form [formGroup]="cinemaForm">
             <div class="field">

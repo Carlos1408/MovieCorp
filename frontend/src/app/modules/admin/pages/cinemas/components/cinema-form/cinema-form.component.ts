@@ -7,11 +7,13 @@ import { CinemaService } from 'src/app/shared/services/cinema.service';
 @Component({
   selector: 'app-cinema-form',
   templateUrl: './cinema-form.component.html',
-  styleUrls: ['./cinema-form.component.scss']
+  styleUrls: ['./cinema-form.component.scss'],
 })
 export class CinemaFormComponent implements OnInit {
+  public get editMode(): boolean {
+    return this.cinemaForm.get('_id')?.value;
+  }
 
-  
   @Input() showForm!: boolean;
   @Input() handleCinema!: Cinema;
 
@@ -19,12 +21,12 @@ export class CinemaFormComponent implements OnInit {
   @Output() createCinema = new EventEmitter<Cinema>();
   @Output() editCinema = new EventEmitter<Cinema>();
 
-  cinemaForm: FormGroup= new FormGroup({
+  cinemaForm: FormGroup = new FormGroup({
     _id: new FormControl(''),
     name: new FormControl(''),
     address: new FormControl(''),
   });
-  constructor(private messageService: MessageService) { }
+  constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {}
 
@@ -43,7 +45,7 @@ export class CinemaFormComponent implements OnInit {
     this.cinemaForm.get('address')?.setValue(this.handleCinema.address);
   }
 
-  handleSubmit(){
+  handleSubmit() {
     if (this.cinemaForm.valid) {
       if (this.cinemaForm.get('_id')?.value) {
         this.editCinema.emit(this.cinemaForm.value);

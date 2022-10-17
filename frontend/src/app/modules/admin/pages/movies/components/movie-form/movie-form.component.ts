@@ -38,9 +38,12 @@ export class MovieFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  public get editMode(): boolean {
+    return this.movieForm.get('_id')?.value;
+  }
+
   onShow(): void {
     this.fillMovieForm();
-    console.log(this.movieForm.value);
   }
 
   closeDialog(): void {
@@ -73,16 +76,6 @@ export class MovieFormComponent implements OnInit {
       this.closeDialog();
     } else {
       console.log('invalid');
-    }
-  }
-
-  devSubmit() {
-    if (this.movieForm.get('_id')?.value) {
-      console.log(this.movieForm.value);
-
-      console.log('edit');
-    } else {
-      console.log('create');
     }
   }
 

@@ -1,5 +1,5 @@
-<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" header="Nuevo usuario" [modal]="true" styleClass="p-fluid"
-    [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
+<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" [header]="(editMode? 'Actualizar': 'Nuevo') + ' usuario'"
+    [modal]="true" styleClass="p-fluid" [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
     <ng-template pTemplate="content">
         <form [formGroup]="userForm">
             <div class="field">
@@ -12,7 +12,8 @@
             </div>
             <div class="field">
                 <h4>Fecha de nacimiento</h4>
-                <p-calendar dataType="string" dateFormat="yy-mm-dd" [showIcon]="true" formControlName="birthdate"></p-calendar>
+                <p-calendar dataType="string" dateFormat="yy-mm-dd" [showIcon]="true" formControlName="birthdate">
+                </p-calendar>
             </div>
             <div class="field">
                 <h4>Telefono</h4>
@@ -24,15 +25,18 @@
             </div>
             <div class="field">
                 <h4>Rol</h4>
-                <p-dropdown [options]="roles" optionLabel="name" optionValue="code" placeholder="Selecione un rol" formControlName="rol"></p-dropdown>
+                <p-dropdown [options]="roles" optionLabel="name" optionValue="code" placeholder="Selecione un rol"
+                    formControlName="rol"></p-dropdown>
             </div>
-            <div class="field">
-                <h4>Contraseña</h4>
-                <p-password [feedback]="false" [toggleMask]="true" formControlName="password"></p-password>
-            </div>
-            <div class="field">
-                <h4>Confirme contraseña</h4>
-                <p-password [feedback]="false" [toggleMask]="true" formControlName="passwordConfirm"></p-password>
+            <div *ngIf="!editMode">
+                <div class="field">
+                    <h4>Contraseña</h4>
+                    <p-password [feedback]="false" [toggleMask]="true" formControlName="password"></p-password>
+                </div>
+                <div class="field">
+                    <h4>Confirme contraseña</h4>
+                    <p-password [feedback]="false" [toggleMask]="true" formControlName="passwordConfirm"></p-password>
+                </div>
             </div>
         </form>
     </ng-template>

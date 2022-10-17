@@ -1,11 +1,11 @@
-<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" header="Nueva Sala" [modal]="true" styleClass="p-fluid"
-    [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
+<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" [header]="(editMode? 'Actualizar': 'Nueva') + ' Sala'"
+    [modal]="true" styleClass="p-fluid" [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
     <ng-template pTemplate="content">
         <form [formGroup]="roomForm">
             <div class="field">
                 <h4>Cine</h4>
                 <p-dropdown placeholder="Seleccione el cine correspondiente" [options]="cinemas" optionLabel="name"
-                    optionValue="_id" formControlName="cinema_id"></p-dropdown>
+                    optionValue="_id" formControlName="cinema_id" [disabled]="editMode"></p-dropdown>
             </div>
             <div class="field">
                 <h4>Numero de Sala</h4>
