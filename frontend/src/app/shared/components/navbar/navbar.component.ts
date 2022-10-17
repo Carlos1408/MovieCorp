@@ -16,22 +16,27 @@ export class NavbarComponent implements OnInit {
       {
         label: 'Cines',
         routerLink: '/admin/cinemas',
-        styleClass: 'mx-1'
+        styleClass: 'mx-1',
+        icon: 'pi pi-video',
+        
       },
       {
         label: 'Salas',
         routerLink: '/admin/rooms',
-        styleClass: 'mx-1'
+        styleClass: 'mx-1',
+        icon: 'pi pi-tablet'
       },
       {
         label: 'Peliculas',
         routerLink: '/admin/movies',
-        styleClass: 'mx-1'
+        styleClass: 'mx-1',
+        icon: 'pi pi-ticket'
       },
       {
         label: 'Usuarios',
         routerLink: '/management/users',
-        styleClass: 'mx-1'
+        styleClass: 'mx-1',
+        icon: 'pi pi-users'
       },
     ];
   }
