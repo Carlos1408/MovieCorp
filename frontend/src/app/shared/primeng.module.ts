@@ -16,6 +16,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
+import { CardModule } from 'primeng/card';
 import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
@@ -37,6 +38,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     InputTextareaModule,
     FileUploadModule,
     ImageModule,
+    CardModule,
     MultiSelectModule,
   ],
 })
