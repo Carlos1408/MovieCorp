@@ -69,9 +69,11 @@ const updateMovie = async (req, res) => {
       director,
       imagePath: req.file.path,
       trailer,
+      cinemas_ids: []
     },
     { new: true }
   );
+  console.log(movie);
   res.json(movie);
 };
 

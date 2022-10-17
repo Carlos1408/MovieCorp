@@ -1,4 +1,5 @@
 const Cinema = require("../models/cinema");
+const Movie = require("../models/movie");
 
 const getAllCinemas = async (req, res) => {
   const cinemas = await Cinema.find();
@@ -19,6 +20,13 @@ const createCinema = async (req, res) => {
     movies,
   });
   await newCinema.save();
+  movies.forEach(async (movie_id) => {
+    const movie = await Movie.findById(movie_id);
+    await movie.updateOne({
+      cinemas_ids: [...movie.cinemas_ids, newCinema._id],
+    });
+    movie.save();
+  });
   res.json(newCinema);
 };
 
