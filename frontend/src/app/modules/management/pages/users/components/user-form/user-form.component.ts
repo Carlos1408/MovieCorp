@@ -19,9 +19,7 @@ export class UserFormComponent implements OnInit {
       name: 'Administrador',
       code: 'admin',
     },
-    { name: 'Gerente',
-      code: 'manager'
-    },
+    { name: 'Gerente', code: 'manager' },
   ];
 
   @Input() showForm!: boolean;
@@ -54,6 +52,10 @@ export class UserFormComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  public get editMode(): boolean {
+    return this.userForm.get('_id')?.value;
+  }
+
   onShow(): void {
     this.fillUserForm();
   }
@@ -71,11 +73,13 @@ export class UserFormComponent implements OnInit {
     this.userForm.get('phone')?.setValue(this.handledUser.phone);
     this.userForm.get('rol')?.setValue(this.handledUser.rol);
     this.userForm.get('email')?.setValue(this.handledUser.email);
+    this.userForm.get('password')?.setValue(this.handledUser.password);
+    this.userForm.get('passwordConfirm')?.setValue(this.handledUser.password);
   }
 
   handleSubmit() {
     if (this.userForm.valid) {
-      if (this.userForm.get('_id')?.value) {
+      if (this.editMode) {
         this.editUser.emit(this.userForm.value);
         this.closeDialog();
       } else {
@@ -93,11 +97,11 @@ export class UserFormComponent implements OnInit {
         }
       }
     } else {
-      console.log('invalid');
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Formulario invalido',
+        detail: 'Todos los datos deben ser llenados correctamente',
+      });
     }
-  }
-
-  devSubmit(){
-    console.log(this.userForm.value);
   }
 }

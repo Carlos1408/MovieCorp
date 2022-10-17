@@ -15,7 +15,7 @@
             <td>{{movies.indexOf(movie)+1}}</td>
             <td>{{movie.title}}</td>
             <td>
-                <p-image [src]="'http://localhost:4000/' + movie.imagePath" height="150" [preview]="true"></p-image>
+                <p-image [src]="URL_API + movie.imagePath" height="150" [preview]="true"></p-image>
             </td>
             <td>{{movie.genre}}</td>
             <td>{{movie.rating}}</td>
