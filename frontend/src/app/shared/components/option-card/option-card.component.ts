@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-option-card',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OptionCardComponent implements OnInit {
 
+  @Input() option!: { title: string; url: string; imagePath: string; };
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  testClick(): void {
+    console.log('FUNCIONA');
   }
 
 }

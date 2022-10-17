@@ -1,1 +1,9 @@
-<p>option-card works!</p>
+<a [routerLink]="option.url">
+    <p-card header={{option.title}} [style]="{width: '360px'}" styleClass="p-card-shadow">
+        <ng-template pTemplate="header">
+            <img alt="Card" src={{option.imagePath}} height="200">
+        </ng-template>
+    </p-card>
+</a>
+
+
