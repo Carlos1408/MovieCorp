@@ -12,10 +12,11 @@ const getCinema = async (req, res) => {
 };
 
 const createCinema = async (req, res) => {
-  const { name, address } = req.body;
+  const { name, address, movies } = req.body;
   const newCinema = new Cinema({
     name,
     address,
+    movies,
   });
   await newCinema.save();
   res.json(newCinema);
@@ -23,12 +24,13 @@ const createCinema = async (req, res) => {
 
 const updateCinema = async (req, res) => {
   const { id } = req.params;
-  const { name, address } = req.body;
+  const { name, address, movies } = req.body;
   const cinema = await Cinema.findByIdAndUpdate(
     id,
     {
       name,
       address,
+      movies,
     },
     {
       new: true,
