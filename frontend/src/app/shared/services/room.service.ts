@@ -1,21 +1,18 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Room } from '../interfaces/room';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RoomService {
-  $fillRoomForm = new EventEmitter<Room>();
+  private URL_API = `${environment.API_BASE_URL}/api/v1/rooms`;
 
-  private URL_API = `${environment.API_BASE_URL}/api/v1/rooms`
-  
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getAllRooms(): Observable<Room[]>{
+  getAllRooms(): Observable<Room[]> {
     return this.http.get<Room[]>(this.URL_API);
   }
 
@@ -28,14 +25,10 @@ export class RoomService {
   }
 
   updateRoom(room: Room): Observable<Room> {
-    return this.http.put<Room>(`${this.URL_API}/${room._id}`,room);
+    return this.http.put<Room>(`${this.URL_API}/${room._id}`, room);
   }
-  
+
   deleteRoom(_id: string): Observable<Room> {
     return this.http.delete<Room>(`${this.URL_API}/${_id}`);
   }
-  fillRoomForm(room: Room){
-    this.$fillRoomForm.emit(room);
-  }
-
 }
