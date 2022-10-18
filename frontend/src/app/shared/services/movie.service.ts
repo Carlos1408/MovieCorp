@@ -39,9 +39,7 @@ export class MovieService {
   formGroup2formData(form: any): FormData {
     const formData = new FormData();
     for (const key of Object.keys(form)) {
-      if (key != 'imageSrc') {
-        formData.append(key, form[key]);
-      }
+      formData.append(key, form[key]);
     }
     return formData;
   }

@@ -4,7 +4,9 @@
         <form [formGroup]="cinemaForm">
             <div class="field">
                 <h4>Peliculas disponibles</h4>
-                <p-multiSelect [options]="movies" optionLabel="title" optionValue="_id" display="chip" formControlName="movies_ids"></p-multiSelect>
+                <p-multiSelect [options]="movies" optionLabel="title" optionValue="_id" display="chip"
+                    formControlName="movies_ids" placeholder="Seleccione las peliculas disponibles en este cine">
+                </p-multiSelect>
             </div>
             <div class="field">
                 <h4>Nombre</h4>
@@ -13,6 +15,12 @@
             <div class="field">
                 <h4>Direccion</h4>
                 <input type="text" pInputText formControlName="address">
+            </div>
+            <div class="field">
+                <h4>Imagen</h4>
+                <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)" removeStyleClass="p-button-sm"
+                    [fileLimit]="1" invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
+                    chooseLabel="Seleccionar archivo"></p-fileUpload>
             </div>
         </form>
     </ng-template>
