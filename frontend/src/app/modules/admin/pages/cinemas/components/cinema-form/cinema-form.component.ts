@@ -26,7 +26,7 @@ export class CinemaFormComponent implements OnInit {
     _id: new FormControl(''),
     name: new FormControl(''),
     address: new FormControl(''),
-    movies: new FormControl(''),
+    movies_ids: new FormControl(''),
   });
   constructor(private messageService: MessageService) {}
 
@@ -45,7 +45,7 @@ export class CinemaFormComponent implements OnInit {
     this.cinemaForm.get('_id')?.setValue(this.handleCinema._id);
     this.cinemaForm.get('name')?.setValue(this.handleCinema.name);
     this.cinemaForm.get('address')?.setValue(this.handleCinema.address);
-    this.cinemaForm.get('movies')?.setValue(this.handleCinema.movies);
+    this.cinemaForm.get('movies_ids')?.setValue(this.handleCinema.movies_ids);
   }
 
   handleSubmit(): void {
