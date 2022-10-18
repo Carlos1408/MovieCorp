@@ -19,3 +19,4 @@
 /backend/package-lock.json
 /backend/uploads/*/*.jpeg
 /backend/uploads/*/*.jpg
+/backend/uploads/*/*.png
