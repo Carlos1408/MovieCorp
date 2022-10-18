@@ -97,6 +97,13 @@ export class CinemasComponent implements OnInit {
           summary: 'Elminar cine',
           detail: 'Los datos del cine han sido elminados correctamente',
         });
+        if (res.rooms_ids) {
+          this.messageSerice.add({
+            severity: 'warn',
+            summary: `${res.rooms_ids.length} salas eliminadas`,
+            detail: `Los datos de ${res.rooms_ids.length} salas han sido elminados`,
+          });
+        }
         this.getCinemas();
       },
       error: (err) => console.log(err),
