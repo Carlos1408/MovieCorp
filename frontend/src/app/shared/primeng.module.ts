@@ -18,6 +18,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ImageModule } from 'primeng/image';
 import { CardModule } from 'primeng/card';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { CarouselModule } from 'primeng/carousel';
 
 @NgModule({
   declarations: [],
@@ -40,6 +41,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     ImageModule,
     CardModule,
     MultiSelectModule,
+    CarouselModule
   ],
 })
 export class PrimengModule {}

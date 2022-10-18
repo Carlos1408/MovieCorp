@@ -5,6 +5,7 @@ import { ClientRoutingModule } from './client-routing.module';
 import { ClientComponent } from './client.component';
 import { BillboardComponent } from './pages/billboard/billboard.component';
 import { MovieCardComponent } from './pages/billboard/movie-card/movie-card.component';
+import { PrimengModule } from 'src/app/shared/primeng.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MovieCardComponent } from './pages/billboard/movie-card/movie-card.comp
   ],
   imports: [
     CommonModule,
-    ClientRoutingModule
+    ClientRoutingModule,
+    PrimengModule
   ]
 })
 export class ClientModule { }
