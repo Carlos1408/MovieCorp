@@ -1,5 +1,6 @@
 const Function = require("../models/function");
 const Movie = require("../models/movie");
+const Room = require("../models/room");
 
 const getAllFunctions = async (req, res) => {
   const function_ = await Function.find();
@@ -14,10 +15,20 @@ const getFunction = async (req, res) => {
 
 const createFunction = async (req, res) => {
   const { cinema_id, room_id, movie_id, from, to } = req.body;
-  const newFunction = new Function({ cinema_id, room_id, movie_id, from, to });
+  const room = await Room.findById(room_id);
+  const newFunction = new Function({
+    cinema_id,
+    room_id,
+    movie_id,
+    from,
+    to,
+    nSeats: room.nRows * room.nCol,
+  });
   await newFunction.save();
   const movie = await Movie.findById(movie_id);
-  await Movie.updateOne({ functions_ids: [...movie.functions_ids, newFunction._id] });
+  await Movie.updateOne({
+    functions_ids: [...movie.functions_ids, newFunction._id],
+  });
   movie.save();
   res.json(newFunction);
 };
