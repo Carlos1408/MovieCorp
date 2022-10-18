@@ -18,5 +18,6 @@ app.use("/api/v1/users", require("./routes/users.routes"));
 app.use("/api/v1/cinemas", require("./routes/cinemas.routes"));
 app.use("/api/v1/movies", require("./routes/movies.routes"));
 app.use("/api/v1/rooms",require("./routes/rooms.routes"));
+app.use("/api/v1/functions",require("./routes/functions.routes"));
 
 module.exports = app;

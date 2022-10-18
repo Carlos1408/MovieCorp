@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const { Room } = require("./room");
 
 const cinemaSchema = new Schema(
   {

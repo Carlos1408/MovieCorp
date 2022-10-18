@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
 import { Room } from 'src/app/shared/interfaces/room';
-import { RoomService } from 'src/app/shared/services/room.service';
+
 @Component({
   selector: 'app-room-form',
   templateUrl: './room-form.component.html',

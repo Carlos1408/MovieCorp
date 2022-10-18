@@ -18,6 +18,7 @@ export class RoomsComponent implements OnInit {
     nRows: 0,
     nCol: 0,
     price: 0,
+    timeRanges: []
   };
 
   rooms: Room[] = [];
@@ -47,6 +48,7 @@ export class RoomsComponent implements OnInit {
       nRows: 0,
       nCol: 0,
       price: 0,
+      timeRanges: []
     };
   }
 

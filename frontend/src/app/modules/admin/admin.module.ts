@@ -16,6 +16,9 @@ import { RoomFormComponent } from './pages/rooms/components/room-form/room-form.
 import { PrimengModule } from 'src/app/shared/primeng.module';
 
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FunctionsComponent } from './pages/functions/functions.component';
+import { FunctionTableComponent } from './pages/functions/components/function-table/function-table.component';
+import { FunctionFormComponent } from './pages/functions/components/function-form/function-form.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,9 @@ import { SharedModule } from 'src/app/shared/shared.module';
     RoomsComponent,
     RoomFormComponent,
     RoomTableComponent,
+    FunctionsComponent,
+    FunctionTableComponent,
+    FunctionFormComponent,
   ],
   imports: [
     CommonModule,
