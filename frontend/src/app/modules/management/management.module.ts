@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PrimengModule } from 'src/app/shared/primeng.module';
 
 import { OptionCardComponent } from 'src/app/shared/components/option-card/option-card.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { OptionCardComponent } from 'src/app/shared/components/option-card/optio
     UsersComponent,
     UserFormComponent,
     UserTableComponent,
-    OptionCardComponent
+    OptionCardComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,
