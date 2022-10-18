@@ -32,8 +32,9 @@
             </div>
             <div class="field">
                 <h4>Portada</h4>
-                <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)" removeStyleClass="p-button-sm"
-                    [fileLimit]="1" invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
+                <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)"
+                    removeStyleClass="p-button-sm p-button-danger" [fileLimit]="1"
+                    invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
                     chooseLabel="Seleccionar archivo"></p-fileUpload>
             </div>
             <div class="field">
