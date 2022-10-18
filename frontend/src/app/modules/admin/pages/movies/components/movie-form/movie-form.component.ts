@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Movie } from 'src/app/shared/interfaces/movie';
 import { MovieService } from 'src/app/shared/services/movie.service';
+import { MessageService } from 'primeng/api';
 
 interface HtmlInputEvent extends Event {
   target: HTMLInputElement & EventTarget;
@@ -34,7 +35,7 @@ export class MovieFormComponent implements OnInit {
     trailer: new FormControl('', Validators.required),
   });
 
-  constructor() {}
+  constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {}
 
@@ -74,8 +75,12 @@ export class MovieFormComponent implements OnInit {
         this.createMovie.emit(this.movieForm.value);
       }
       this.closeDialog();
-    } else {
-      console.log('invalid');
+    }  else {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Formulario invalido',
+        detail: 'Todos los datos deben ser llenados correctamente',
+      });
     }
   }
 
