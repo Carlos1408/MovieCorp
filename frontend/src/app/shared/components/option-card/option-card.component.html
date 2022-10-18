@@ -1,7 +1,14 @@
-<a [routerLink]="option.url" sty>
-    <p-card header={{option.title}} [style]="{width: '360px'}" styleClass="p-card-shadow">
-        <ng-template pTemplate="header">
-            <img alt="Card" src={{option.imagePath}} height="200">
-        </ng-template>
-    </p-card>
-</a>
+<div class="m-2">
+    <a [routerLink]="option.url">
+        <p-card [style]="{width: '360px', height: '300px'}" styleClass="surface-200">
+            <ng-template pTemplate="header">
+                <img alt="Card" src={{option.imagePath}} width="100%" height="200">
+            </ng-template>
+            <ng-template pTemplate="content">
+                <div class="flex justify-content-center">
+                    <h2 class="m-0">{{option.title}}</h2>
+                </div>
+            </ng-template>
+        </p-card>
+    </a>
+</div>

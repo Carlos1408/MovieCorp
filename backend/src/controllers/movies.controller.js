@@ -14,6 +14,7 @@ const getMovie = async (req, res) => {
 };
 
 const createMovie = async (req, res) => {
+  console.log(req.body);
   const {
     title,
     synopsis,
