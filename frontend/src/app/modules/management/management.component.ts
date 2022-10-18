@@ -20,7 +20,7 @@ export class ManagementComponent implements OnInit {
     },
     {
       title: 'Mi perfil',
-      url: '/profile',
+      url: '/management/profile',
       imagePath: '/assets/images/management/profile.png'
     }
   ]
