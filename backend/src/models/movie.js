@@ -11,7 +11,7 @@ const movieSchema = new Schema(
     director: { type: String, required: true },
     imagePath: { type: String, required: true },
     trailer: { type: String, required: true },
-    cinemas_ids: { type: Array, required: false, default: [] },
+    functions_ids: { type: String, required: false, default: [] },
   },
   {
     timestamps: true,
