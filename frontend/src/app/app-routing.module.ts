@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NotFoundPageComponent } from './shared/components/not-found-page/not-found-page.component';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: '/client' },
   {
     path: 'admin',
     loadChildren: () =>
@@ -14,7 +16,16 @@ const routes: Routes = [
         (m) => m.ManagementModule
       ),
   },
-  { path: 'client', loadChildren: () => import('./modules/client/client.module').then(m => m.ClientModule) },
+  {
+    path: 'client',
+    loadChildren: () =>
+      import('./modules/client/client.module').then((m) => m.ClientModule),
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    component: NotFoundPageComponent,
+  },
 ];
 
 @NgModule({
