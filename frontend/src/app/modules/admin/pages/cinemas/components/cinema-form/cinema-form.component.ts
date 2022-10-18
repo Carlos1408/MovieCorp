@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
 import { Movie } from 'src/app/shared/interfaces/movie';
@@ -24,9 +24,9 @@ export class CinemaFormComponent implements OnInit {
 
   cinemaForm: FormGroup = new FormGroup({
     _id: new FormControl(''),
-    name: new FormControl(''),
-    address: new FormControl(''),
-    image: new FormControl(''),
+    name: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    image: new FormControl('', Validators.required),
     movies_ids: new FormControl(''),
   });
   constructor(private messageService: MessageService) {}
@@ -59,6 +59,12 @@ export class CinemaFormComponent implements OnInit {
         this.createCinema.emit(this.cinemaForm.value);
         this.closeDialog();
       }
+    } else {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Formulario invalido',
+        detail: 'Todos los datos deben ser llenados correctamente',
+      });
     }
   }
 

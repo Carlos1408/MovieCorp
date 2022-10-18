@@ -15,6 +15,8 @@ import { RoomTableComponent } from './pages/rooms/components/room-table/room-tab
 import { RoomFormComponent } from './pages/rooms/components/room-form/room-form.component';
 import { PrimengModule } from 'src/app/shared/primeng.module';
 
+import { SharedModule } from 'src/app/shared/shared.module';
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -33,6 +35,7 @@ import { PrimengModule } from 'src/app/shared/primeng.module';
     AdminRoutingModule,
     ReactiveFormsModule,
     PrimengModule,
+    SharedModule,
   ],
 })
 export class AdminModule {}
