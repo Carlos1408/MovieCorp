@@ -73,7 +73,6 @@ const updateMovie = async (req, res) => {
     },
     { new: true }
   );
-  console.log(movie);
   res.json(movie);
 };
 
