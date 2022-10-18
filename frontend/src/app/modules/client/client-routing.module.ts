@@ -4,12 +4,12 @@ import { ClientComponent } from './client.component';
 import { BillboardComponent } from './pages/billboard/billboard.component';
 
 const routes: Routes = [
-  { path: '', component: ClientComponent },
-  { path: 'billboard', component: BillboardComponent}
+  { path: '', redirectTo: '/client/billboard', pathMatch: 'full' },
+  { path: 'billboard', component: BillboardComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class ClientRoutingModule { }
+export class ClientRoutingModule {}
