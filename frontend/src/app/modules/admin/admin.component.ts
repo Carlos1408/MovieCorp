@@ -8,19 +8,29 @@ import { Component, OnInit } from '@angular/core';
 export class AdminComponent implements OnInit {
   options = [
     {
-      title: 'Reportes',
-      url: '/reports',
-      imagePath: '/assets/images/management/reports.jpg'
+      title: 'Cines',
+      url: '/admin/cinemas',
+      imagePath: '/assets/images/admin/cinema.jpg'
     },
     {
-      title: 'Administracion de usuarios',
-      url: '/management/users',
-      imagePath: '/assets/images/management/users.jpg'
+      title: 'Salas',
+      url: '/admin/rooms',
+      imagePath: '/assets/images/admin/rooms.jpg'
+    },
+    {
+      title: 'Peliculas',
+      url: '/admin/movies',
+      imagePath: '/assets/images/admin/movies.jpg'
+    },
+    {
+      title: 'Crear Funcion',
+      url: '/admin',
+      imagePath: '/assets/images/admin/function.jpg'
     },
     {
       title: 'Mi perfil',
-      url: '/management/profile',
-      imagePath: '/assets/images/management/profile.png'
+      url: '/admin',
+      imagePath: '/assets/images/admin/profile.png'
     }
   ]
 
