@@ -3,6 +3,13 @@
     <ng-template pTemplate="content">
         <form [formGroup]="functionForm">
             <div class="field">
+                <h4>Horario</h4>
+                <div class="p-inputgroup">
+                    <p-calendar [timeOnly]="true" placeholder="Inicio" formControlName="from"></p-calendar>
+                    <p-calendar [timeOnly]="true" placeholder="Fin" formControlName="to"></p-calendar>
+                </div>
+            </div>
+            <div class="field">
                 <h4>Cine</h4>
                 <p-dropdown [options]="cinemas" optionLabel="name" optionValue="_id"
                     placeholder="Seleccione un cine" formControlName="cinema_id"></p-dropdown>
@@ -16,13 +23,6 @@
                 <h4>Pelicula</h4>
                 <p-dropdown [options]="moviesRaw" optionLabel="title" optionValue="_id"
                     placeholder="Seleccione una pelicula" formControlName="movie_id"></p-dropdown>
-            </div>
-            <div class="field">
-                <h4>Horario</h4>
-                <div class="p-inputgroup">
-                    <p-calendar [timeOnly]="true" placeholder="Inicio" formControlName="from"></p-calendar>
-                    <p-calendar [timeOnly]="true" placeholder="Fin" formControlName="to"></p-calendar>
-                </div>
             </div>
         </form>
     </ng-template>

@@ -50,6 +50,8 @@ export class FunctionFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCinemas();
+    this.getRooms();
+    this.getMovies();
   }
 
   onShow(): void {}
