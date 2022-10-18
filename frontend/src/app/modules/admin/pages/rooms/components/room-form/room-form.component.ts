@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
 import { Room } from 'src/app/shared/interfaces/room';
@@ -20,11 +20,11 @@ export class RoomFormComponent implements OnInit {
 
   roomForm: FormGroup = new FormGroup({
     _id: new FormControl(''),
-    cinema_id: new FormControl(''),
-    roomNum: new FormControl(''),
-    nRows: new FormControl(''),
-    nCol: new FormControl(''),
-    price: new FormControl(''),
+    cinema_id: new FormControl('', Validators.required),
+    roomNum: new FormControl('', Validators.required),
+    nRows: new FormControl('', [Validators.required, Validators.min(1)]),
+    nCol: new FormControl('', [Validators.required, Validators.min(1)]),
+    price: new FormControl('', [Validators.required, Validators.min(1)]),
   });
 
   constructor(private messageService: MessageService) {}
@@ -62,6 +62,12 @@ export class RoomFormComponent implements OnInit {
         this.createRoom.emit(this.roomForm.value);
         this.closeDialog();
       }
+    } else {
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Formulario invalido',
+        detail: 'Todos los datos deben ser llenados correctamente',
+      });
     }
   }
 

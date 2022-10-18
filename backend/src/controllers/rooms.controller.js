@@ -49,7 +49,6 @@ const updateRoom = async (req, res) => {
 const deleteRoom = async (req, res) => {
   const { id } = req.params;
   const room = await Room.findByIdAndRemove(id);
-  console.log(room);
   const cinema = await Cinema.findById(room.cinema_id);
   await cinema.updateOne({
     rooms_ids: cinema.rooms_ids.filter((r) => {

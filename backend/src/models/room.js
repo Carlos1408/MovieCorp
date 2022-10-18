@@ -1,15 +1,17 @@
-const {Schema, model} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const roomSchema = new Schema(
-    {
-        roomNum: {type: String, require: true},
-        nRows: {type: Number, require: true},
-        nCol: {type: Number, require: true},
-        price: {type: Number, require: true},
-        cinema_id: {type: String, require: true},
-    },
-    {
-        timestamps: true,
-        versionKey: false,
-    });
+  {
+    roomNum: { type: String, required: true },
+    nRows: { type: Number, required: true },
+    nCol: { type: Number, required: true },
+    price: { type: Number, required: true },
+    timeRanges: { type: Array, required: false, default: [] },
+    cinema_id: { type: String, required: true },
+  },
+  {
+    timestamps: true,
+    versionKey: false,
+  }
+);
 module.exports = model("room", roomSchema);
