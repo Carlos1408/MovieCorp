@@ -4,7 +4,7 @@ import { ClientComponent } from './client.component';
 import { BillboardComponent } from './pages/billboard/billboard.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/client/billboard', pathMatch: 'full' },
+  { path: '', redirectTo: 'billboard', pathMatch: 'full' },
   { path: 'billboard', component: BillboardComponent },
 ];
 

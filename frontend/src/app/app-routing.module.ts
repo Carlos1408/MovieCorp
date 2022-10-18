@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPageComponent } from './shared/components/not-found-page/not-found-page.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/client' },
+  { path: '', pathMatch: 'full', redirectTo: '/client/billboard' },
   {
     path: 'admin',
     loadChildren: () =>

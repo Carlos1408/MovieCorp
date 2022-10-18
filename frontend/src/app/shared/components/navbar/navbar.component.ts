@@ -14,6 +14,23 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.items = [
       {
+        label: 'Cartelera',
+        routerLink: '/client/billboard',
+        styleClass: 'mx-1',
+      },
+      {
+        label: 'Administrador',
+        routerLink: '/admin',
+        styleClass: 'mx-1',
+        
+      },
+      {
+        label: 'Gerente',
+        routerLink: '/management',
+        styleClass: 'mx-1',
+        
+      },
+      {
         label: 'Cines',
         routerLink: '/admin/cinemas',
         styleClass: 'mx-1',
@@ -33,10 +50,20 @@ export class NavbarComponent implements OnInit {
         icon: 'pi pi-ticket'
       },
       {
+        label: 'Funciones',
+        routerLink: '/admin/functions',
+        styleClass: 'mx-1',
+      },
+      {
         label: 'Usuarios',
         routerLink: '/management/users',
         styleClass: 'mx-1',
         icon: 'pi pi-users'
+      },
+      {
+        label: 'Mi perfil',
+        routerLink: '/admin/profile',
+        styleClass: 'mx-1',
       },
     ];
   }
