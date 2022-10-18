@@ -1,5 +1,5 @@
-<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" [header]="(editMode? 'Actualizar': 'Nueva') + ' Pelicula'" [modal]="true" styleClass="p-fluid"
-    [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
+<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" [header]="(editMode? 'Actualizar': 'Nueva') + ' Pelicula'"
+    [modal]="true" styleClass="p-fluid" [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
     <ng-template pTemplate="content">
         <form [formGroup]="movieForm">
             <div class="field">
@@ -32,8 +32,9 @@
             </div>
             <div class="field">
                 <h4>Portada</h4>
-                <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)" removeStyleClass="p-button-sm"></p-fileUpload>
-                <!-- <input type="file" formControlName="imageSrc" (change)="onFileChange($event)"> -->
+                <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)" removeStyleClass="p-button-sm"
+                    [fileLimit]="1" invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
+                    chooseLabel="Seleccionar archivo"></p-fileUpload>
             </div>
             <div class="field">
                 <h4>Trailer</h4>

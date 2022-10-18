@@ -16,7 +16,8 @@ export class CinemasComponent implements OnInit {
   handleCinema: Cinema = {
     name: '',
     address: '',
-    movies_ids: []
+    imagePath: '',
+    movies_ids: [],
   };
 
   cinemas: Cinema[] = [];
@@ -44,7 +45,8 @@ export class CinemasComponent implements OnInit {
     this.handleCinema = {
       name: '',
       address: '',
-      movies_ids: []
+      imagePath: '',
+      movies_ids: [],
     };
   }
 

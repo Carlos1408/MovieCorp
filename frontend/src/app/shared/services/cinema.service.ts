@@ -21,14 +21,26 @@ export class CinemaService {
   }
 
   createCinema(cinema: Cinema): Observable<Cinema> {
-    return this.http.post<Cinema>(this.URL_API, cinema);
+    const formData: FormData = this.formGroup2formData(cinema);
+
+    return this.http.post<Cinema>(this.URL_API, formData);
   }
 
   updateCinema(cinema: Cinema): Observable<Cinema> {
-    return this.http.put<Cinema>(`${this.URL_API}/${cinema._id}`, cinema);
+    const formData = this.formGroup2formData(cinema);
+
+    return this.http.put<Cinema>(`${this.URL_API}/${cinema._id}`, formData);
   }
 
   deleteCinema(_id: string): Observable<Cinema> {
     return this.http.delete<Cinema>(`${this.URL_API}/${_id}`);
+  }
+
+  formGroup2formData(form: any): FormData {
+    const formData = new FormData();
+    for (const key of Object.keys(form)) {
+      formData.append(key, form[key]);
+    }
+    return formData;
   }
 }
