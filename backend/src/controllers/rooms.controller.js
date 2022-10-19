@@ -1,8 +1,24 @@
 const Room = require("../models/room");
 const Cinema = require("../models/cinema");
+const mongoose = require("mongoose");
 
 const getAllRooms = async (req, res) => {
   const rooms = await Room.find();
+  res.json(rooms);
+};
+
+const getAllRoomsLg = async (req, res) => {
+  const rooms = await Room.aggregate([
+    {
+      $lookup: {
+        from: "cinemas",
+        localField: "cinema_id",
+        foreignField: "_id",
+        as: "cinema",
+      },
+    },
+    { $unwind: "$cinema" },
+  ]);
   res.json(rooms);
 };
 
@@ -12,6 +28,22 @@ const getRoom = async (req, res) => {
   res.json(room);
 };
 
+const getRoomLg = async (req, res) => {
+  const { id } = req.params;
+  const room = await Room.aggregate([
+    {
+      $lookup: {
+        from: "cinemas",
+        localField: "cinema_id",
+        foreignField: "_id",
+        as: "cinema",
+      },
+    },
+    { $unwind: "$cinema" },
+  ]);
+  res.json(room[0]);
+};
+
 const createRoom = async (req, res) => {
   const { roomNum, nRows, nCol, price, cinema_id } = req.body;
   const newRoom = new Room({
@@ -19,7 +51,7 @@ const createRoom = async (req, res) => {
     nRows,
     nCol,
     price,
-    cinema_id,
+    cinema_id: mongoose.Types.ObjectId(cinema_id),
   });
   await newRoom.save();
   const cinema = await Cinema.findById(cinema_id);
@@ -65,4 +97,6 @@ module.exports = {
   createRoom,
   updateRoom,
   deleteRoom,
+  getAllRoomsLg,
+  getRoomLg,
 };

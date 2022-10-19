@@ -1,9 +1,25 @@
 const Movie = require("../models/movie");
+const Cinema = require("../models/cinema");
 const fs = require("fs");
 const path = require("path");
+const mongoose = require("mongoose");
 
 const getAllMovies = async (req, res) => {
   const movies = await Movie.find();
+  res.json(movies);
+};
+
+const getAllMoviesLg = async (req, res) => {
+  const movies = await Movie.aggregate([
+    {
+      $lookup: {
+        from: "functions",
+        localField: "function_id",
+        foreignField: "_id",
+        as: "functions",
+      },
+    },
+  ]);
   res.json(movies);
 };
 
@@ -11,6 +27,23 @@ const getMovie = async (req, res) => {
   const { id } = req.params;
   const movie = await Movie.findById(id);
   res.json(movie);
+};
+
+const getMovieLg = async (req, res) => {
+  const { id } = req.params;
+  const movie = await Movie.aggregate([
+    { $match: { _id: mongoose.Types.ObjectId(id) } },
+    { $limit: 1 },
+    {
+      $lookup: {
+        from: "functions",
+        localField: "functions_id",
+        foreignField: "_id",
+        as: "functions",
+      },
+    },
+  ]);
+  res.json(movie[0]);
 };
 
 const createMovie = async (req, res) => {
@@ -42,6 +75,7 @@ const createMovie = async (req, res) => {
 
 const updateMovie = async (req, res) => {
   const { id } = req.params;
+  let upMovie;
   const {
     title,
     synopsis,
@@ -52,29 +86,28 @@ const updateMovie = async (req, res) => {
     director,
     trailer,
   } = req.body;
-  const oldMovie = await Movie.findById(id);
-  if (oldMovie) {
-    await fs.unlink(path.resolve(oldMovie.imagePath), (err) => {
+  const movie = await Movie.findById(id);
+  if (movie) {
+    await fs.unlink(path.resolve(movie.imagePath), (err) => {
       console.log(err);
     });
+    upMovie = await movie.update(
+      {
+        title,
+        synopsis,
+        length,
+        genre,
+        rating,
+        protagonists,
+        director,
+        imagePath: req.file.path,
+        trailer,
+      },
+      { new: true }
+    );
+    movie.save();
   }
-  const movie = await Movie.findByIdAndUpdate(
-    id,
-    {
-      title,
-      synopsis,
-      length,
-      genre,
-      rating,
-      protagonists,
-      director,
-      imagePath: req.file.path,
-      trailer,
-      cinemas_ids: []
-    },
-    { new: true }
-  );
-  res.json(movie);
+  res.json(upMovie);
 };
 
 const deleteMovie = async (req, res) => {
@@ -83,6 +116,15 @@ const deleteMovie = async (req, res) => {
   if (movie) {
     await fs.unlink(path.resolve(movie.imagePath), (err) => {
       console.log(err);
+    });
+    const cinemas = await Cinema.find();
+    cinemas.forEach(async (cinema) => {
+      await cinema.updateOne({
+        movies_ids: cinema.movies_ids.filter((m_id) => {
+          m_id.toString() !== movie._id.toString();
+        }),
+      });
+      cinema.save();
     });
   }
   res.json(movie);
@@ -94,4 +136,6 @@ module.exports = {
   createMovie,
   updateMovie,
   deleteMovie,
+  getMovieLg,
+  getAllMoviesLg,
 };
