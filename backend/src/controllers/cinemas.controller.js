@@ -1,4 +1,5 @@
 const fs = require("fs");
+const mongoose = require("mongoose");
 const path = require("path");
 const Cinema = require("../models/cinema");
 const Movie = require("../models/movie");
@@ -9,10 +10,57 @@ const getAllCinemas = async (req, res) => {
   res.json(cinemas);
 };
 
+const getAllCinemasLg = async (req, res) => {
+  const cinemas = await Cinema.aggregate([
+    {
+      $lookup: {
+        from: "rooms",
+        localField: "rooms_ids",
+        foreignField: "_id",
+        as: "rooms",
+      },
+    },
+    {
+      $lookup: {
+        from: "movies",
+        localField: "movies_ids",
+        foreignField: "_id",
+        as: "movies",
+      },
+    }
+  ]);
+  res.json(cinemas);
+};
+
 const getCinema = async (req, res) => {
   const { id } = req.params;
   const cinema = await Cinema.findById(id);
   res.json(cinema);
+};
+
+const getCinemaLg = async (req, res) => {
+  const { id } = req.params;
+  const cinema = await Cinema.aggregate([
+    { $match: { _id: mongoose.Types.ObjectId(id) } },
+    { $limit: 1 },
+    {
+      $lookup: {
+        from: "rooms",
+        localField: "rooms_ids",
+        foreignField: "_id",
+        as: "rooms",
+      },
+    },
+    {
+      $lookup: {
+        from: "movies",
+        localField: "movies_ids",
+        foreignField: "_id",
+        as: "movies",
+      },
+    },
+  ]);
+  res.json(cinema[0]);
 };
 
 const createCinema = async (req, res) => {
@@ -22,7 +70,9 @@ const createCinema = async (req, res) => {
     name,
     address,
     imagePath: req.file.path,
-    movies_ids,
+    movies_ids: movies_ids.map((id) => {
+      return mongoose.Types.ObjectId(id);
+    }),
   });
   await newCinema.save();
   if (movies_ids) {
@@ -50,7 +100,9 @@ const updateCinema = async (req, res) => {
       name,
       address,
       imagePath: req.file.path,
-      movies_ids,
+      movies_ids: movies_ids.map((id) => {
+        return mongoose.Types.ObjectId(id);
+      }),
     });
     await cinema.save();
   }
@@ -77,4 +129,6 @@ module.exports = {
   createCinema,
   updateCinema,
   deleteCinema,
+  getAllCinemasLg,
+  getCinemaLg,
 };
