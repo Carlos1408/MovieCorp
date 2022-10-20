@@ -2,11 +2,11 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Nro</th>
-            <th>Cine</th>
-            <th>Sala</th>
-            <th>Pelicula</th>
-            <th>Inicio</th>
-            <th>Final</th>
+            <th pSortableColumn="cinema.name">Cine <p-sortIcon field="cinema.name"></p-sortIcon></th>
+            <th pSortableColumn="room.roomNum">Sala <p-sortIcon field="room.roomNum"></p-sortIcon></th>
+            <th pSortableColumn="movie.title">Pelicula <p-sortIcon field="movie.title"></p-sortIcon></th>
+            <th pSortableColumn="from">Inicio <p-sortIcon field="from"></p-sortIcon></th>
+            <th pSortableColumn="to">Final <p-sortIcon field="to"></p-sortIcon></th>
             <th>Opciones</th>
         </tr>
     </ng-template>

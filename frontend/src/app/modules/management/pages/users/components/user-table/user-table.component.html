@@ -2,11 +2,11 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Nro</th>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Telefono</th>
-            <th>Email</th>
-            <th>Rol</th>
+            <th pSortableColumn="name">Nombre <p-sortIcon field="name"></p-sortIcon></th>
+            <th pSortableColumn="lastnames">Apellidos <p-sortIcon field="lastnames"></p-sortIcon></th>
+            <th pSortableColumn="phone">Telefono <p-sortIcon field="phone"></p-sortIcon></th>
+            <th pSortableColumn="email">Email <p-sortIcon field="email"></p-sortIcon></th>
+            <th pSortableColumn="rol">Rol <p-sortIcon field="rol"></p-sortIcon></th>
             <th>Opciones</th>
         </tr>
     </ng-template>
