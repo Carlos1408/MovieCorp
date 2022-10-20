@@ -2,6 +2,7 @@
     <ng-template pTemplate="header">
         <tr>
             <th>Nro</th>
+            <th>Cine</th>
             <th>Numero de Sala</th>
             <th>Cantidad Filas</th>
             <th>Cantidad Columnas</th>
@@ -12,6 +13,7 @@
     <ng-template pTemplate="body" let-room>
         <tr>
             <td>{{rooms.indexOf(room)+1}}</td>
+            <td>{{room.cinema.name}}</td>
             <td>{{room.roomNum}}</td>
             <td>{{room.nRows}}</td>
             <td>{{room.nCol}}</td>

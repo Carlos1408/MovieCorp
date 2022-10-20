@@ -3,31 +3,35 @@
     <ng-template pTemplate="content">
         <form [formGroup]="functionForm">
             <div class="field">
-                <h4>Horario</h4>
-                <div class="p-inputgroup">
-                    <p-calendar [timeOnly]="true" placeholder="Inicio" formControlName="from"></p-calendar>
-                    <p-calendar [timeOnly]="true" placeholder="Fin" formControlName="to"></p-calendar>
-                </div>
-            </div>
-            <div class="field">
                 <h4>Cine</h4>
-                <p-dropdown [options]="cinemas" optionLabel="name" optionValue="_id"
-                    placeholder="Seleccione un cine" formControlName="cinema_id"></p-dropdown>
+                <p-dropdown [options]="cinemas" optionLabel="name" optionValue="_id" placeholder="Seleccione un cine"
+                    formControlName="cinema_id" (onChange)="onSelectCinema()" appendTo="body"></p-dropdown>
             </div>
             <div class="field">
                 <h4>Sala</h4>
-                <p-dropdown [options]="roomsRaw" optionLabel="roomNum" optionValue="_id"
-                    placeholder="Seleccione una sala" formControlName="room_id"></p-dropdown>
+                <p-dropdown [options]="rooms" optionLabel="roomNum" optionValue="_id" placeholder="Seleccione una sala"
+                    formControlName="room_id" appendTo="body" (onChange)="onSelectRoom($event)"></p-dropdown>
             </div>
             <div class="field">
                 <h4>Pelicula</h4>
-                <p-dropdown [options]="moviesRaw" optionLabel="title" optionValue="_id"
-                    placeholder="Seleccione una pelicula" formControlName="movie_id"></p-dropdown>
+                <p-dropdown [options]="movies" optionLabel="title" optionValue="_id"
+                    placeholder="Seleccione una pelicula" (onChange)="onSelectMovie($event)" formControlName="movie_id"
+                    appendTo="body"></p-dropdown>
+            </div>
+            <div class="field">
+                <h4>Horario</h4>
+                <div class="p-inputgroup">
+                    <p-calendar [timeOnly]="true" placeholder="Inicio" formControlName="from" appendTo="body"
+                        [readonlyInput]="true" (onSelect)="onSelectFrom($event)">
+                    </p-calendar>
+                    <p-calendar [timeOnly]="true" placeholder="Fin" formControlName="to" appendTo="body"
+                        [readonlyInput]="true" ></p-calendar>
+                </div>
             </div>
         </form>
     </ng-template>
     <ng-template pTemplate="footer">
         <p-button label="Cancelar" (onClick)="closeDialog()" styleClass="p-button-danger"></p-button>
-        <p-button label="Guardar" (onClick)="handleSubmit()" styleClass="p-button-primary"></p-button>
+        <p-button label="Guardar" (onClick)="devSubmit()" styleClass="p-button-primary"></p-button>
     </ng-template>
 </p-dialog>

@@ -29,7 +29,9 @@ export class FunctionsComponent implements OnInit {
     private confirmationService: ConfirmationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getFunctions();
+  }
 
   openForm() {
     this.showForm = true;
@@ -48,7 +50,7 @@ export class FunctionsComponent implements OnInit {
 
   getFunctions() {
     this.functionService
-      .getAllRooms()
+      .getAllFunctionsLg()
       .pipe(tap((functions: Function[]) => (this.functions = functions)))
       .subscribe();
   }
@@ -65,7 +67,7 @@ export class FunctionsComponent implements OnInit {
   }
 
   createFunction(function_: Function): void {
-    this.functionService.createRoom(function_).subscribe({
+    this.functionService.createFunction(function_).subscribe({
       next: (res) => {
         this.messageService.add({
           severity: 'success',
@@ -79,7 +81,7 @@ export class FunctionsComponent implements OnInit {
   }
 
   deleteFunction(_id: string): void {
-    this.functionService.deleteRoom(_id).subscribe({
+    this.functionService.deleteFunction(_id).subscribe({
       next: (res) => {
         this.messageService.add({
           severity: 'success',

@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, default: mongoose } = require("mongoose");
 
 const roomSchema = new Schema(
   {
@@ -7,7 +7,7 @@ const roomSchema = new Schema(
     nCol: { type: Number, required: true },
     price: { type: Number, required: true },
     timeRanges: { type: Array, required: false, default: [] },
-    cinema_id: { type: String, required: true },
+    cinema_id: { type: mongoose.Types.ObjectId, required: true },
   },
   {
     timestamps: true,

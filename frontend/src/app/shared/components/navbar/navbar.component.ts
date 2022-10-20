@@ -22,32 +22,29 @@ export class NavbarComponent implements OnInit {
         label: 'Administrador',
         routerLink: '/admin',
         styleClass: 'mx-1',
-        
       },
       {
         label: 'Gerente',
         routerLink: '/management',
         styleClass: 'mx-1',
-        
       },
       {
         label: 'Cines',
         routerLink: '/admin/cinemas',
         styleClass: 'mx-1',
-        icon: 'pi pi-video',
-        
+        icon: 'pi pi-video text-100',
       },
       {
         label: 'Salas',
         routerLink: '/admin/rooms',
         styleClass: 'mx-1',
-        icon: 'pi pi-tablet'
+        icon: 'pi pi-tablet text-100'
       },
       {
         label: 'Peliculas',
         routerLink: '/admin/movies',
         styleClass: 'mx-1',
-        icon: 'pi pi-ticket'
+        icon: 'pi pi-ticket text-100'
       },
       {
         label: 'Funciones',
@@ -58,7 +55,7 @@ export class NavbarComponent implements OnInit {
         label: 'Usuarios',
         routerLink: '/management/users',
         styleClass: 'mx-1',
-        icon: 'pi pi-users'
+        icon: 'pi pi-users text-100'
       },
       {
         label: 'Mi perfil',

@@ -12,23 +12,27 @@ export class FunctionService {
 
   constructor(private http: HttpClient) {}
 
-  getAllRooms(): Observable<Function[]> {
+  getAllFunctions(): Observable<Function[]> {
     return this.http.get<Function[]>(this.URL_API);
   }
 
-  getRoom(_id: string): Observable<Function> {
+  getAllFunctionsLg(): Observable<Function[]> {
+    return this.http.get<Function[]>(`${this.URL_API}/lg`);
+  }
+
+  getFunction(_id: string): Observable<Function> {
     return this.http.get<Function>(`${this.URL_API}/${_id}`);
   }
 
-  createRoom(function_: Function): Observable<Function> {
+  createFunction(function_: Function): Observable<Function> {
     return this.http.post<Function>(this.URL_API, function_);
   }
 
-  updateRoom(function_: Function): Observable<Function> {
+  updateFunction(function_: Function): Observable<Function> {
     return this.http.put<Function>(`${this.URL_API}/${function_._id}`, function_);
   }
 
-  deleteRoom(_id: string): Observable<Function> {
+  deleteFunction(_id: string): Observable<Function> {
     return this.http.delete<Function>(`${this.URL_API}/${_id}`);
   }
 }

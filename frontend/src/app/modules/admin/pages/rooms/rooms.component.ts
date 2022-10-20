@@ -38,6 +38,8 @@ export class RoomsComponent implements OnInit {
   }
 
   openForm() {
+    console.log(this.rooms);
+    
     this.showForm = true;
   }
 
@@ -54,7 +56,7 @@ export class RoomsComponent implements OnInit {
 
   getRooms(): void {
     this.roomService
-      .getAllRooms()
+      .getAllRoomsLg()
       .pipe(tap((rooms: Room[]) => (this.rooms = rooms)))
       .subscribe();
   }
