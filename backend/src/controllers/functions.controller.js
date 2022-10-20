@@ -99,7 +99,7 @@ const createFunction = async (req, res) => {
   await Movie.updateOne({
     functions_ids: [...movie.functions_ids, newFunction._id],
   });
-  movie.save();
+  await movie.save();
   res.json(newFunction);
 };
 
@@ -112,7 +112,7 @@ const deleteFunction = async (req, res) => {
       return f.toString() !== function_._id.toString();
     }),
   });
-  movie.save();
+  await movie.save();
   res.json(function_);
 };
 

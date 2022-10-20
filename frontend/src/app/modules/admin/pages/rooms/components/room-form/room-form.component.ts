@@ -40,6 +40,7 @@ export class RoomFormComponent implements OnInit {
   }
 
   closeDialog(): void {
+    this.roomForm.get('cinema_id')?.enable();
     this.roomForm.reset();
     this.closeForm.emit();
   }
@@ -51,6 +52,8 @@ export class RoomFormComponent implements OnInit {
     this.roomForm.get('nRows')?.setValue(this.handleRoom.nRows);
     this.roomForm.get('nCol')?.setValue(this.handleRoom.nCol);
     this.roomForm.get('price')?.setValue(this.handleRoom.price);
+
+    if(this.editMode) this.roomForm.get('cinema_id')?.disable();
   }
 
   handleSubmit() {

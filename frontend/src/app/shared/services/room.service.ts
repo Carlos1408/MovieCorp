@@ -16,8 +16,16 @@ export class RoomService {
     return this.http.get<Room[]>(this.URL_API);
   }
 
+  getAllRoomsLg(): Observable<Room[]> {
+    return this.http.get<Room[]>(`${this.URL_API}/lg`);
+  }
+
   getRoom(_id: string): Observable<Room> {
     return this.http.get<Room>(`${this.URL_API}/${_id}`);
+  }
+
+  getRoomLg(_id: string): Observable<Room> {
+    return this.http.get<Room>(`${this.URL_API}/lg/${_id}`);
   }
 
   createRoom(room: Room): Observable<Room> {

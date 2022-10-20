@@ -20,3 +20,4 @@
 /backend/uploads/*/*.jpeg
 /backend/uploads/*/*.jpg
 /backend/uploads/*/*.png
+/backend/uploads/*/*.webp

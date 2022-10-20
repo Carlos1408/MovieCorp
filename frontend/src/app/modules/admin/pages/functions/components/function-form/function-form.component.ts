@@ -19,11 +19,11 @@ import { tap } from 'rxjs';
 })
 export class FunctionFormComponent implements OnInit {
   cinemas: Cinema[] = [];
-  roomsRaw: Room[] = [];
-  moviesRaw: Movie[] = [];
+  rooms: Room[] | any = [];
+  movies: Movie[] | any = [];
 
-  rooms: Room[] = [];
-  movies: Movie[] = [];
+  selectedMovie!: Movie | any;
+  selectedRoom!: Room | any;
 
   @Input() showForm!: boolean;
 
@@ -50,36 +50,21 @@ export class FunctionFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCinemas();
-    this.getRooms();
-    this.getMovies();
   }
 
   onShow(): void {}
+
+  closeDialog(): void {
+    this.closeForm.emit();
+    this.selectedMovie = {}
+    this.functionForm.reset();
+  }
 
   getCinemas(): void {
     this.cinemaService
       .getAllCinemas()
       .pipe(tap((cinemas: Cinema[]) => (this.cinemas = cinemas)))
       .subscribe();
-  }
-
-  getRooms(): void {
-    this.roomService
-      .getAllRooms()
-      .pipe(tap((rooms: Room[]) => (this.roomsRaw = rooms)))
-      .subscribe();
-  }
-
-  getMovies(): void {
-    this.movieService
-      .getAllMovies()
-      .pipe(tap((movies: Movie[]) => (this.moviesRaw = movies)))
-      .subscribe();
-  }
-
-  closeDialog(): void {
-    this.functionForm.reset();
-    this.closeForm.emit();
   }
 
   fillfunctionForm() {
@@ -93,13 +78,39 @@ export class FunctionFormComponent implements OnInit {
     this.functionForm.get('to')?.setValue(this.handledFunction.to);
   }
 
-  onSelectedCinema() {
+  onSelectCinema(): void {
     const cinema_id = this.functionForm.get('cinema_id')?.value;
-    this.getRooms();
-    this.getMovies();
-    const cinema = this.cinemas.filter((c) => {
-      return c._id === cinema_id;
+    if (cinema_id) {
+      this.cinemaService
+        .getCinemaLg(cinema_id)
+        .pipe(
+          tap((cinema: Cinema) => {
+            this.rooms = cinema.rooms;
+            this.movies = cinema.movies;
+          })
+        )
+        .subscribe();
+    }
+  }
+
+  onSelectRoom(id: any): void {
+    this.selectedRoom = this.rooms.filter((r: Room) => {
+      return r._id === id.value;
     })[0];
+  }
+
+  onSelectMovie(id: any): void {
+    this.selectedMovie = this.movies.filter((m: Movie) => {
+      return m._id === id.value;
+    })[0];
+  }
+
+  onSelectFrom(time: any): void {
+    console.log('select ', time instanceof Date);
+    const to: Date = new Date(time);
+    to.setMinutes(time.getMinutes() + (this.selectedMovie.length + 30));
+    this.functionForm.get('to')?.setValue(to);
+    console.log(this.functionForm.value);
   }
 
   handleSubmit() {
@@ -113,5 +124,9 @@ export class FunctionFormComponent implements OnInit {
         detail: 'Todos los datos deben ser llenados correctamente',
       });
     }
+  }
+
+  devSubmit() {
+    console.log(this.functionForm.value);
   }
 }

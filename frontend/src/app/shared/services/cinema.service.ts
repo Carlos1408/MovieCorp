@@ -16,8 +16,16 @@ export class CinemaService {
     return this.http.get<Cinema[]>(this.URL_API);
   }
 
+  getAllCinemasLg(): Observable<Cinema[]> {
+    return this.http.get<Cinema[]>(`${this.URL_API}/lg`);
+  }
+
   getCinema(_id: string): Observable<Cinema> {
     return this.http.get<Cinema>(`${this.URL_API}/${_id}`);
+  }
+
+  getCinemaLg(_id: string): Observable<Cinema> {
+    return this.http.get<Cinema>(`${this.URL_API}/lg/${_id}`);
   }
 
   createCinema(cinema: Cinema): Observable<Cinema> {

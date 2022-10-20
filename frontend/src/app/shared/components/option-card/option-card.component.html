@@ -1,11 +1,11 @@
-<div class="m-2">
-    <a [routerLink]="option.url">
-        <p-card [style]="{width: '360px', height: '300px'}" styleClass="surface-200">
+<div class="mx-2 my-4">
+    <a [routerLink]="option.url" class="no-underline">
+        <p-card [style]="{width: '360px', height: '275px'}" styleClass="transition-colors transition-duration-200 surface-200 hover:surface-400">
             <ng-template pTemplate="header">
                 <img alt="Card" src={{option.imagePath}} width="100%" height="200">
             </ng-template>
-            <ng-template pTemplate="content">
-                <div class="flex justify-content-center">
+            <ng-template pTemplate="subtitle">
+                <div class="flex justify-content-center text-color">
                     <h2 class="m-0">{{option.title}}</h2>
                 </div>
             </ng-template>

@@ -1,6 +1,8 @@
 const Room = require("../models/room");
 const Cinema = require("../models/cinema");
 const mongoose = require("mongoose");
+const Function = require("../models/function");
+const Movie = require("../models/movie");
 
 const getAllRooms = async (req, res) => {
   const rooms = await Room.find();
@@ -88,6 +90,20 @@ const deleteRoom = async (req, res) => {
     }),
   });
   cinema.save();
+
+  const functions = await Function.find({
+    room_id: mongoose.Types.ObjectId(id),
+  });
+  functions.forEach(async (f) => {
+    const movie = await Movie.findById(f.movie_id);
+    await movie.updateOne({
+      functions_ids: movie.functions_ids.filter((f_id) => {
+        return f_id.toString() !== f._id.toString();
+      }),
+    });
+    await movie.save();
+    await f.remove();
+  });
   res.json(room);
 };
 

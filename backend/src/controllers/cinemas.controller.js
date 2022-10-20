@@ -4,6 +4,7 @@ const path = require("path");
 const Cinema = require("../models/cinema");
 const Movie = require("../models/movie");
 const Room = require("../models/room");
+const Function = require("../models/function");
 
 const getAllCinemas = async (req, res) => {
   const cinemas = await Cinema.find();
@@ -27,7 +28,7 @@ const getAllCinemasLg = async (req, res) => {
         foreignField: "_id",
         as: "movies",
       },
-    }
+    },
   ]);
   res.json(cinemas);
 };
@@ -75,15 +76,6 @@ const createCinema = async (req, res) => {
     }),
   });
   await newCinema.save();
-  if (movies_ids) {
-    movies_ids.forEach(async (movie_id) => {
-      const movie = await Movie.findById(movie_id);
-      await movie.updateOne({
-        cinemas_ids: [...movie.cinemas_ids, newCinema._id],
-      });
-      await movie.save();
-    });
-  }
   res.json(newCinema);
 };
 
@@ -118,6 +110,19 @@ const deleteCinema = async (req, res) => {
     });
     cinema.rooms_ids.forEach(async (room_id) => {
       await Room.findByIdAndRemove(room_id);
+    });
+    const functions = await Function.find({
+      cinema_id: mongoose.Types.ObjectId(id),
+    });
+    functions.forEach(async (f) => {
+      const movie = await Movie.findById(f.movie_id);
+      movie.updateOne({
+        functions_ids: movie.functions_ids.filter((f_id) => {
+          return f_id.toString() !== f._id.toString();
+        }),
+      });
+      await movie.save();
+      await f.remove();
     });
   }
   res.json(cinema);

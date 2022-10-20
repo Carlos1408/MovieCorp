@@ -3,6 +3,7 @@ const Cinema = require("../models/cinema");
 const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
+const Function = require("../models/function");
 
 const getAllMovies = async (req, res) => {
   const movies = await Movie.find();
@@ -47,7 +48,6 @@ const getMovieLg = async (req, res) => {
 };
 
 const createMovie = async (req, res) => {
-  console.log(req.body);
   const {
     title,
     synopsis,
@@ -91,7 +91,7 @@ const updateMovie = async (req, res) => {
     await fs.unlink(path.resolve(movie.imagePath), (err) => {
       console.log(err);
     });
-    upMovie = await movie.update(
+    upMovie = await movie.updateOne(
       {
         title,
         synopsis,
@@ -105,7 +105,7 @@ const updateMovie = async (req, res) => {
       },
       { new: true }
     );
-    movie.save();
+    await movie.save();
   }
   res.json(upMovie);
 };
@@ -124,7 +124,19 @@ const deleteMovie = async (req, res) => {
           m_id.toString() !== movie._id.toString();
         }),
       });
-      cinema.save();
+      await cinema.save();
+    });
+    const functions = await Function.find({
+      movie_id: mongoose.Types.ObjectId(id),
+    });
+    functions.forEach(async (function_) => {
+      const cinema = await Cinema.findById(function_.cinema_id);
+      cinema.updateOne({
+        functions: cinema.functions_id.filter((f) => {
+          return f._id.toString() !== id.toString();
+        }),
+      });
+      await f.remove();
     });
   }
   res.json(movie);

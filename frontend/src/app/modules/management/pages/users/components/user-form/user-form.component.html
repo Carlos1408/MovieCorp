@@ -12,7 +12,8 @@
             </div>
             <div class="field">
                 <h4>Fecha de nacimiento</h4>
-                <p-calendar dataType="string" dateFormat="yy-mm-dd" [showIcon]="true" formControlName="birthdate">
+                <p-calendar dataType="string" dateFormat="yy-mm-dd" [showIcon]="true" formControlName="birthdate"
+                    appendTo="body">
                 </p-calendar>
             </div>
             <div class="field">
@@ -26,7 +27,7 @@
             <div class="field">
                 <h4>Rol</h4>
                 <p-dropdown [options]="roles" optionLabel="name" optionValue="code" placeholder="Selecione un rol"
-                    formControlName="rol"></p-dropdown>
+                    formControlName="rol" appendTo="body"></p-dropdown>
             </div>
             <div *ngIf="!editMode">
                 <div class="field">
