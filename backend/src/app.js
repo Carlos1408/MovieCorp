@@ -19,5 +19,6 @@ app.use("/api/v1/cinemas", require("./routes/cinemas.routes"));
 app.use("/api/v1/movies", require("./routes/movies.routes"));
 app.use("/api/v1/rooms",require("./routes/rooms.routes"));
 app.use("/api/v1/functions",require("./routes/functions.routes"));
+app.use("/api/v1/auth",require("./routes/auth.routes"));
 
 module.exports = app;

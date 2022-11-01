@@ -29,7 +29,7 @@ export class AdminComponent implements OnInit {
     },
     {
       title: 'Mi perfil',
-      url: '/admin',
+      url: '/profile',
       imagePath: '/assets/images/admin/profile.png'
     }
   ]

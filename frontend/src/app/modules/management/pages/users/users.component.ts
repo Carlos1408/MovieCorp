@@ -2,16 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { User } from 'src/app/shared/interfaces/user';
 import { UserService } from 'src/app/shared/services/user.service';
-import {
-  ConfirmationService,
-  MessageService,
-} from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
-  providers: [ConfirmationService, MessageService],
+  providers: [],
 })
 export class UsersComponent implements OnInit {
   handledUser: User = {
@@ -20,7 +17,7 @@ export class UsersComponent implements OnInit {
     birthdate: '',
     phone: 0,
     email: '',
-    rol: '',
+    role: '',
     password: '',
   };
 
@@ -49,7 +46,7 @@ export class UsersComponent implements OnInit {
       birthdate: '',
       phone: 0,
       email: '',
-      rol: '',
+      role: '',
       password: '',
     };
   }

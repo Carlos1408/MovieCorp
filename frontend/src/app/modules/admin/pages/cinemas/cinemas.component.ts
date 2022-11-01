@@ -10,7 +10,7 @@ import { MovieService } from 'src/app/shared/services/movie.service';
   selector: 'app-cinemas',
   templateUrl: './cinemas.component.html',
   styleUrls: ['./cinemas.component.scss'],
-  providers: [ConfirmationService, MessageService],
+  providers: [],
 })
 export class CinemasComponent implements OnInit {
   handleCinema: Cinema = {

@@ -1,67 +1,104 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { Observable, Subscription, tap } from 'rxjs';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   items!: MenuItem[];
 
-  constructor() {}
+  isLoggedIn!: boolean;
+  private userRoleSubscription!: Subscription;
+
+  constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.items = [
-      {
-        label: 'Cartelera',
-        routerLink: '/client/billboard',
-        styleClass: 'mx-1',
-      },
-      {
-        label: 'Administrador',
-        routerLink: '/admin',
-        styleClass: 'mx-1',
-      },
-      {
-        label: 'Gerente',
-        routerLink: '/management',
-        styleClass: 'mx-1',
-      },
-      {
-        label: 'Cines',
-        routerLink: '/admin/cinemas',
-        styleClass: 'mx-1',
-        icon: 'pi pi-video text-100',
-      },
-      {
-        label: 'Salas',
-        routerLink: '/admin/rooms',
-        styleClass: 'mx-1',
-        icon: 'pi pi-tablet text-100'
-      },
-      {
-        label: 'Peliculas',
-        routerLink: '/admin/movies',
-        styleClass: 'mx-1',
-        icon: 'pi pi-ticket text-100'
-      },
-      {
-        label: 'Funciones',
-        routerLink: '/admin/functions',
-        styleClass: 'mx-1',
-      },
-      {
-        label: 'Usuarios',
-        routerLink: '/management/users',
-        styleClass: 'mx-1',
-        icon: 'pi pi-users text-100'
-      },
-      {
-        label: 'Mi perfil',
-        routerLink: '/admin/profile',
-        styleClass: 'mx-1',
-      },
-    ];
+    this.userRoleSubscription = this.authService.user$
+      .pipe(
+        tap((user) => {
+          if (!user) {
+            this.isLoggedIn = false;
+            this.items = [
+              {
+                label: 'Cartelera',
+                routerLink: '/client/billboard',
+                styleClass: 'mx-1',
+              },
+            ];
+          } else {
+            this.isLoggedIn = true;
+            if (user.role === 'admin') {
+              this.items = [
+                {
+                  label: 'Administrador',
+                  routerLink: '/admin',
+                  styleClass: 'mx-1',
+                },
+                {
+                  label: 'Cines',
+                  routerLink: '/admin/cinemas',
+                  styleClass: 'mx-1',
+                  icon: 'pi pi-video text-100',
+                },
+                {
+                  label: 'Salas',
+                  routerLink: '/admin/rooms',
+                  styleClass: 'mx-1',
+                  icon: 'pi pi-tablet text-100',
+                },
+                {
+                  label: 'Peliculas',
+                  routerLink: '/admin/movies',
+                  styleClass: 'mx-1',
+                  icon: 'pi pi-ticket text-100',
+                },
+                {
+                  label: 'Funciones',
+                  routerLink: '/admin/functions',
+                  styleClass: 'mx-1',
+                },
+                {
+                  label: 'Mi perfil',
+                  routerLink: '/profile',
+                  styleClass: 'mx-1',
+                },
+              ];
+            }
+            if (user.role === 'manager') {
+              this.items = [
+                {
+                  label: 'Gerente',
+                  routerLink: '/management',
+                  styleClass: 'mx-1',
+                },
+                {
+                  label: 'Usuarios',
+                  routerLink: '/management/users',
+                  styleClass: 'mx-1',
+                  icon: 'pi pi-users text-100',
+                },
+                {
+                  label: 'Mi perfil',
+                  routerLink: '/profile',
+                  styleClass: 'mx-1',
+                },
+              ];
+            }
+          }
+        })
+      )
+      .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.userRoleSubscription.unsubscribe();
+  }
+
+  logOut(): void {
+    this.authService.logOut();
   }
 }

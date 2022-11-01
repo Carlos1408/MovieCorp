@@ -8,14 +8,16 @@ const {
   createFunction,
   deleteFunction,
   getAllFunctionsLg,
-  getFunctionLg
+  getFunctionLg,
 } = require("../controllers/functions.controller");
 
-router.get("/", getAllFunctions);
-router.get("/lg", getAllFunctionsLg);
-router.get("/:id", getFunction);
-router.get("/lg/:id", getFunctionLg);
-router.post("/", createFunction);
-router.delete("/:id", deleteFunction);
+const { verifyToken, verifyAdmin } = require("../controllers/auth.controller");
+
+router.get("/", verifyToken, verifyAdmin, getAllFunctions);
+router.get("/lg", verifyToken, verifyAdmin, getAllFunctionsLg);
+router.get("/:id", verifyToken, verifyAdmin, getFunction);
+router.get("/lg/:id", verifyToken, verifyAdmin, getFunctionLg);
+router.post("/", verifyToken, verifyAdmin, createFunction);
+router.delete("/:id", verifyToken, verifyAdmin, deleteFunction);
 
 module.exports = router;

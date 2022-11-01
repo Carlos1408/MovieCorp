@@ -13,12 +13,20 @@ const {
   getMovieLg,
 } = require("../controllers/movies.controller");
 
+const { verifyToken, verifyAdmin } = require("../controllers/auth.controller");
+
 router.get("/", getAllMovies);
-router.get("/lg/", getAllMoviesLg);
-router.get("/:id", getMovie);
-router.get("/lg/:id", getMovieLg);
-router.post("/", multer.single("image"), createMovie);
-router.put("/:id", multer.single("image"), updateMovie);
-router.delete("/:id", deleteMovie);
+router.get("/lg/", verifyToken, verifyAdmin, getAllMoviesLg);
+router.get("/:id", verifyToken, verifyAdmin, getMovie);
+router.get("/lg/:id", verifyToken, verifyAdmin, getMovieLg);
+router.post("/", verifyToken, verifyAdmin, multer.single("image"), createMovie);
+router.put(
+  "/:id",
+  verifyToken,
+  verifyAdmin,
+  multer.single("image"),
+  updateMovie
+);
+router.delete("/:id", verifyToken, verifyAdmin, deleteMovie);
 
 module.exports = router;

@@ -1,4 +1,3 @@
-
 export interface User {
   _id?: string;
   name: string;
@@ -6,8 +5,9 @@ export interface User {
   birthdate: string;
   phone: number;
   email: string;
-  rol: string;
-  password: string;
+  role: string;
+  password?: string;
   createdAt?: string;
   updatedAt?: string;
+  token?: string;
 }
