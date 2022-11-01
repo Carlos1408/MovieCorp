@@ -39,9 +39,22 @@ export class AuthService {
   }
 
   logOut(): void {
-    this.removeUser();
+    this.removeToken();
     this.user.next(null);
     this.redirectToHome();
+  }
+
+  getRoleHomeUrl(role: string): string {
+    switch (role) {
+      case 'admin':
+        return '/admin';
+
+      case 'manager':
+        return '/management';
+
+      default:
+        return '/';
+    }
   }
 
   private redirectToHome(): void {
@@ -72,8 +85,6 @@ export class AuthService {
   }
 
   private loadUser(): void {
-    console.log('relogin');
-    
     this.http
       .get<any>(`${this.URL_API}/relogin`)
       .pipe(
@@ -84,7 +95,7 @@ export class AuthService {
       .subscribe();
   }
 
-  private removeUser(): void {
+  private removeToken(): void {
     this.cookieService.delete('token');
   }
 }

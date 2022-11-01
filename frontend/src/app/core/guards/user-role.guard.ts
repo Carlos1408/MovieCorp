@@ -47,16 +47,27 @@ export class UserRoleGuard implements CanActivate, CanLoad {
   private verifyRole(route: Route | ActivatedRouteSnapshot) {
     const allowedRole: string = route.data?.['allowedRole'];
     return this.authService.user$.pipe(
-      map((user) => Boolean(user && allowedRole === user.role)),
-      tap(
-        (hasRole) =>
-          hasRole === false &&
+      map((user) => {
+        if (!user) {
+          this.messageService.add({
+            severity: 'warn',
+            summary: 'Acceso denegado',
+            detail: 'Debe iniciar sesion en el sistema',
+          });
+          return this.router.createUrlTree(['/auth/login']);
+        }
+        if (user.role !== allowedRole) {
           this.messageService.add({
             severity: 'warn',
             summary: 'Acceso denegado',
             detail: 'Rol de usuario no permitido',
-          })
-      )
+          });
+          return this.router.createUrlTree([
+            this.authService.getRoleHomeUrl(user.role),
+          ]);
+        }
+        return true;
+      })
     );
   }
 }
