@@ -10,7 +10,7 @@ import { RoomService } from 'src/app/shared/services/room.service';
   selector: 'app-rooms',
   templateUrl: './rooms.component.html',
   styleUrls: ['./rooms.component.scss'],
-  providers: [ConfirmationService, MessageService],
+  providers: [],
 })
 export class RoomsComponent implements OnInit {
   handleRoom: Room = {
@@ -18,7 +18,7 @@ export class RoomsComponent implements OnInit {
     nRows: 0,
     nCol: 0,
     price: 0,
-    timeRanges: []
+    timeRanges: [],
   };
 
   rooms: Room[] = [];
@@ -39,7 +39,7 @@ export class RoomsComponent implements OnInit {
 
   openForm() {
     console.log(this.rooms);
-    
+
     this.showForm = true;
   }
 
@@ -50,7 +50,7 @@ export class RoomsComponent implements OnInit {
       nRows: 0,
       nCol: 0,
       price: 0,
-      timeRanges: []
+      timeRanges: [],
     };
   }
 

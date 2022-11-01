@@ -10,7 +10,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PrimengModule } from 'src/app/shared/primeng.module';
 
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +17,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
     UsersComponent,
     UserFormComponent,
     UserTableComponent,
-    ProfileComponent
   ],
   imports: [
     CommonModule,

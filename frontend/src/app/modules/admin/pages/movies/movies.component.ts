@@ -8,7 +8,7 @@ import { MovieService } from 'src/app/shared/services/movie.service';
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss'],
-  providers: [ConfirmationService, MessageService],
+  providers: [],
 })
 export class MoviesComponent implements OnInit {
   handledMovie: Movie = {

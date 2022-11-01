@@ -10,15 +10,29 @@ const {
   updateCinema,
   deleteCinema,
   getAllCinemasLg,
-  getCinemaLg
+  getCinemaLg,
 } = require("../controllers/cinemas.controller");
 
-router.get("/", getAllCinemas);
-router.get("/lg", getAllCinemasLg);
-router.get("/:id", getCinema);
-router.get("/lg/:id", getCinemaLg);
-router.post("/", multer.single("image"), createCinema);
-router.put("/:id", multer.single("image"), updateCinema);
-router.delete("/:id", deleteCinema);
+const { verifyToken, verifyAdmin } = require("../controllers/auth.controller");
+
+router.get("/", verifyToken, verifyAdmin, getAllCinemas);
+router.get("/lg", verifyToken, verifyAdmin, getAllCinemasLg);
+router.get("/:id", verifyToken, verifyAdmin, getCinema);
+router.get("/lg/:id", verifyToken, verifyAdmin, getCinemaLg);
+router.post(
+  "/",
+  verifyToken,
+  verifyAdmin,
+  multer.single("image"),
+  createCinema
+);
+router.put(
+  "/:id",
+  verifyToken,
+  verifyAdmin,
+  multer.single("image"),
+  updateCinema
+);
+router.delete("/:id", verifyToken, verifyAdmin, deleteCinema);
 
 module.exports = router;

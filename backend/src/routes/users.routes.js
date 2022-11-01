@@ -10,10 +10,12 @@ const {
   deleteUser,
 } = require("../controllers/users.controller");
 
-router.get("/", getAlltUsers);
-router.get("/:id", getUser);
-router.post("/", createUser);
-router.put("/:id", updateUser);
-router.delete("/:id", deleteUser);
+const { verifyToken, verifyManager } = require("../controllers/auth.controller");
+
+router.get("/", verifyToken, verifyManager, getAlltUsers);
+router.get("/:id", verifyToken, verifyManager, getUser);
+router.post("/", verifyToken, verifyManager, createUser);
+router.put("/:id", verifyToken, verifyManager, updateUser);
+router.delete("/:id", verifyToken, verifyManager, deleteUser);
 
 module.exports = router;

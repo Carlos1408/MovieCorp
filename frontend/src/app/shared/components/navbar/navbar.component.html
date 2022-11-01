@@ -2,4 +2,14 @@
     <ng-template pTemplate="start">
         <h2 class="text-0 my-0 mx-4">MovieCorp</h2>
     </ng-template>
+    <ng-template pTemplate="end">
+        <ng-container *ngIf="isLoggedIn">
+            <p-button label="Cerrar sesion" styleClass="p-button-sm p-button-outlined p-button-secondary text-0"
+                (onClick)="logOut()"></p-button>
+        </ng-container>
+        <ng-container *ngIf="!isLoggedIn">
+            <a routerLink="/auth/login" styleClass="p-button-sm p-button-outlined p-button-secondary text-0">Iniciar
+                sesion</a>
+        </ng-container>
+    </ng-template>
 </p-menubar>

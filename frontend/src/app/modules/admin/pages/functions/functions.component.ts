@@ -8,7 +8,7 @@ import { FunctionService } from 'src/app/shared/services/function.service';
   selector: 'app-functions',
   templateUrl: './functions.component.html',
   styleUrls: ['./functions.component.scss'],
-  providers: [ConfirmationService, MessageService],
+  providers: [],
 })
 export class FunctionsComponent implements OnInit {
   handledFunction: Function = {

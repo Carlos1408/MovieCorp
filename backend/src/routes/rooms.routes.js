@@ -12,12 +12,14 @@ const {
   getRoomLg,
 } = require("../controllers/rooms.controller");
 
-router.get("/", getAllRooms);
-router.get("/lg/", getAllRoomsLg);
-router.get("/:id", getRoom);
-router.get("/lg/:id", getRoomLg);
-router.post("/", createRoom);
-router.put("/:id", updateRoom);
-router.delete("/:id", deleteRoom);
+const { verifyToken, verifyAdmin } = require("../controllers/auth.controller");
+
+router.get("/", verifyToken, verifyAdmin, getAllRooms);
+router.get("/lg/", verifyToken, verifyAdmin, getAllRoomsLg);
+router.get("/:id", verifyToken, verifyAdmin, getRoom);
+router.get("/lg/:id", verifyToken, verifyAdmin, getRoomLg);
+router.post("/", verifyToken, verifyAdmin, createRoom);
+router.put("/:id", verifyToken, verifyAdmin, updateRoom);
+router.delete("/:id", verifyToken, verifyAdmin, deleteRoom);
 
 module.exports = router;

@@ -37,7 +37,7 @@ export class UserFormComponent implements OnInit {
     birthdate: new FormControl('', Validators.required),
     phone: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
-    rol: new FormControl('', Validators.required),
+    role: new FormControl('', Validators.required),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
@@ -71,7 +71,7 @@ export class UserFormComponent implements OnInit {
     this.userForm.get('lastnames')?.setValue(this.handledUser.lastnames);
     this.userForm.get('birthdate')?.setValue(this.handledUser.birthdate);
     this.userForm.get('phone')?.setValue(this.handledUser.phone);
-    this.userForm.get('rol')?.setValue(this.handledUser.rol);
+    this.userForm.get('rol')?.setValue(this.handledUser.role);
     this.userForm.get('email')?.setValue(this.handledUser.email);
     this.userForm.get('password')?.setValue(this.handledUser.password);
     this.userForm.get('passwordConfirm')?.setValue(this.handledUser.password);
