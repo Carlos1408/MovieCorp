@@ -1,8 +1,19 @@
-<div class="row mb-3">
-    <h1>Peliculas</h1>
+<h1>Peliculas</h1>
+
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <p-button label="Nueva pelicula" (onClick)="openForm()" iconPos="right" icon="pi pi-plus"
+                styleClass="p-button-primary"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <app-movie-table [movies]="movies" (editMovie)="fillMovieForm($event)" (deleteMovie)="confirmDelete($event)">
+    </app-movie-table>
+
+    <app-movie-form [showForm]="showForm" [handledMovie]="handledMovie" (createMovie)="createMovie($event)" (updateMovie)="updateMovie($event)" (closeForm)="closeForm()">
+    </app-movie-form>
 </div>
 
-<div class="row">
-    <div class="col-4"><app-movie-form></app-movie-form></div>
-    <div class="col-8"><app-movie-table></app-movie-table></div>
-</div>
+<p-confirmDialog [style]="{width: '450px'}" rejectButtonStyleClass="p-button-danger" acceptLabel="Si"></p-confirmDialog>
+<p-toast></p-toast>

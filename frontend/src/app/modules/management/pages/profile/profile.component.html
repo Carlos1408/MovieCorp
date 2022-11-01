@@ -1,0 +1,34 @@
+<div class="flex justify-content-center ">
+    <p-card header="MI PERFIL" [style]="{width: '500px'}" styleClass="p-card-shadow">
+        <div class="flex flex-column card-container green-container align-items-center">
+            <div class="field">
+                <h4>NOMBRE</h4>
+                <span class="p-float-label">
+                    <input type="text" id="name" pInputText disabled="false" class="p-inputtext-lg" placeholder="Large" style="width: 400px;">
+                    <label for="name">{{profile.name}}</label>
+                </span>
+            </div>
+            <div class="field">
+                <h4>APELLIDOS</h4>
+                <span class="p-float-label">
+                    <input type="text" id="lastnames" pInputText disabled="false" class="p-inputtext-lg" placeholder="Large" style="width: 400px;">
+                    <label for="lastnames">{{profile.lastnames}}</label>
+                </span>
+            </div>
+            <div class="field">
+                <h4>TELEFONO</h4>
+                <span class="p-float-label">
+                    <input type="text" id="phone" pInputText disabled="false" class="p-inputtext-lg" placeholder="Large" style="width: 400px;">
+                    <label for="phone">{{profile.phone}}</label>
+                </span>
+            </div>
+            <div class="field">
+                <h4>EMAIL</h4>
+                <span class="p-float-label">
+                    <input type="text" id="email" pInputText disabled="false" class="p-inputtext-lg" placeholder="Large" style="width: 400px;">
+                    <label for="email">{{profile.email}}</label>
+                </span>
+            </div>
+        </div>
+    </p-card>
+</div>

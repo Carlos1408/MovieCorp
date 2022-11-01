@@ -1,4 +1,3 @@
-import { AbstractControl, FormGroup } from '@angular/forms';
 
 export interface User {
   _id?: string;
@@ -7,6 +6,7 @@ export interface User {
   birthdate: string;
   phone: number;
   email: string;
+  rol: string;
   password: string;
   createdAt?: string;
   updatedAt?: string;

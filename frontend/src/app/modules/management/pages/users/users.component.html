@@ -1,12 +1,19 @@
-<div class="row mb-3">
-    <h1>Administradores</h1>
+<h1>Usuarios</h1>
+
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <p-button label="Nuevo usuario" (onClick)="openForm()" iconPos="right" icon="pi pi-plus"
+                styleClass="p-button-primary"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <app-user-table (editUser)="fillUserForm($event)" (deleteUser)="confirmDelete($event)" [users]="users">
+    </app-user-table>
+
+    <app-user-form (createUser)="createUser($event)" (editUser)="updateUser($event)" [showForm]="showForm"
+        (closeForm)="closeForm()" [handledUser]="handledUser"></app-user-form>
 </div>
 
-<div class="row">
-    <div class="col-4">
-        <app-user-form (createUser)="createUser($event)"></app-user-form>
-    </div>
-    <div class="col-8">
-        <app-user-table [users]="users"></app-user-table>
-    </div>
-</div>
+<p-confirmDialog [style]="{width: '450px'}" rejectButtonStyleClass="p-button-danger" acceptLabel="Si"></p-confirmDialog>
+<p-toast></p-toast>

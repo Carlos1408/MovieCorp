@@ -1,1 +1,5 @@
-<p>management works!</p>
+<div class="flex justify-content-center ">
+    <div class="mr-4" *ngFor="let option of options; index as i" >
+        <app-option-card [option]="option"></app-option-card>
+    </div>
+</div>

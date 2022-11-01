@@ -1,12 +1,24 @@
-<div class="row mb-3">
-    <h1>Salas</h1>
-</div>
+<h1>Salas</h1>
 
-<div class="row">
-    <div class="col-4">
-        <app-room-form></app-room-form>        
-    </div>
-    <div class="col-8">
-        <app-room-table></app-room-table>
-    </div>
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <p-button label="Nueva Sala" (onClick)="openForm()" iconPos="right" icon="pi pi-plus"
+                styleClass="p-button-primary"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <app-room-table [rooms]="rooms" (deleteRoom)="confirmDelete($event)" (editRoom)="fillRoomForm($event)">
+    </app-room-table>
+
+    <app-room-form 
+        [cinemas]="cinemas"
+        [showForm]="showForm" 
+        (closeForm)="closeForm()" 
+        (createRoom)="createRoom($event)"
+        (editRoom)="updateRoom($event)"
+        [handleRoom]="handleRoom"
+    ></app-room-form>
 </div>
+<p-confirmDialog [style]="{width: '450px'}" rejectButtonStyleClass="p-button-danger" acceptLabel="Si"></p-confirmDialog>
+<p-toast></p-toast>

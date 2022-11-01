@@ -1,0 +1,19 @@
+<h1>Funciones</h1>
+
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <p-button label="Nueva Funcion" (onClick)="openForm()" iconPos="right" icon="pi pi-plus"
+                styleClass="p-button-primary"></p-button>
+        </ng-template>
+    </p-toolbar>
+
+    <app-function-table (showFunction)="fillFunctionForm($event)" [functions]="functions">
+    </app-function-table>
+
+    <app-function-form (createFunction)="createFunction($event)" [showForm]="showForm"
+        (closeForm)="closeForm()" [handledFunction]="handledFunction"></app-function-form>
+</div>
+
+<p-confirmDialog [style]="{width: '450px'}" rejectButtonStyleClass="p-button-danger" acceptLabel="Si"></p-confirmDialog>
+<p-toast></p-toast>

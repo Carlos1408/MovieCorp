@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Room } from 'src/app/shared/interfaces/room';
 
 @Component({
   selector: 'app-room-table',
@@ -6,40 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./room-table.component.scss']
 })
 export class RoomTableComponent implements OnInit {
-  rooms=[{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  },{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  },{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  },{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  },{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  },{
-    nRows: 9,
-    nCol: 7,
-    price: 30,
-    roomNum: 1
-  }]
+  @Input() rooms!: Room[];
+  
+  @Output() deleteRoom = new EventEmitter<string>();
+  @Output() editRoom = new EventEmitter<Room>();
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  handleDelete(_id?: string): void{
+    this.deleteRoom.emit(_id);
+  }
+  handleEdit(room: Room){
+    this.editRoom.emit(room);
+  }
 }

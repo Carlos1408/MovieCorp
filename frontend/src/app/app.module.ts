@@ -1,22 +1,21 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
-import { HttpClientModule } from '@angular/common/http';
-import { PrimengModule } from './primeng.module';
+import { NotFoundPageComponent } from './shared/components/not-found-page/not-found-page.component';
+import { PrimengModule } from './shared/primeng.module';
 
 @NgModule({
-  declarations: [AppComponent, NavbarComponent],
+  declarations: [AppComponent, NavbarComponent, NotFoundPageComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    HttpClientModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
+    HttpClientModule,
     PrimengModule,
   ],
   providers: [],

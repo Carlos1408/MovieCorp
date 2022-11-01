@@ -1,38 +1,48 @@
-<form class="card bg-dark text-light" [formGroup]="userForm">
-    <div class="card-body">
-        <div class="mb-3">
-            <label class="form-label">Nombre</label>
-            <input type="text" formControlName="name" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Apellidos</label>
-            <input type="text" formControlName="lastnames" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Fecha de nacimiento</label>
-            <input type="date" formControlName="birthdate" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Telefono</label>
-            <input type="number" formControlName="phone" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Email</label>
-            <input type="email" formControlName="email" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Contraseña</label>
-            <input type="password" formControlName="password" class="form-control">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Confirme contraseña</label>
-            <input type="password" formControlName="passwordConfirm" class="form-control">
-        </div>
-    </div>
-    <div class="card-footer">
-        <div class="d-flex justify-content-around">
-            <button (click)="handleSubmit()" class="btn btn-primary">Guardar</button>
-            <button (click)="handleCancel()" class="btn btn-danger">Cancelar</button>
-        </div>
-    </div>
-</form>
+<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" [header]="(editMode? 'Actualizar': 'Nuevo') + ' usuario'"
+    [modal]="true" styleClass="p-fluid" [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
+    <ng-template pTemplate="content">
+        <form [formGroup]="userForm">
+            <div class="field">
+                <h4>Nombre</h4>
+                <input type="text" pInputText formControlName="name">
+            </div>
+            <div class="field">
+                <h4>Apellidos</h4>
+                <input type="text" pInputText formControlName="lastnames">
+            </div>
+            <div class="field">
+                <h4>Fecha de nacimiento</h4>
+                <p-calendar dataType="string" dateFormat="yy-mm-dd" [showIcon]="true" formControlName="birthdate"
+                    appendTo="body">
+                </p-calendar>
+            </div>
+            <div class="field">
+                <h4>Telefono</h4>
+                <p-inputNumber [useGrouping]="false" formControlName="phone"></p-inputNumber>
+            </div>
+            <div class="field">
+                <h4>Email</h4>
+                <input type="email" pInputText formControlName="email">
+            </div>
+            <div class="field">
+                <h4>Rol</h4>
+                <p-dropdown [options]="roles" optionLabel="name" optionValue="code" placeholder="Selecione un rol"
+                    formControlName="rol" appendTo="body"></p-dropdown>
+            </div>
+            <div *ngIf="!editMode">
+                <div class="field">
+                    <h4>Contraseña</h4>
+                    <p-password [feedback]="false" [toggleMask]="true" formControlName="password"></p-password>
+                </div>
+                <div class="field">
+                    <h4>Confirme contraseña</h4>
+                    <p-password [feedback]="false" [toggleMask]="true" formControlName="passwordConfirm"></p-password>
+                </div>
+            </div>
+        </form>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <p-button label="Cancelar" (onClick)="closeDialog()" styleClass="p-button-danger"></p-button>
+        <p-button label="Guardar" (onClick)="handleSubmit()" styleClass="p-button-primary"></p-button>
+    </ng-template>
+</p-dialog>

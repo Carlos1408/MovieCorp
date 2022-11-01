@@ -1,0 +1,30 @@
+<p-table [value]="functions" [rows]="10" [paginator]="true" responsiveLayout="scroll" [rowHover]="true">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nro</th>
+            <th pSortableColumn="cinema.name">Cine <p-sortIcon field="cinema.name"></p-sortIcon></th>
+            <th pSortableColumn="room.roomNum">Sala <p-sortIcon field="room.roomNum"></p-sortIcon></th>
+            <th pSortableColumn="movie.title">Pelicula <p-sortIcon field="movie.title"></p-sortIcon></th>
+            <th pSortableColumn="from">Inicio <p-sortIcon field="from"></p-sortIcon></th>
+            <th pSortableColumn="to">Final <p-sortIcon field="to"></p-sortIcon></th>
+            <th>Opciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-function_>
+        <tr>
+            <td>{{functions.indexOf(function_) + 1}}</td>
+            <td>{{function_.cinema.name}}</td>
+            <td>{{function_.room.roomNum}}</td>
+            <td>{{function_.movie.title}}</td>
+            <td>{{function_.from | date:'shortTime'}}</td>
+            <td>{{function_.to | date:'shortTime'}}</td>
+            <td>
+                <p-button label="Editar" (onClick)="handleShow(function_)" iconPos="right" icon="pi pi-pencil"
+                    styleClass="p-button-sm p-button-success mr-2"></p-button>
+                <p-button label="Eliminar" (onClick)="handleDelete(function_._id)" iconPos="right" icon="pi pi-trash"
+                    styleClass="p-button-sm p-button-danger">
+                </p-button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
