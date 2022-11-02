@@ -6,7 +6,7 @@
                         [style]="{'width': '10rem', 'height': '10rem'}"></div>
             </ng-template>
             <ng-template pTemplate="content">
-                <form [formGroup]="loginForm">
+                <form [formGroup]="loginForm" (keydown)="keyDownFunction($event)">
                     <div class="field">
                         <h3>Email</h3>
                         <input pInputText type="email" class="p-inputtext-lg" formControlName="email">
