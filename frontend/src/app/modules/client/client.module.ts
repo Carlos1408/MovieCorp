@@ -6,6 +6,8 @@ import { ClientComponent } from './client.component';
 import { BillboardComponent } from './pages/billboard/billboard.component';
 import { MovieCardComponent } from './pages/billboard/movie-card/movie-card.component';
 import { PrimengModule } from 'src/app/shared/primeng.module';
+import { TheatersComponent } from './pages/theaters/theaters.component';
+import { CinemaCardComponent } from './pages/theaters/cinema-card/cinema-card.component';
 import { MovieComponent } from './pages/movie/movie.component';
 import { MoviePropertyComponent } from './pages/movie/components/movie-property/movie-property.component';
 import { YouTubePlayerModule } from '@angular/youtube-player';
@@ -15,6 +17,8 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     ClientComponent,
     BillboardComponent,
     MovieCardComponent,
+    TheatersComponent,
+    CinemaCardComponent
     MovieComponent,
     MoviePropertyComponent,
   ],
