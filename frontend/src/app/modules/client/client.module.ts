@@ -18,7 +18,7 @@ import { YouTubePlayerModule } from '@angular/youtube-player';
     BillboardComponent,
     MovieCardComponent,
     TheatersComponent,
-    CinemaCardComponent
+    CinemaCardComponent,
     MovieComponent,
     MoviePropertyComponent,
   ],

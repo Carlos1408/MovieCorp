@@ -7,8 +7,8 @@ import { MovieComponent } from './pages/movie/movie.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'billboard', pathMatch: 'full' },
+  { path: 'theaters', component: TheatersComponent },
   { path: 'billboard', component: BillboardComponent },
-  { path: 'theaters', component: TheatersComponent}
   { path: 'movie/:id', component: MovieComponent },
 ];
 

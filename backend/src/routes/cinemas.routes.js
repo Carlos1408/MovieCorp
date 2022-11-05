@@ -15,10 +15,10 @@ const {
 
 const { verifyToken, verifyAdmin } = require("../controllers/auth.controller");
 
-router.get("/", verifyToken, verifyAdmin, getAllCinemas);
-router.get("/lg", verifyToken, verifyAdmin, getAllCinemasLg);
-router.get("/:id", verifyToken, verifyAdmin, getCinema);
-router.get("/lg/:id", verifyToken, verifyAdmin, getCinemaLg);
+router.get("/", getAllCinemas);
+router.get("/lg", getAllCinemasLg);
+router.get("/:id", getCinema);
+router.get("/lg/:id", getCinemaLg);
 router.post(
   "/",
   verifyToken,
