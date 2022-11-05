@@ -6,11 +6,16 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./option-card.component.scss'],
 })
 export class OptionCardComponent implements OnInit {
-  @Input() option!: { title: string; url: string; imagePath: string };
+  @Input() name!: string;
+  @Input() url!: string;
+  @Input() imagePath!: string;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.name, this.url, this.imagePath);
+    
+  }
 
   testClick(): void {
     console.log('FUNCIONA');

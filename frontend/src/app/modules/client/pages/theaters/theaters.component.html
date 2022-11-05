@@ -1,5 +1,6 @@
 <div class="flex flex-wrap justify-content-center">
     <div class="mr-4" *ngFor="let cinema of cinemas; index as i">
-        <app-cinema-card [cinema]="cinema"></app-cinema-card>
+        <app-option-card [name]="cinema.name" url="/client/billboard" [imagePath]="API_URL + cinema.imagePath">
+        </app-option-card>
     </div>
 </div>

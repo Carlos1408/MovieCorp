@@ -6,7 +6,7 @@ import { NotFoundPageComponent } from './shared/components/not-found-page/not-fo
 import { ProfileComponent } from './shared/components/profile/profile.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/client/billboard' },
+  { path: '', pathMatch: 'full', redirectTo: '/client/theaters' },
   {
     path: 'admin',
     canActivate: [UserRoleGuard],
