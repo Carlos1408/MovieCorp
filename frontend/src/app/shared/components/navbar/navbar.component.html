@@ -1,6 +1,6 @@
-<p-menubar styleClass="bg-red-600 mb-4" [model]="items">
+<p-menubar styleClass="bg-red-600 py-1 mb-4" [model]="items">
     <ng-template pTemplate="start">
-        <h2 class="text-0 my-0 mx-4">MovieCorp</h2>
+        <h2 class="text-white my-0 mx-4">MovieCorp</h2>
     </ng-template>
     <ng-template pTemplate="end">
         <ng-container *ngIf="isLoggedIn">
@@ -8,7 +8,7 @@
                 (onClick)="logOut()"></p-button>
         </ng-container>
         <ng-container *ngIf="!isLoggedIn">
-            <a routerLink="/auth/login" styleClass="p-button-sm p-button-outlined p-button-secondary text-0">Iniciar
+            <a routerLink="/auth/login" styleClass="p-button-sm p-button-outlined p-button-secondary text-white">Iniciar
                 sesion</a>
         </ng-container>
     </ng-template>

@@ -16,9 +16,9 @@ const {
 const { verifyToken, verifyAdmin } = require("../controllers/auth.controller");
 
 router.get("/", getAllMovies);
-router.get("/lg/", verifyToken, verifyAdmin, getAllMoviesLg);
-router.get("/:id", verifyToken, verifyAdmin, getMovie);
-router.get("/lg/:id", verifyToken, verifyAdmin, getMovieLg);
+router.get("/lg/", getAllMoviesLg);
+router.get("/:id", getMovie);
+router.get("/lg/:id", getMovieLg);
 router.post("/", verifyToken, verifyAdmin, multer.single("image"), createMovie);
 router.put(
   "/:id",

@@ -16,8 +16,16 @@ export class MovieService {
     return this.http.get<Movie[]>(this.URL_API);
   }
 
+  getAllMoviesLg(): Observable<Movie> {
+    return this.http.get<Movie>(`${this.URL_API}/lg`);
+  }
+
   getMovie(_id: string): Observable<Movie> {
     return this.http.get<Movie>(`${this.URL_API}/${_id}`);
+  }
+
+  getMovieLg(_id: string): Observable<Movie> {
+    return this.http.get<Movie>(`${this.URL_API}/lg/${_id}`);
   }
 
   createMovie(form: any): Observable<Movie> {

@@ -42,19 +42,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
                   label: 'Cines',
                   routerLink: '/admin/cinemas',
                   styleClass: 'mx-1',
-                  icon: 'pi pi-video text-100',
+                  icon: 'pi pi-video text-white',
                 },
                 {
                   label: 'Salas',
                   routerLink: '/admin/rooms',
                   styleClass: 'mx-1',
-                  icon: 'pi pi-tablet text-100',
+                  icon: 'pi pi-tablet text-white',
                 },
                 {
                   label: 'Peliculas',
                   routerLink: '/admin/movies',
                   styleClass: 'mx-1',
-                  icon: 'pi pi-ticket text-100',
+                  icon: 'pi pi-ticket text-white',
                 },
                 {
                   label: 'Funciones',
@@ -79,7 +79,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
                   label: 'Usuarios',
                   routerLink: '/management/users',
                   styleClass: 'mx-1',
-                  icon: 'pi pi-users text-100',
+                  icon: 'pi pi-users text-white',
                 },
                 {
                   label: 'Mi perfil',
