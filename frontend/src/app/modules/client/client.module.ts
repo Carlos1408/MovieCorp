@@ -6,18 +6,23 @@ import { ClientComponent } from './client.component';
 import { BillboardComponent } from './pages/billboard/billboard.component';
 import { MovieCardComponent } from './pages/billboard/movie-card/movie-card.component';
 import { PrimengModule } from 'src/app/shared/primeng.module';
-
+import { MovieComponent } from './pages/movie/movie.component';
+import { MoviePropertyComponent } from './pages/movie/components/movie-property/movie-property.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
     ClientComponent,
     BillboardComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    MovieComponent,
+    MoviePropertyComponent,
   ],
   imports: [
     CommonModule,
     ClientRoutingModule,
-    PrimengModule
-  ]
+    PrimengModule,
+    YouTubePlayerModule,
+  ],
 })
-export class ClientModule { }
+export class ClientModule {}
