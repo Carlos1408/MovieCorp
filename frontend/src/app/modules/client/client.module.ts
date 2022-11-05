@@ -8,7 +8,9 @@ import { MovieCardComponent } from './pages/billboard/movie-card/movie-card.comp
 import { PrimengModule } from 'src/app/shared/primeng.module';
 import { TheatersComponent } from './pages/theaters/theaters.component';
 import { CinemaCardComponent } from './pages/theaters/cinema-card/cinema-card.component';
-
+import { MovieComponent } from './pages/movie/movie.component';
+import { MoviePropertyComponent } from './pages/movie/components/movie-property/movie-property.component';
+import { YouTubePlayerModule } from '@angular/youtube-player';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,14 @@ import { CinemaCardComponent } from './pages/theaters/cinema-card/cinema-card.co
     MovieCardComponent,
     TheatersComponent,
     CinemaCardComponent
+    MovieComponent,
+    MoviePropertyComponent,
   ],
   imports: [
     CommonModule,
     ClientRoutingModule,
-    PrimengModule
-  ]
+    PrimengModule,
+    YouTubePlayerModule,
+  ],
 })
-export class ClientModule { }
+export class ClientModule {}
