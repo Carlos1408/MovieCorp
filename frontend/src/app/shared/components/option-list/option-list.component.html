@@ -1,0 +1,5 @@
+<div class="flex flex-wrap justify-content-center">
+    <div class="mr-4" *ngFor="let option of options; index as i">
+        <app-option-card [name]="option.name" [url]="option.url" [imagePath]="option.imagePath"></app-option-card>
+    </div>
+</div>

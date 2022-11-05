@@ -24,8 +24,18 @@ export class NavbarComponent implements OnInit, OnDestroy {
             this.isLoggedIn = false;
             this.items = [
               {
+                label: 'Cines',
+                routerLink: '/client/theaters',
+                styleClass: 'mx-1',
+              },
+              {
                 label: 'Cartelera',
                 routerLink: '/client/billboard',
+                styleClass: 'mx-1',
+              },
+              {
+                label: 'Pelicula',
+                routerLink: '/client/movie',
                 styleClass: 'mx-1',
               },
             ];

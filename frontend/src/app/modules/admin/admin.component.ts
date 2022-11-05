@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Option } from 'src/app/core/interfaces/option';
 
 @Component({
   selector: 'app-admin',
@@ -6,29 +7,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  options = [
+  options: Option[] = [
     {
-      title: 'Cines',
+      name: 'Cines',
       url: '/admin/cinemas',
       imagePath: '/assets/images/admin/cinema.jpg'
     },
     {
-      title: 'Salas',
+      name: 'Salas',
       url: '/admin/rooms',
       imagePath: '/assets/images/admin/rooms.jpg'
     },
     {
-      title: 'Peliculas',
+      name: 'Peliculas',
       url: '/admin/movies',
       imagePath: '/assets/images/admin/movies.jpg'
     },
     {
-      title: 'Crear Funcion',
+      name: 'Crear Funcion',
       url: '/admin',
       imagePath: '/assets/images/admin/function.jpg'
     },
     {
-      title: 'Mi perfil',
+      name: 'Mi perfil',
       url: '/profile',
       imagePath: '/assets/images/admin/profile.png'
     }

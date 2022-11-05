@@ -9,17 +9,17 @@ export class ManagementComponent implements OnInit {
 
   options = [
     {
-      title: 'Reportes',
+      name: 'Reportes',
       url: '/reports',
       imagePath: '/assets/images/management/reports.jpg'
     },
     {
-      title: 'Administracion de usuarios',
+      name: 'Administracion de usuarios',
       url: '/management/users',
       imagePath: '/assets/images/management/users.jpg'
     },
     {
-      title: 'Mi perfil',
+      name: 'Mi perfil',
       url: '/profile',
       imagePath: '/assets/images/management/profile.png'
     }
