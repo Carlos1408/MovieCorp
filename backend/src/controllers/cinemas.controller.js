@@ -5,6 +5,7 @@ const Cinema = require("../models/cinema");
 const Movie = require("../models/movie");
 const Room = require("../models/room");
 const Function = require("../models/function");
+const { deleteFunctionRaw } = require("../controllers/functions.controller");
 
 const getAllCinemas = async (req, res) => {
   const cinemas = await Cinema.find();
@@ -108,21 +109,14 @@ const deleteCinema = async (req, res) => {
     await fs.unlink(path.resolve(cinema.imagePath), (err) => {
       console.log(err);
     });
-    cinema.rooms_ids.forEach(async (room_id) => {
-      await Room.findByIdAndRemove(room_id);
-    });
     const functions = await Function.find({
       cinema_id: mongoose.Types.ObjectId(id),
     });
     functions.forEach(async (f) => {
-      const movie = await Movie.findById(f.movie_id);
-      movie.updateOne({
-        functions_ids: movie.functions_ids.filter((f_id) => {
-          return f_id.toString() !== f._id.toString();
-        }),
-      });
-      await movie.save();
-      await f.remove();
+      deleteFunctionRaw(f._id.toString());
+    });
+    cinema.rooms_ids.forEach(async (room_id) => {
+      await Room.findByIdAndRemove(room_id);
     });
   }
   res.json(cinema);

@@ -95,6 +95,17 @@ const createFunction = async (req, res) => {
     nSeats: room.nRows * room.nCol,
   });
   await newFunction.save();
+  await room.updateOne({
+    timeRanges: [
+      ...room.timeRanges,
+      {
+        function_id: newFunction._id,
+        from,
+        to,
+      },
+    ],
+  });
+  room.save();
   const movie = await Movie.findById(movie_id);
   await Movie.updateOne({
     functions_ids: [...movie.functions_ids, newFunction._id],
@@ -105,15 +116,34 @@ const createFunction = async (req, res) => {
 
 const deleteFunction = async (req, res) => {
   const { id } = req.params;
-  const function_ = await Function.findByIdAndRemove(id);
-  const movie = await Movie.findById(function_.movie_id);
-  await movie.updateOne({
-    functions_ids: movie.functions_ids.filter((f) => {
-      return f.toString() !== function_._id.toString();
-    }),
-  });
-  await movie.save();
+  const function_ = deleteFunctionRaw(id);
   res.json(function_);
+};
+
+const deleteFunctionRaw = async (id) => {
+  const function_ = await Function.findByIdAndRemove(id);
+  if (function_) {
+    const movie = await Movie.findById(function_.movie_id);
+    if (movie) {
+      console.log("updating movie ", movie);
+      await movie.updateOne({
+        functions_ids: movie.functions_ids.filter((f) => {
+          return f.toString() !== function_._id.toString();
+        }),
+      });
+      await movie.save();
+    }
+    const room = await Room.findById(function_.room_id);
+    if (room) {
+      await room.updateOne({
+        timeRanges: room.timeRanges.filter((tr) => {
+          return tr.function_id.toString() !== function_._id.toString();
+        }),
+      });
+      await room.save();
+    }
+  }
+  return function_;
 };
 
 module.exports = {
@@ -122,5 +152,6 @@ module.exports = {
   createFunction,
   deleteFunction,
   getAllFunctionsLg,
-  getFunctionLg
+  getFunctionLg,
+  deleteFunctionRaw,
 };
