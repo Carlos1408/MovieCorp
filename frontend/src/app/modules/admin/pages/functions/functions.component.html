@@ -8,9 +8,10 @@
         </ng-template>
     </p-toolbar>
 
-    <app-function-table (showFunction)="fillFunctionForm($event)" [functions]="functions">
+    <app-function-table (showFunction)="fillFunctionForm($event)" [functions]="functions"
+        (deleteFunction)="confirmDelete($event)">
     </app-function-table>
 
-    <app-function-form (createFunction)="createFunction($event)" [showForm]="showForm"
-        (closeForm)="closeForm()" [handledFunction]="handledFunction"></app-function-form>
+    <app-function-form (createFunction)="createFunction($event)" [showForm]="showForm" (closeForm)="closeForm()"
+        [handledFunction]="handledFunction"></app-function-form>
 </div>

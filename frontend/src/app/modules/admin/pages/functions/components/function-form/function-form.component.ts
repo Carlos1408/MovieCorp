@@ -18,6 +18,14 @@ import { tap } from 'rxjs';
   styleUrls: ['./function-form.component.scss'],
 })
 export class FunctionFormComponent implements OnInit {
+  public get editMode(): boolean {
+    const editMode = this.functionForm.get('_id')?.value ? true : false;
+    if (editMode) this.functionForm.disable();
+    if (!editMode) this.functionForm.enable();
+
+    return this.functionForm.get('_id')?.value;
+  }
+
   cinemas: Cinema[] = [];
   rooms: Room[] | any = [];
   movies: Movie[] | any = [];
@@ -52,11 +60,13 @@ export class FunctionFormComponent implements OnInit {
     this.getCinemas();
   }
 
-  onShow(): void {}
+  onShow(): void {
+    this.fillfunctionForm();
+  }
 
   closeDialog(): void {
     this.closeForm.emit();
-    this.selectedMovie = {}
+    this.selectedMovie = {};
     this.functionForm.reset();
   }
 
@@ -72,10 +82,16 @@ export class FunctionFormComponent implements OnInit {
     this.functionForm
       .get('cinema_id')
       ?.setValue(this.handledFunction.cinema_id);
+    this.onSelectCinema();
+    this.functionForm.get('room_id')?.setValue(this.handledFunction.room_id);
     this.functionForm.get('room_id')?.setValue(this.handledFunction.room_id);
     this.functionForm.get('movie_id')?.setValue(this.handledFunction.movie_id);
-    this.functionForm.get('from')?.setValue(this.handledFunction.from);
-    this.functionForm.get('to')?.setValue(this.handledFunction.to);
+    this.functionForm
+      .get('from')
+      ?.setValue(this.editMode ? new Date(this.handledFunction.from) : '');
+    this.functionForm
+      .get('to')
+      ?.setValue(this.editMode ? new Date(this.handledFunction.from) : '');
   }
 
   onSelectCinema(): void {

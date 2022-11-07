@@ -4,6 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const mongoose = require("mongoose");
 const Function = require("../models/function");
+const { deleteFunctionRaw } = require("../controllers/functions.controller");
 
 const getAllMovies = async (req, res) => {
   const movies = await Movie.find();
@@ -129,14 +130,8 @@ const deleteMovie = async (req, res) => {
     const functions = await Function.find({
       movie_id: mongoose.Types.ObjectId(id),
     });
-    functions.forEach(async (function_) => {
-      const cinema = await Cinema.findById(function_.cinema_id);
-      cinema.updateOne({
-        functions: cinema.functions_id.filter((f) => {
-          return f._id.toString() !== id.toString();
-        }),
-      });
-      await f.remove();
+    functions.forEach(async (f) => {
+      deleteFunctionRaw(f._id.toString());
     });
   }
   res.json(movie);

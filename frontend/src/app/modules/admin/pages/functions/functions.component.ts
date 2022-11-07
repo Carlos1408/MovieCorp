@@ -71,8 +71,8 @@ export class FunctionsComponent implements OnInit {
       next: (res) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Sala nueva',
-          detail: 'Datos ingresados correctamente',
+          summary: 'Funcion nueva nueva',
+          detail: 'Funcion creada exitosamente',
         });
         this.getFunctions();
       },
@@ -85,8 +85,8 @@ export class FunctionsComponent implements OnInit {
       next: (res) => {
         this.messageService.add({
           severity: 'success',
-          summary: 'Sala eliminada',
-          detail: 'La sala ha sido eliminada correctamente',
+          summary: 'Funcion eliminada',
+          detail: 'La funcion ha sido eliminada correctamente',
         });
         this.getFunctions();
       },

@@ -1,5 +1,5 @@
-<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" header="Nueva Funcion" [modal]="true" styleClass="p-fluid"
-    [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
+<p-dialog [(visible)]="showForm" [style]="{width: '550px'}" [header]="(editMode? 'Detalles de': 'Nueva') + ' Funcion'"
+    [modal]="true" styleClass="p-fluid" [draggable]="false" (onShow)="onShow()" (onHide)="closeDialog()">
     <ng-template pTemplate="content">
         <form [formGroup]="functionForm">
             <div class="field">
@@ -22,16 +22,21 @@
                 <h4>Horario</h4>
                 <div class="p-inputgroup">
                     <p-calendar [timeOnly]="true" placeholder="Inicio" formControlName="from" appendTo="body"
-                        [readonlyInput]="true" (onSelect)="onSelectFrom($event)">
+                        [readonlyInput]="true" hourFormat="12" (onSelect)="onSelectFrom($event)">
                     </p-calendar>
-                    <p-calendar [timeOnly]="true" placeholder="Fin" formControlName="to" appendTo="body"
-                        [readonlyInput]="true" ></p-calendar>
+                    <p-calendar [timeOnly]="true" placeholder="Fin" formControlName="to" appendTo="body" hourFormat="12"
+                        [readonlyInput]="true"></p-calendar>
                 </div>
             </div>
         </form>
     </ng-template>
     <ng-template pTemplate="footer">
-        <p-button label="Cancelar" (onClick)="closeDialog()" styleClass="p-button-danger"></p-button>
-        <p-button label="Guardar" (onClick)="devSubmit()" styleClass="p-button-primary"></p-button>
+        <div *ngIf="editMode">
+            <p-button label="Cerrar" (onClick)="closeDialog()" styleClass="p-button-danger"></p-button>
+        </div>
+        <div *ngIf="!editMode">
+            <p-button label="Cancelar" (onClick)="closeDialog()" styleClass="p-button-danger"></p-button>
+            <p-button label="Guardar" (onClick)="handleSubmit()" styleClass="p-button-primary"></p-button>
+        </div>
     </ng-template>
 </p-dialog>
