@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, tap } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -14,7 +15,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn!: boolean;
   private userRoleSubscription!: Subscription;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.userRoleSubscription = this.authService.user$
@@ -111,6 +112,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userRoleSubscription.unsubscribe();
+  }
+
+  redirectLogIn(): void {
+    this.router.navigateByUrl('/auth/login');
   }
 
   logOut(): void {

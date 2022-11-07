@@ -4,12 +4,12 @@
     </ng-template>
     <ng-template pTemplate="end">
         <ng-container *ngIf="isLoggedIn">
-            <p-button label="Cerrar sesion" styleClass="p-button-sm p-button-outlined p-button-secondary text-0"
+            <p-button label="Cerrar sesion" styleClass="p-button-sm p-button-outlined p-button-secondary text-white"
                 (onClick)="logOut()"></p-button>
         </ng-container>
         <ng-container *ngIf="!isLoggedIn">
-            <a routerLink="/auth/login" styleClass="p-button-sm p-button-outlined p-button-secondary text-white">Iniciar
-                sesion</a>
+            <p-button label="Iniciar sesion" styleClass="p-button-sm p-button-outlined p-button-secondary text-white"
+                (onClick)="redirectLogIn()"></p-button>
         </ng-container>
     </ng-template>
 </p-menubar>

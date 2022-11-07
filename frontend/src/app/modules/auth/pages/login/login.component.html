@@ -3,24 +3,24 @@
         <p-card styleClass="p-fluid bg-gray-500" [style]="{'width': '25rem'}">
             <ng-template pTemplate="header">
                 <div class="flex justify-content-center pt-4"><img src="/assets/images/auth/user.png"
-                        [style]="{'width': '10rem', 'height': '10rem'}"></div>
+                        [style]="{'width': '8rem', 'height': '8rem'}"></div>
             </ng-template>
             <ng-template pTemplate="content">
                 <form [formGroup]="loginForm" (keydown.enter)="handleSubmit()">
                     <div class="field">
-                        <h3>Email</h3>
-                        <input pInputText type="email" class="p-inputtext-lg" formControlName="email">
+                        <h4>Email</h4>
+                        <input pInputText type="email" formControlName="email">
                     </div>
                     <div class="field">
-                        <h3>Contraseña</h3>
-                        <p-password [feedback]="false" styleClass="p-inputtext-lg" [toggleMask]="true"
+                        <h4>Contraseña</h4>
+                        <p-password [feedback]="false" [toggleMask]="true"
                             formControlName="password"></p-password>
                     </div>
                 </form>
             </ng-template>
             <ng-template pTemplate="footer">
                 <div class="flex justify-content-center">
-                    <p-button label="Iniciar sesion" class="w-full" (onClick)="handleSubmit()" styleClass="p-button-lg">
+                    <p-button label="Iniciar sesion" class="w-full" (onClick)="handleSubmit()">
                     </p-button>
                 </div>
             </ng-template>
