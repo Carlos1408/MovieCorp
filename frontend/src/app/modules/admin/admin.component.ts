@@ -24,8 +24,8 @@ export class AdminComponent implements OnInit {
       imagePath: '/assets/images/admin/movies.jpg'
     },
     {
-      name: 'Crear Funcion',
-      url: '/admin',
+      name: 'Funciones',
+      url: '/admin/functions',
       imagePath: '/assets/images/admin/function.jpg'
     },
     {

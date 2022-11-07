@@ -47,6 +47,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
                   label: 'Administrador',
                   routerLink: '/admin',
                   styleClass: 'mx-1',
+                  icon: 'pi pi-home text-white',
                 },
                 {
                   label: 'Cines',
@@ -70,11 +71,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
                   label: 'Funciones',
                   routerLink: '/admin/functions',
                   styleClass: 'mx-1',
+                  icon: 'pi pi-video text-white',
                 },
                 {
                   label: 'Mi perfil',
                   routerLink: '/profile',
                   styleClass: 'mx-1',
+                  icon: 'pi pi-user text-white',
                 },
               ];
             }
@@ -84,6 +87,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
                   label: 'Gerente',
                   routerLink: '/management',
                   styleClass: 'mx-1',
+                  icon: 'pi pi-home text-white',
                 },
                 {
                   label: 'Usuarios',
@@ -95,6 +99,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
                   label: 'Mi perfil',
                   routerLink: '/profile',
                   styleClass: 'mx-1',
+                  icon: 'pi pi-user text-white',
                 },
               ];
             }
