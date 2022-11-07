@@ -20,10 +20,4 @@ export class LoginComponent implements OnInit {
   handleSubmit(): void {
     this.authService.logIn(this.loginForm.value).subscribe();
   }
-
-  keyDownFunction(event: any) {
-    if (event.keyCode === 13) {
-      this.handleSubmit();
-    }
-  }
 }
