@@ -1,22 +1,14 @@
-
-<ng-template pTemplate="header">
-    <h5>CARTELERA</h5>
-</ng-template>
-<div class="flex flex-wrap justify-content-center">
-    <div class="mr-2 my-2" *ngFor="let movie of movies; index as i">
-        <a [routerLink]="" class="no-underline">
-            <p-card [style]="{width: '300px', height: '550px'}" styleClass="transition-colors transition-duration-200 surface-200 hover:surface-400">
-                <ng-template pTemplate="header">
-                    <img alt="Card" [src]="URL_API + movie.imagePath" width="50%" height="350">
-                </ng-template>
-                <ng-template pTemplate="subtitle">
-                    <div class=" justify-content-center text-color">
-                        <h1 class="mb-1">{{movie.title}}</h1>
-                        <h2 class="mt-0 mb-3">Horarios: 18:00-20:10</h2>
-                    </div>
-                </ng-template>
-                
-            </p-card>
-        </a>
-    </div>
+<div (click)="handleSelect()">
+    <p-card [style]="{width: '300px', height: '550px'}"
+        styleClass="transition-colors transition-duration-200 surface-200 hover:surface-400 cursor-pointer">
+        <ng-template pTemplate="header">
+            <img alt="Card" [src]="URL_API + movie.imagePath" width="50%" height="350">
+        </ng-template>
+        <ng-template pTemplate="subtitle">
+            <div class=" justify-content-center text-color">
+                <h1 class="mb-1">{{movie.title}}</h1>
+                <h2 class="mt-0 mb-3">Horarios: 18:00-20:10</h2>
+            </div>
+        </ng-template>
+    </p-card>
 </div>

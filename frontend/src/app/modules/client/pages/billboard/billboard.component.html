@@ -1,2 +1,5 @@
-<app-movie-card [movies]="movies"></app-movie-card>
- 
+<div class="flex flex-wrap justify-content-center">
+    <div class="mr-2 my-2" *ngFor="let movie of movies; index as i">
+        <app-movie-card [movie]="movie" (selectMovie)="selectMovie($event)"></app-movie-card>
+    </div>
+</div>
