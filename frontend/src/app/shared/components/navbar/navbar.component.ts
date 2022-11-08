@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieOptions, CookieService } from 'ngx-cookie-service';
 import { MenuItem } from 'primeng/api';
 import { Observable, Subscription, tap } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ClientService } from 'src/app/core/services/client.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,14 +17,33 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn!: boolean;
   private userRoleSubscription!: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  isCinemaSelected!: boolean;
+  cinemaSelectedSubscription!: Subscription;
+
+  isMovieSelected!: boolean;
+  movieSelectedSubscription!: Subscription;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cookieService: CookieService,
+    private clientService: ClientService
+  ) {}
 
   ngOnInit(): void {
-    this.userRoleSubscription = this.authService.user$
+    this.cinemaSelectedSubscription = this.clientService.isCinemaSelected$
       .pipe(
-        tap((user) => {
-          if (!user) {
-            this.isLoggedIn = false;
+        tap((selected) => {
+          if (!selected) {
+            this.items = [
+              {
+                label: 'Cines',
+                routerLink: '/client/theaters',
+                styleClass: 'mx-1',
+              },
+            ];
+          }
+          if (selected) {
             this.items = [
               {
                 label: 'Cines',
@@ -31,15 +52,52 @@ export class NavbarComponent implements OnInit, OnDestroy {
               },
               {
                 label: 'Cartelera',
-                routerLink: '/client/billboard',
+                routerLink: `/client/billboard/${this.cookieService.get(
+                  'cinema_id'
+                )}`,
+                styleClass: 'mx-1',
+              },
+            ];
+          }
+        })
+      )
+      .subscribe((selected) => {
+        this.isCinemaSelected = selected;
+      });
+
+    this.movieSelectedSubscription = this.clientService.isMovieSelected$
+      .pipe(
+        tap((selected) => {
+          if (selected) {
+            this.items = [
+              {
+                label: 'Cines',
+                routerLink: '/client/theaters',
+                styleClass: 'mx-1',
+              },
+              {
+                label: 'Cartelera',
+                routerLink: `/client/billboard/${this.cookieService.get(
+                  'cinema_id'
+                )}`,
                 styleClass: 'mx-1',
               },
               {
                 label: 'Pelicula',
-                routerLink: '/client/movie',
                 styleClass: 'mx-1',
               },
             ];
+          }
+        })
+      )
+      .subscribe((selected) => {
+        this.isMovieSelected = selected;
+      });
+    this.userRoleSubscription = this.authService.user$
+      .pipe(
+        tap((user) => {
+          if (!user) {
+            this.isLoggedIn = false;
           } else {
             this.isLoggedIn = true;
             if (user.role === 'admin') {
@@ -112,6 +170,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.userRoleSubscription.unsubscribe();
+    this.cinemaSelectedSubscription.unsubscribe();
+    this.movieSelectedSubscription.unsubscribe();
   }
 
   redirectLogIn(): void {
