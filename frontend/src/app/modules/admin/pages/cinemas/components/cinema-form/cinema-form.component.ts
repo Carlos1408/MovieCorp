@@ -10,6 +10,8 @@ import { Movie } from 'src/app/shared/interfaces/movie';
   styleUrls: ['./cinema-form.component.scss'],
 })
 export class CinemaFormComponent implements OnInit {
+  uploadImage = false;
+
   public get editMode(): boolean {
     return this.cinemaForm.get('_id')?.value;
   }
@@ -21,12 +23,13 @@ export class CinemaFormComponent implements OnInit {
   @Output() closeForm = new EventEmitter();
   @Output() createCinema = new EventEmitter<Cinema>();
   @Output() editCinema = new EventEmitter<Cinema>();
+  @Output() editCinemaNoImg = new EventEmitter<Cinema>();
 
   cinemaForm: FormGroup = new FormGroup({
     _id: new FormControl(''),
     name: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
-    image: new FormControl('', Validators.required),
+    image: new FormControl(''),
     movies_ids: new FormControl(''),
   });
   constructor(private messageService: MessageService) {}
@@ -40,6 +43,11 @@ export class CinemaFormComponent implements OnInit {
   closeDialog(): void {
     this.cinemaForm.reset();
     this.closeForm.emit();
+    this.uploadImage = false;
+  }
+
+  toggleImg(): void {
+    this.uploadImage = !this.uploadImage;
   }
 
   fillcinemaForm(): void {
@@ -53,19 +61,22 @@ export class CinemaFormComponent implements OnInit {
   handleSubmit(): void {
     if (this.cinemaForm.valid) {
       if (this.editMode) {
-        this.editCinema.emit(this.cinemaForm.value);
-        this.closeDialog();
+        if (this.uploadImage) {
+          if (this.cinemaForm.get('image')?.value) {
+            this.editCinema.emit(this.cinemaForm.value);
+            this.closeDialog();
+          } else this.throwInvalidFormMessage();
+        } else {
+          this.editCinemaNoImg.emit(this.cinemaForm.value);
+          this.closeDialog();
+        }
       } else {
-        this.createCinema.emit(this.cinemaForm.value);
-        this.closeDialog();
+        if (this.cinemaForm.get('image')?.value) {
+          this.createCinema.emit(this.cinemaForm.value);
+          this.closeDialog();
+        } else this.throwInvalidFormMessage();
       }
-    } else {
-      this.messageService.add({
-        severity: 'warn',
-        summary: 'Formulario invalido',
-        detail: 'Todos los datos deben ser llenados correctamente',
-      });
-    }
+    } else this.throwInvalidFormMessage();
   }
 
   onFileChange(event: any): void {
@@ -73,5 +84,13 @@ export class CinemaFormComponent implements OnInit {
       const file = event.currentFiles[0];
       this.cinemaForm.patchValue({ image: file });
     }
+  }
+
+  throwInvalidFormMessage(): void {
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Formulario invalido',
+      detail: 'Todos los datos deben ser llenados correctamente',
+    });
   }
 }

@@ -11,6 +11,7 @@ const {
   deleteMovie,
   getAllMoviesLg,
   getMovieLg,
+  updateMovieNoImg,
 } = require("../controllers/movies.controller");
 
 const { verifyToken, verifyAdmin } = require("../controllers/auth.controller");
@@ -27,6 +28,7 @@ router.put(
   multer.single("image"),
   updateMovie
 );
+router.put("/noimg/:id", verifyToken, verifyAdmin, updateMovieNoImg);
 router.delete("/:id", verifyToken, verifyAdmin, deleteMovie);
 
 module.exports = router;

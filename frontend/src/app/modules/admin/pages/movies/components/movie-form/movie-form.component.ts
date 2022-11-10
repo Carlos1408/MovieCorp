@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Movie } from 'src/app/shared/interfaces/movie';
-import { MovieService } from 'src/app/shared/services/movie.service';
 import { MessageService } from 'primeng/api';
 
 interface HtmlInputEvent extends Event {
@@ -14,6 +13,8 @@ interface HtmlInputEvent extends Event {
   styleUrls: ['./movie-form.component.scss'],
 })
 export class MovieFormComponent implements OnInit {
+  uploadImage = false;
+
   @Input() showForm!: boolean;
   @Input() handledMovie!: Movie;
 
@@ -21,6 +22,7 @@ export class MovieFormComponent implements OnInit {
 
   @Output() createMovie = new EventEmitter<any>();
   @Output() updateMovie = new EventEmitter<any>();
+  @Output() updateMovieNoImg = new EventEmitter<Movie>();
 
   movieForm: FormGroup = new FormGroup({
     _id: new FormControl(''),
@@ -31,7 +33,7 @@ export class MovieFormComponent implements OnInit {
     length: new FormControl('', Validators.required),
     protagonists: new FormControl('', Validators.required),
     director: new FormControl('', Validators.required),
-    image: new FormControl('', Validators.required),
+    image: new FormControl(''),
     trailer: new FormControl('', Validators.required),
   });
 
@@ -50,6 +52,11 @@ export class MovieFormComponent implements OnInit {
   closeDialog(): void {
     this.movieForm.reset();
     this.closeForm.emit();
+    this.uploadImage = false;
+  }
+
+  toggleImg(): void {
+    this.uploadImage = !this.uploadImage;
   }
 
   fillMovieForm(): void {
@@ -69,19 +76,31 @@ export class MovieFormComponent implements OnInit {
 
   handleSubmit(): void {
     if (this.movieForm.valid) {
-      if (this.movieForm.get('_id')?.value) {
-        this.updateMovie.emit(this.movieForm.value);
+      if (this.editMode) {
+        if (this.uploadImage) {
+          if (this.movieForm.get('image')?.value) {
+            this.updateMovie.emit(this.movieForm.value);
+            this.closeDialog();
+          } else this.throwInvalidFormMessage();
+        } else {
+          this.updateMovieNoImg.emit(this.movieForm.value);
+          this.closeDialog();
+        }
       } else {
-        this.createMovie.emit(this.movieForm.value);
+        if (this.movieForm.get('image')?.value) {
+          this.createMovie.emit(this.movieForm.value);
+          this.closeDialog();
+        } else this.throwInvalidFormMessage();
       }
-      this.closeDialog();
-    }  else {
-      this.messageService.add({
-        severity: 'warn',
-        summary: 'Formulario invalido',
-        detail: 'Todos los datos deben ser llenados correctamente',
-      });
-    }
+    } else this.throwInvalidFormMessage();
+  }
+
+  throwInvalidFormMessage(): void {
+    this.messageService.add({
+      severity: 'warn',
+      summary: 'Formulario invalido',
+      detail: 'Todos los datos deben ser llenados correctamente',
+    });
   }
 
   onFileChange(event: any): void {

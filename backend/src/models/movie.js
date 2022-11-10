@@ -9,7 +9,7 @@ const movieSchema = new Schema(
     rating: { type: String, required: true },
     protagonists: { type: String, required: false },
     director: { type: String, required: true },
-    imagePath: { type: String, required: true },
+    imagePath: { type: String, required: false },
     trailer: { type: String, required: true },
     functions_ids: { type: Array, required: false, default: [] },
   },

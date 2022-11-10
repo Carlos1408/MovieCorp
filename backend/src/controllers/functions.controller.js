@@ -125,7 +125,6 @@ const deleteFunctionRaw = async (id) => {
   if (function_) {
     const movie = await Movie.findById(function_.movie_id);
     if (movie) {
-      console.log("updating movie ", movie);
       await movie.updateOne({
         functions_ids: movie.functions_ids.filter((f) => {
           return f.toString() !== function_._id.toString();

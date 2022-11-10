@@ -5,7 +5,8 @@
             <div class="field">
                 <h4>Peliculas disponibles</h4>
                 <p-multiSelect [options]="movies" optionLabel="title" optionValue="_id" display="chip"
-                    formControlName="movies_ids" placeholder="Seleccione las peliculas disponibles en este cine" appendTo="body">
+                    formControlName="movies_ids" placeholder="Seleccione las peliculas disponibles en este cine"
+                    appendTo="body">
                 </p-multiSelect>
             </div>
             <div class="field">
@@ -18,10 +19,22 @@
             </div>
             <div class="field">
                 <h4>Imagen</h4>
-                <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)"
-                    removeStyleClass="p-button-sm p-button-danger" [fileLimit]="1"
-                    invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
-                    chooseLabel="Seleccionar archivo" accept="image/*"></p-fileUpload>
+                <ng-container *ngIf="editMode">
+                    <p-button [label]="!uploadImage? 'Actualizar imagen': 'Cancelar'" (onClick)="toggleImg()">
+                    </p-button>
+                    <ng-container *ngIf="uploadImage">
+                        <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)"
+                            removeStyleClass="p-button-sm p-button-danger" [fileLimit]="1"
+                            invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
+                            chooseLabel="Seleccionar archivo" accept="image/*"></p-fileUpload>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="!editMode">
+                    <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)"
+                        removeStyleClass="p-button-sm p-button-danger" [fileLimit]="1"
+                        invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
+                        chooseLabel="Seleccionar archivo" accept="image/*"></p-fileUpload>
+                </ng-container>
             </div>
         </form>
     </ng-template>

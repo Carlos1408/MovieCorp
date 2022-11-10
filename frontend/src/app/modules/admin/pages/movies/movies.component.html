@@ -11,6 +11,7 @@
     <app-movie-table [movies]="movies" (editMovie)="fillMovieForm($event)" (deleteMovie)="confirmDelete($event)">
     </app-movie-table>
 
-    <app-movie-form [showForm]="showForm" [handledMovie]="handledMovie" (createMovie)="createMovie($event)" (updateMovie)="updateMovie($event)" (closeForm)="closeForm()">
+    <app-movie-form [showForm]="showForm" [handledMovie]="handledMovie" (createMovie)="createMovie($event)"
+        (updateMovie)="updateMovie($event)" (updateMovieNoImg)="updateMovieNoImg($event)" (closeForm)="closeForm()">
     </app-movie-form>
 </div>

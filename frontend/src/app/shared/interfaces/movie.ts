@@ -7,6 +7,6 @@ export interface Movie {
   rating: string;
   protagonists: string;
   director: string;
-  imagePath: string;
+  imagePath?: string;
   trailer: string;
 }

@@ -30,14 +30,16 @@ export class MovieService {
 
   createMovie(form: any): Observable<Movie> {
     const formData = this.formGroup2formData(form);
-
     return this.http.post<Movie>(this.URL_API, formData);
   }
 
   updateMovie(form: any): Observable<Movie> {
     const formData = this.formGroup2formData(form);
-
     return this.http.put<Movie>(`${this.URL_API}/${form._id}`, formData);
+  }
+
+  updateMovieNoImg(movie: Movie): Observable<Movie> {
+    return this.http.put<Movie>(`${this.URL_API}/noimg/${movie._id}`, movie);
   }
 
   deleteMovie(_id: string): Observable<Movie> {

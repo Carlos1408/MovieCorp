@@ -4,7 +4,7 @@ const cinemaSchema = new Schema(
   {
     name: { type: String, required: true },
     address: { type: String, required: true },
-    imagePath: {type: String, required: true},
+    imagePath: {type: String, required: false},
     movies_ids: { type: Array, required: false, default: [] },
     rooms_ids: { type: Array, required: false, default: [] },
   },
