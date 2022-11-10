@@ -64,8 +64,4 @@ export class ClientService {
       room_id,
     });
   }
-
-  showInfo(): void {
-    console.log(this.ticket.getValue());
-  }
 }

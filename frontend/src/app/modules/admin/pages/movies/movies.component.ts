@@ -101,6 +101,20 @@ export class MoviesComponent implements OnInit {
     });
   }
 
+  updateMovieNoImg(movie: Movie): void {
+    this.movieService.updateMovieNoImg(movie).subscribe({
+      next: (res) => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Pelicula actualizada',
+          detail: 'La pelicula ha sido actualizada exitosamente',
+        });
+        this.getMovies();
+      },
+      error: (err) => console.log(err),
+    });
+  }
+
   deleteMovie(_id: string): void {
     this.movieService.deleteMovie(_id).subscribe({
       next: (res) => {

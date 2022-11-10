@@ -12,5 +12,6 @@
     </app-cinema-table>
 
     <app-cinema-form (createCinema)="createCinema($event)" [showForm]="showForm" [movies]="movies"
-        (closeForm)="closeForm()" (editCinema)="updateCinema($event)" [handleCinema]="handleCinema"></app-cinema-form>
+        (closeForm)="closeForm()" (editCinema)="updateCinema($event)" (editCinemaNoImg)="updateCinemaNoImg($event)"
+        [handleCinema]="handleCinema"></app-cinema-form>
 </div>

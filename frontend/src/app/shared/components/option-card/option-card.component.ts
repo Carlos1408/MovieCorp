@@ -13,11 +13,6 @@ export class OptionCardComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.name, this.url, this.imagePath);
-    
   }
 
-  testClick(): void {
-    console.log('FUNCIONA');
-  }
 }

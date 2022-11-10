@@ -111,6 +111,38 @@ const updateMovie = async (req, res) => {
   res.json(upMovie);
 };
 
+const updateMovieNoImg = async (req, res) => {
+  const { id } = req.params;
+  const {
+    title,
+    synopsis,
+    length,
+    genre,
+    rating,
+    protagonists,
+    director,
+    trailer,
+  } = req.body;
+  const movie = await Movie.findById(id);
+  if (movie) {
+    movie.updateOne(
+      {
+        title,
+        synopsis,
+        length,
+        genre,
+        rating,
+        protagonists,
+        director,
+        trailer,
+      },
+      { new: true }
+    );
+    await movie.save();
+  }
+  res.json(movie);
+};
+
 const deleteMovie = async (req, res) => {
   const { id } = req.params;
   const movie = await Movie.findByIdAndRemove(id);
@@ -145,4 +177,5 @@ module.exports = {
   deleteMovie,
   getMovieLg,
   getAllMoviesLg,
+  updateMovieNoImg,
 };

@@ -122,11 +122,9 @@ export class FunctionFormComponent implements OnInit {
   }
 
   onSelectFrom(time: any): void {
-    console.log('select ', time instanceof Date);
     const to: Date = new Date(time);
     to.setMinutes(time.getMinutes() + (this.selectedMovie.length + 30));
     this.functionForm.get('to')?.setValue(to);
-    console.log(this.functionForm.value);
   }
 
   handleSubmit() {
@@ -140,9 +138,5 @@ export class FunctionFormComponent implements OnInit {
         detail: 'Todos los datos deben ser llenados correctamente',
       });
     }
-  }
-
-  devSubmit() {
-    console.log(this.functionForm.value);
   }
 }

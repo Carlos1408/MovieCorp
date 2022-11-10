@@ -13,6 +13,5 @@ export class OptionListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.options);
   }
 }
