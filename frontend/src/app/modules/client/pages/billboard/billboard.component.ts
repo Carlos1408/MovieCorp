@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { tap } from 'rxjs';
 import { ClientService } from 'src/app/core/services/client.service';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
@@ -24,7 +23,6 @@ export class BillboardComponent implements OnInit {
     private clientService: ClientService,
     private route: ActivatedRoute,
     private router: Router,
-    private messageService: MessageService
   ) {}
 
   ngOnInit(): void {

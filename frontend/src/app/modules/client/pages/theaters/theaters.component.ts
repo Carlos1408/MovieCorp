@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { Subscription, tap } from 'rxjs';
+import { tap } from 'rxjs';
 import { ClientService } from 'src/app/core/services/client.service';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
 import { CinemaService } from 'src/app/shared/services/cinema.service';
@@ -15,7 +15,6 @@ import { environment } from 'src/environments/environment';
 export class TheatersComponent implements OnInit {
   API_URL = `${environment.API_BASE_URL}/`;
   cinemas!: Cinema[];
-  clientSubscription!: Subscription;
 
   constructor(
     private cinemaService: CinemaService,
