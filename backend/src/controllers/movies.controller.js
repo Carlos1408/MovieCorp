@@ -123,9 +123,11 @@ const updateMovieNoImg = async (req, res) => {
     director,
     trailer,
   } = req.body;
+  console.log(req.params);
+  console.log(req.body);
   const movie = await Movie.findById(id);
   if (movie) {
-    movie.updateOne(
+    await movie.updateOne(
       {
         title,
         synopsis,

@@ -35,7 +35,8 @@ export class MovieComponent implements OnInit {
       .getMovieLg(id)
       .pipe(tap((movie) => (this.movie = movie)))
       .subscribe((movie) => {
-        this.trailerUrl = movie.trailer.split('=')[1].split('&')[0];
+        const urlArr = movie.trailer.split('/')
+        this.trailerUrl = urlArr[urlArr.length-1]
       });
   }
 
