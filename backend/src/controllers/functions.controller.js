@@ -41,6 +41,14 @@ const getAllFunctionsLg = async (req, res) => {
   res.json(functions);
 };
 
+const getCinemaFunctions = async (req, res) => {
+  const { cinema_id } = req.params;
+  const functions = await Function.find({
+    cinema_id: mongoose.Types.ObjectId(cinema_id),
+  });
+  res.json(functions);
+};
+
 const getFunction = async (req, res) => {
   const { id } = req.params;
   const function_ = await Function.findById(id);
@@ -105,9 +113,9 @@ const createFunction = async (req, res) => {
       },
     ],
   });
-  room.save();
+  await room.save();
   const movie = await Movie.findById(movie_id);
-  await Movie.updateOne({
+  await movie.updateOne({
     functions_ids: [...movie.functions_ids, newFunction._id],
   });
   await movie.save();
@@ -153,4 +161,5 @@ module.exports = {
   getAllFunctionsLg,
   getFunctionLg,
   deleteFunctionRaw,
+  getCinemaFunctions,
 };

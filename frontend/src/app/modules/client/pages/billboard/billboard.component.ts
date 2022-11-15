@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { ClientService } from 'src/app/core/services/client.service';
-import { Cinema } from 'src/app/shared/interfaces/cinema';
+import { Function } from 'src/app/shared/interfaces/function';
 import { Movie } from 'src/app/shared/interfaces/movie';
-import { CinemaService } from 'src/app/shared/services/cinema.service';
 import { MovieService } from 'src/app/shared/services/movie.service';
 
 @Component({
@@ -15,19 +14,28 @@ import { MovieService } from 'src/app/shared/services/movie.service';
 export class BillboardComponent implements OnInit {
   cinema_id!: string;
   movies!: Movie[];
-  cinema!: Cinema;
+  functions!: Function[];
 
   constructor(
     private movieService: MovieService,
-    private cinemaService: CinemaService,
     private clientService: ClientService,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.getCinemaId();
-    this.getCinemaLg();
+    this.getCinemaMovies();
+  }
+
+  getMovieFunctions(movie_id?: string): Function[] {
+    if (this.functions) {
+      return this.functions.filter((f) => {
+        console.log('FUNCTIONS ');
+        console.log(f);
+        f.movie_id == movie_id;
+      });
+    } else return [];
   }
 
   selectMovie(movie_id: string): void {
@@ -45,21 +53,9 @@ export class BillboardComponent implements OnInit {
     });
   }
 
-  getCinemaLg(): void {
-    this.cinemaService
-      .getCinemaLg(this.cinema_id)
-      .pipe(
-        tap((cinema: Cinema) => {
-          this.cinema = cinema;
-          if (cinema.movies) this.movies = cinema.movies;
-        })
-      )
-      .subscribe();
-  }
-
-  getMovies(): void {
+  getCinemaMovies(): void {
     this.movieService
-      .getAllMovies()
+      .getCinemaMoviesLg(this.cinema_id)
       .pipe(tap((movies: Movie[]) => (this.movies = movies)))
       .subscribe();
   }

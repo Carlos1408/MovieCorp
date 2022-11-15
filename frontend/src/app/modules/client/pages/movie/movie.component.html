@@ -8,14 +8,19 @@
             <p-image [src]="BASE_URL + movie.imagePath" [alt]="movie.title" height="500" [preview]="true"></p-image>
         </div>
         <div class="flex justify-content-center mt-2">
-            <div class="surface-50 border-round" style="max-width: 350px">
-                <h1 class="pl-2 my-2">Horarios</h1>
-                <div class="flex flex-wrap" style="max-width: 350px">
-                    <div class="h-3rem w-4rem border-round flex align-items-center justify-content-center bg-red-600 hover:bg-red-800 border-1 border-white text-white m-2 font-bold transition-colors transition-duration-200 cursor-pointer"
-                        *ngFor="let function of functions" (click)="handleClick($event)">
-                        {{function}}
+            <div class="surface-50 border-round w-full" style="max-width: 350px">
+                <ng-container *ngIf="functions.length">
+                    <h1 class="pl-2 my-2">Horarios</h1>
+                    <div class="flex flex-wrap" style="max-width: 350px">
+                        <div class="h-3rem w-4rem border-round flex align-items-center justify-content-center bg-red-600 hover:bg-red-800 border-1 border-white text-white m-2 font-bold transition-colors transition-duration-200 cursor-pointer"
+                            *ngFor="let function of functions" (click)="handleClick(function)">
+                            {{function.from | date:'H:mm'}}
+                        </div>
                     </div>
-                </div>
+                </ng-container>
+                <ng-container *ngIf="!functions.length">
+                    <h1 class="pl-2 my-2">Próximamente</h1>
+                </ng-container>
             </div>
         </div>
 

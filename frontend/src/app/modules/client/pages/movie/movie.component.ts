@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs';
 import { ClientService } from 'src/app/core/services/client.service';
+import { Function } from 'src/app/shared/interfaces/function';
 import { Movie } from 'src/app/shared/interfaces/movie';
 import { MovieService } from 'src/app/shared/services/movie.service';
 import { environment } from 'src/environments/environment';
@@ -12,10 +13,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./movie.component.scss'],
 })
 export class MovieComponent implements OnInit {
-  functions = ['10:30', '13:30', '16:00', '18:30', '17:00', '18:00']; // ELIMINAR
-
   BASE_URL = `${environment.API_BASE_URL}/`;
   movie!: Movie;
+  functions!: Function[];
 
   trailerUrl!: string;
 
@@ -27,20 +27,26 @@ export class MovieComponent implements OnInit {
 
   ngOnInit(): void {
     const movie_id = this.route.snapshot.paramMap.get('id');
-    if (movie_id) this.getMovie(movie_id);
+    if (movie_id) this.getMovieLg(movie_id);
   }
 
-  getMovie(id: string): void {
+  getMovieLg(id: string): void {
     this.movieService
       .getMovieLg(id)
       .pipe(tap((movie) => (this.movie = movie)))
       .subscribe((movie) => {
-        const urlArr = movie.trailer.split('/')
-        this.trailerUrl = urlArr[urlArr.length-1]
+        const urlArr = movie.trailer.split('/');
+        this.trailerUrl = urlArr[urlArr.length - 1];
+        if (this.movie.functions) {
+          this.functions = this.movie.functions?.filter(
+            (f: Function) => f.cinema_id === this.clientService.cinema_id
+          );
+        }
       });
   }
 
-  handleClick(function_id: any): void {
-    console.log('redirect to function page');
+  handleClick(function_: Function): void {
+    this.clientService.setRoom(function_.room_id);
+    if (function_._id) this.clientService.setFunction(function_._id);
   }
 }

@@ -22,9 +22,9 @@
                 <h4>Horario</h4>
                 <div class="p-inputgroup">
                     <p-calendar [timeOnly]="true" placeholder="Inicio" formControlName="from" appendTo="body"
-                        [readonlyInput]="true" hourFormat="12" (onSelect)="onSelectFrom($event)">
+                        [readonlyInput]="true" (onSelect)="onSelectFrom($event)">
                     </p-calendar>
-                    <p-calendar [timeOnly]="true" placeholder="Fin" formControlName="to" appendTo="body" hourFormat="12"
+                    <p-calendar [timeOnly]="true" placeholder="Fin" formControlName="to" appendTo="body"
                         [readonlyInput]="true"></p-calendar>
                 </div>
             </div>

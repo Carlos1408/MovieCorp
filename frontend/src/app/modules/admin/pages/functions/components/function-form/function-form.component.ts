@@ -91,7 +91,7 @@ export class FunctionFormComponent implements OnInit {
       ?.setValue(this.editMode ? new Date(this.handledFunction.from) : '');
     this.functionForm
       .get('to')
-      ?.setValue(this.editMode ? new Date(this.handledFunction.from) : '');
+      ?.setValue(this.editMode ? new Date(this.handledFunction.to) : '');
   }
 
   onSelectCinema(): void {
