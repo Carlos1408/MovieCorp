@@ -16,7 +16,24 @@ const getAllMoviesLg = async (req, res) => {
     {
       $lookup: {
         from: "functions",
-        localField: "function_id",
+        localField: "functions_ids",
+        foreignField: "_id",
+        as: "functions",
+      },
+    },
+  ]);
+  res.json(movies);
+};
+
+const getCinemaMoviesLg = async (req, res) => {
+  const { cinema_id } = req.params;
+  const cinema = await Cinema.findById(cinema_id);
+  const movies = await Movie.aggregate([
+    { $match: { _id: { $in: cinema.movies_ids } } },
+    {
+      $lookup: {
+        from: "functions",
+        localField: "functions_ids",
         foreignField: "_id",
         as: "functions",
       },
@@ -39,7 +56,7 @@ const getMovieLg = async (req, res) => {
     {
       $lookup: {
         from: "functions",
-        localField: "functions_id",
+        localField: "functions_ids",
         foreignField: "_id",
         as: "functions",
       },
@@ -180,4 +197,5 @@ module.exports = {
   getMovieLg,
   getAllMoviesLg,
   updateMovieNoImg,
+  getCinemaMoviesLg,
 };

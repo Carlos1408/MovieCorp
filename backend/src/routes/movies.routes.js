@@ -12,6 +12,7 @@ const {
   getAllMoviesLg,
   getMovieLg,
   updateMovieNoImg,
+  getCinemaMoviesLg
 } = require("../controllers/movies.controller");
 
 const { verifyToken, verifyAdmin } = require("../controllers/auth.controller");
@@ -20,6 +21,7 @@ router.get("/", getAllMovies);
 router.get("/lg/", getAllMoviesLg);
 router.get("/:id", getMovie);
 router.get("/lg/:id", getMovieLg);
+router.get("/lg/cinema/:cinema_id", getCinemaMoviesLg);
 router.post("/", verifyToken, verifyAdmin, multer.single("image"), createMovie);
 router.put(
   "/:id",

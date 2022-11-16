@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
+import { ClientService } from 'src/app/core/services/client.service';
+import { Function } from 'src/app/shared/interfaces/function';
 import { Movie } from 'src/app/shared/interfaces/movie';
 import { environment } from 'src/environments/environment';
 
@@ -11,9 +14,17 @@ export class MovieCardComponent implements OnInit {
   @Input() movie!: Movie;
   @Output() selectMovie = new EventEmitter<string>();
 
-  constructor() {}
+  functions!: Function[];
 
-  ngOnInit(): void {}
+  constructor(private clientService: ClientService) {}
+
+  ngOnInit(): void {
+    if (this.movie.functions) {
+      this.functions = this.movie.functions?.filter(
+        (f: Function) => f.cinema_id === this.clientService.cinema_id
+      );
+    }
+  }
 
   URL_API = `${environment.API_BASE_URL}/`;
 

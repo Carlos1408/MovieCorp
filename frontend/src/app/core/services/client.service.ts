@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject, map } from 'rxjs';
-import { Ticket } from '../interface/ticket';
+import { Ticket } from '../interfaces/ticket';
 
 @Injectable({
   providedIn: 'root',
@@ -45,7 +45,14 @@ export class ClientService {
       cinema_id,
       movie_id: '',
       room_id: '',
+      function_id: '',
     });
+  }
+
+  public get cinema_id(): string {
+    const cinema_id = this.ticket.getValue().cinema_id;
+    if (cinema_id) return cinema_id;
+    return '';
   }
 
   setMovie(movie_id: string): void {
@@ -62,6 +69,14 @@ export class ClientService {
       cinema_id: oldTicket.cinema_id,
       movie_id: oldTicket.movie_id,
       room_id,
+    });
+  }
+
+  setFunction(function_id: string): void {
+    const oldTicket = this.ticket.getValue();
+    this.ticket.next({
+      cinema_id: oldTicket.cinema_id,
+      function_id: function_id,
     });
   }
 }

@@ -2,7 +2,6 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const path = require("path");
 const Cinema = require("../models/cinema");
-const Movie = require("../models/movie");
 const Room = require("../models/room");
 const Function = require("../models/function");
 const { deleteFunctionRaw } = require("../controllers/functions.controller");
