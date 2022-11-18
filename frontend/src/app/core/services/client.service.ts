@@ -27,6 +27,11 @@ export class ClientService {
     map((ticket: Ticket) => Boolean(ticket.room_id))
   );
 
+  private mySeats = new BehaviorSubject<string[]>([]);
+  mySeats$ = this.mySeats.asObservable();
+
+  private occupedSeats: string[] = ['11', '24', '25'];
+
   constructor(private cookieService: CookieService) {}
 
   clearTicket(): void {
@@ -55,6 +60,14 @@ export class ClientService {
     return '';
   }
 
+  public get getOccupedSeats(): string[] {
+    return this.occupedSeats;
+  }
+
+  setOccupedSeats(os: string[]) {
+    this.occupedSeats = this.occupedSeats;
+  }
+
   setMovie(movie_id: string): void {
     const oldTicket = this.ticket.getValue();
     this.ticket.next({
@@ -78,5 +91,23 @@ export class ClientService {
       cinema_id: oldTicket.cinema_id,
       function_id: function_id,
     });
+  }
+
+  clearSeats(): void {
+    this.mySeats.next([]);
+  }
+
+  selectSeat(nSeat: string): void {
+    const oldSeats = this.mySeats.getValue();
+    this.mySeats.next([...oldSeats, nSeat]);
+  }
+
+  unSelectSeat(nSeat: string): void {
+    const oldSeats = this.mySeats.getValue();
+    this.mySeats.next(oldSeats.filter((seat) => seat !== nSeat));
+  }
+
+  showSeats(): void {
+    console.log(this.mySeats.getValue());
   }
 }

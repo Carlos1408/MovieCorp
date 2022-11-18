@@ -1,0 +1,32 @@
+<div class="grid">
+    <div class="col-12 lg:col-3 mr-8">
+        <div class="flex justify-content-center">
+            <p-image [src]="BASE_URL + movie.imagePath" [alt]="movie.title" height="500" [preview]="true"></p-image>
+        </div>
+        <div class="flex justify-content-center mt-2">
+            <div class="surface-50 border-round w-full" style="max-width: 350px">
+                <app-function-property title="Película" [value]="movie.title"></app-function-property>
+                <app-function-property title="Sala" [value]="room.roomNum"></app-function-property>
+                <app-function-property title="Duración" [value]="movie.length + ' min.'"></app-function-property>
+                <app-function-property title="Precio de entrada" [value]="room.price + ' Bs'"></app-function-property>
+                <app-function-property title="Cantidad de butacas" [value]="mySeats.length"></app-function-property>
+                <app-function-property title="Total" [value]="totalPrice + ' Bs'"></app-function-property>
+            </div>
+        </div>
+        <div class="w-full">
+            <p-button label="Comprar entradas" styleClass="w-full text-white bg-red-600 hover:bg-red-400 mt-2"
+                (onClick)="handleSubmit()">
+            </p-button>
+        </div>
+    </div>
+
+    <div class="col-12 lg:col-7">
+        <div class="w-full bg-bluegray-900 py-4 px-6">
+            <div
+                class="bg-gray-800 border-noround border-3 border-white flex justify-content-center align-items-center">
+                <h1 class="my-4">Pantalla</h1>
+            </div>
+            <app-seats-matrix [nCols]="room.nCol" [nRows]="room.nRows"></app-seats-matrix>
+        </div>
+    </div>
+</div>

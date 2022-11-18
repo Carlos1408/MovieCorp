@@ -24,6 +24,10 @@ export class FunctionService {
     return this.http.get<Function>(`${this.URL_API}/${_id}`);
   }
 
+  getFunctionLg(_id: string): Observable<Function> {
+    return this.http.get<Function>(`${this.URL_API}/lg/${_id}`);
+  }
+
   getCinemaFunctions(cinema_id: string): Observable<Function[]> {
     return this.http.get<Function[]>(`${this.URL_API}/cinema/${cinema_id}`);
   }
