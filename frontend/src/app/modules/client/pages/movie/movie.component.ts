@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs';
 import { ClientService } from 'src/app/core/services/client.service';
 import { Function } from 'src/app/shared/interfaces/function';
@@ -22,7 +22,8 @@ export class MovieComponent implements OnInit {
   constructor(
     private movieService: MovieService,
     private clientService: ClientService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -47,6 +48,9 @@ export class MovieComponent implements OnInit {
 
   handleClick(function_: Function): void {
     this.clientService.setRoom(function_.room_id);
-    if (function_._id) this.clientService.setFunction(function_._id);
+    if (function_._id) {
+      this.clientService.setFunction(function_._id);
+      this.router.navigateByUrl(`/client/room-function/${function_._id}`);
+    }
   }
 }
