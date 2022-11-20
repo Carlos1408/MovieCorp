@@ -39,9 +39,9 @@ export class MovieComponent implements OnInit {
         const urlArr = movie.trailer.split('/');
         this.trailerUrl = urlArr[urlArr.length - 1];
         if (this.movie.functions) {
-          this.functions = this.movie.functions?.filter(
-            (f: Function) => f.cinema_id === this.clientService.cinema_id
-          );
+          this.functions = this.movie.functions?.filter((f: Function) => {
+            return f.cinema_id === this.clientService.cinema_id;
+          });
         }
       });
   }
@@ -53,4 +53,12 @@ export class MovieComponent implements OnInit {
       this.router.navigateByUrl(`/client/room-function/${function_._id}`);
     }
   }
+
+  getAvailableSeats = (function_: Function | undefined): string => {
+    if (function_)
+      return `${(
+        Number(function_.nSeats) - Number(function_.occupiedSeats)
+      ).toString()} entradas disponibles`;
+    else return '';
+  };
 }

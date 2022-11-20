@@ -19,6 +19,7 @@ import { ImageModule } from 'primeng/image';
 import { CardModule } from 'primeng/card';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CarouselModule } from 'primeng/carousel';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [],
@@ -41,7 +42,8 @@ import { CarouselModule } from 'primeng/carousel';
     ImageModule,
     CardModule,
     MultiSelectModule,
-    CarouselModule
+    CarouselModule,
+    TooltipModule,
   ],
 })
 export class PrimengModule {}

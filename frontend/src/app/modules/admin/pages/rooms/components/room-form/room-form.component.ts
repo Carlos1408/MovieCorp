@@ -22,9 +22,20 @@ export class RoomFormComponent implements OnInit {
     _id: new FormControl(''),
     cinema_id: new FormControl('', Validators.required),
     roomNum: new FormControl('', Validators.required),
-    nRows: new FormControl('', [Validators.required, Validators.min(1)]),
-    nCol: new FormControl('', [Validators.required, Validators.min(1)]),
-    price: new FormControl('', [Validators.required, Validators.min(1)]),
+    nRows: new FormControl('', [
+      Validators.required,
+      Validators.min(5),
+      Validators.max(15),
+    ]),
+    nCol: new FormControl('', [
+      Validators.required,
+      Validators.min(5),
+      Validators.max(15),
+    ]),
+    price: new FormControl('', [
+      Validators.required,
+      Validators.min(10),
+    ]),
   });
 
   constructor(private messageService: MessageService) {}
@@ -53,7 +64,7 @@ export class RoomFormComponent implements OnInit {
     this.roomForm.get('nCol')?.setValue(this.handleRoom.nCol);
     this.roomForm.get('price')?.setValue(this.handleRoom.price);
 
-    if(this.editMode) this.roomForm.get('cinema_id')?.disable();
+    if (this.editMode) this.roomForm.get('cinema_id')?.disable();
   }
 
   handleSubmit() {
