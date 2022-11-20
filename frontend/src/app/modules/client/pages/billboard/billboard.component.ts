@@ -28,14 +28,6 @@ export class BillboardComponent implements OnInit {
     this.getCinemaMovies();
   }
 
-  getMovieFunctions(movie_id?: string): Function[] {
-    if (this.functions) {
-      return this.functions.filter((f) => {
-        f.movie_id == movie_id;
-      });
-    } else return [];
-  }
-
   selectMovie(movie_id: string): void {
     this.clientService.setMovie(movie_id);
     this.router.navigateByUrl(`/client/movie/${movie_id}`);
@@ -54,7 +46,19 @@ export class BillboardComponent implements OnInit {
   getCinemaMovies(): void {
     this.movieService
       .getCinemaMoviesLg(this.cinema_id)
-      .pipe(tap((movies: Movie[]) => (this.movies = movies)))
+      .pipe(
+        tap((movies: Movie[]) => {
+          this.movies = movies.map((movie: Movie) => {
+            return {
+              ...movie,
+              functions: movie.functions?.filter((f) => {
+                return f.cinema_id === this.cinema_id;
+              }),
+            };
+          });
+          console.log(this.movies);
+        })
+      )
       .subscribe();
   }
 }

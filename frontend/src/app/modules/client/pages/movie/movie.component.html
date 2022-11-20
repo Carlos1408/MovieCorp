@@ -1,7 +1,4 @@
-<div
-    class="-mt-2 mb-3 w-full h-4rem surface-100 border-round text-white mb-8rem flex align-items-center justify-content-center">
-    <h1 class="m-0">{{movie.title}}</h1>
-</div>
+<app-title-bar [title]="movie.title"></app-title-bar>
 <div class="grid">
     <div class="col-12 lg:col-3 mr-8">
         <div class="flex justify-content-center">
@@ -13,7 +10,7 @@
                     <h1 class="pl-2 my-2">Horarios</h1>
                     <div class="flex flex-wrap" style="max-width: 350px">
                         <div class="h-3rem w-4rem border-round flex align-items-center justify-content-center bg-red-600 hover:bg-red-800 border-1 border-white text-white m-2 font-bold transition-colors transition-duration-200 cursor-pointer"
-                            *ngFor="let function of functions" (click)="handleClick(function)">
+                            *ngFor="let function of functions" (click)="handleClick(function)" [pTooltip]="getAvailableSeats(function)">
                             {{function.from | date:'HH:mm'}}
                         </div>
                     </div>

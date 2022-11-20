@@ -1,7 +1,9 @@
+<app-title-bar title="Cines disponibles"></app-title-bar>
 <div class="flex flex-wrap justify-content-center">
     <div class="lg:mx-4 md:mx-2" *ngFor="let cinema of cinemas; index as i">
         <app-option-card [name]="cinema.name" [url]="'/client/billboard/' + cinema._id"
-            [imagePath]="API_URL + cinema.imagePath">
+            [imagePath]="API_URL + cinema.imagePath" [showTooltip]="true"
+            [tooltiptext]="cinema.movies_ids?.length + ' películas disponibles\n' + cinema.rooms_ids?.length + ' salas disponibles'">
         </app-option-card>
     </div>
 </div>

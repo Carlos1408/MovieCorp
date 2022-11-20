@@ -20,9 +20,9 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.movie.functions) {
-      this.functions = this.movie.functions?.filter(
-        (f: Function) => f.cinema_id === this.clientService.cinema_id
-      );
+      this.functions = this.movie.functions?.filter((f: Function) => {
+        return f.cinema_id === this.clientService.cinema_id;
+      });
     }
   }
 
