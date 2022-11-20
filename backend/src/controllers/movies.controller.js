@@ -140,8 +140,6 @@ const updateMovieNoImg = async (req, res) => {
     director,
     trailer,
   } = req.body;
-  console.log(req.params);
-  console.log(req.body);
   const movie = await Movie.findById(id);
   if (movie) {
     await movie.updateOne(
@@ -173,7 +171,7 @@ const deleteMovie = async (req, res) => {
     cinemas.forEach(async (cinema) => {
       await cinema.updateOne({
         movies_ids: cinema.movies_ids.filter((m_id) => {
-          m_id.toString() !== movie._id.toString();
+          return m_id.toString() !== movie._id.toString();
         }),
       });
       await cinema.save();

@@ -156,12 +156,4 @@ export class FunctionFormComponent implements OnInit {
       });
     }
   }
-
-  devSubmit() {
-    console.log(this.cinema);
-    console.log(this.selectedRoom);
-    console.log(this.selectedMovie);
-
-    console.log(this.functionForm.value);
-  }
 }

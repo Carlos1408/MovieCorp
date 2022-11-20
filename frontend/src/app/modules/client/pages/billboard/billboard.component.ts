@@ -31,8 +31,6 @@ export class BillboardComponent implements OnInit {
   getMovieFunctions(movie_id?: string): Function[] {
     if (this.functions) {
       return this.functions.filter((f) => {
-        console.log('FUNCTIONS ');
-        console.log(f);
         f.movie_id == movie_id;
       });
     } else return [];
