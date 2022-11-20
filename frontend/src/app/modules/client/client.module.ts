@@ -15,6 +15,8 @@ import { RoomFunctionComponent } from './pages/room-function/room-function.compo
 import { SeatsMatrixComponent } from './pages/room-function/components/seats-matrix/seats-matrix.component';
 import { SeatComponent } from './pages/room-function/components/seat/seat.component';
 import { FunctionPropertyComponent } from './pages/room-function/components/function-property/function-property.component';
+import { VoucherComponent } from './pages/voucher/voucher.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { FunctionPropertyComponent } from './pages/room-function/components/func
     SeatsMatrixComponent,
     SeatComponent,
     FunctionPropertyComponent,
+    VoucherComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import { FunctionPropertyComponent } from './pages/room-function/components/func
     PrimengModule,
     YouTubePlayerModule,
     SharedModule,
+    ReactiveFormsModule,
   ],
 })
 export class ClientModule {}

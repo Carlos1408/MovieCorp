@@ -1,0 +1,30 @@
+<div class="flex justify-content-center ">
+    <p-card header="DATOS DEL RECIBO" [style]="{width: '500px'}" styleClass="p-card-shadow">
+        <form [formGroup]="voucherForm">
+            <div class="flex flex-column card-container green-container align-items-center">
+                <div class="field">
+                    <h4>NOMBRE Y APELLIDOS</h4>
+                    <span class="p-float-label">
+                        <input type="text" pInputText class="p-inputtext-lg" formControlName="names" style="width: 400px;">
+                    </span>
+                </div>
+                <div class="field">
+                    <h4>CI</h4>
+                    <span class="p-float-label">
+                        <input type="text" pInputText class="p-inputtext-lg" formControlName="ci" style="width: 400px;">
+                    </span>
+                </div>
+                <div class="field">
+                    <h4>EMAIL</h4>
+                    <span class="p-float-label">
+                        <input type="text" id="email" pInputText class="p-inputtext-lg" formControlName="email" style="width: 400px;">
+                    </span>
+                </div>
+            </div>
+        </form>
+        <div class="flex justify-content-center" >
+            <p-button class="mr-2" label="Atras" styleClass="p-button-danger"></p-button>
+            <p-button class="ml-2" label="Guardar" styleClass="p-button-primary"></p-button>
+        </div>
+    </p-card>
+</div>
