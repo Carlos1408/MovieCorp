@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Subscription, tap } from 'rxjs';
 import { ClientService } from 'src/app/core/services/client.service';
 import { Function } from 'src/app/shared/interfaces/function';
@@ -25,7 +26,9 @@ export class RoomFunctionComponent implements OnInit, OnDestroy {
   constructor(
     private functionService: FunctionService,
     private route: ActivatedRoute,
-    private clientService: ClientService
+    private clientService: ClientService,
+    private router: Router,
+    private messageService: MessageService
   ) {}
 
   public get totalPrice(): number {
@@ -65,5 +68,12 @@ export class RoomFunctionComponent implements OnInit, OnDestroy {
 
   handleSubmit(): void {
     this.clientService.showSeats();
+    if (this.mySeats.length) this.router.navigateByUrl('/client/voucher');
+    else
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Butacas no seleccionadas',
+        detail: 'No se han seleccionado butacas para la compra',
+      });
   }
 }
