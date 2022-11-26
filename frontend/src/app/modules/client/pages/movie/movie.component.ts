@@ -57,7 +57,7 @@ export class MovieComponent implements OnInit {
   getAvailableSeats = (function_: Function | undefined): string => {
     if (function_)
       return `${(
-        Number(function_.nSeats) - Number(function_.occupiedSeats)
+        Number(function_.nSeats) - Number(function_.occupiedSeats?.length)
       ).toString()} entradas disponibles`;
     else return '';
   };
