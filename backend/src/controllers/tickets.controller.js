@@ -90,8 +90,8 @@ function createMessage(client) {
     port: 465,
     secure: true,
     auth: {
-      user: "vcp256@gmail.com",
-      pass: "alhabaaodphimqcb",
+      user: "oasiscorp707@gmail.com",
+      pass: "mwqbcvgisrvphbhv",
     },
   });
 
