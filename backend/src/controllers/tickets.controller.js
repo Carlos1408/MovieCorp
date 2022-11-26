@@ -40,6 +40,7 @@ function createVoucher(cinema, movie, hour, seats, price, room, client) {
       if (error) {
         console.log("Error creando PDF: " + error);
       } else {
+        console.log("creado recibo");
         createTicket(movie, cinema, room, hour, seats, client);
       }
     });
@@ -77,6 +78,7 @@ function createTicket(movie, cinema, room, hour, seats, client) {
       if (error) {
         console.log("Error creando PDF: " + error);
       } else {
+        console.log("CREADO boletos");
         createMessage(client);
       }
     });
@@ -107,6 +109,7 @@ function createMessage(client) {
   transporter.sendMail(mailOptions, async (error, info) => {
     if (error) {
     } else {
+      console.log("mensaje enviado");
       fs.unlink(path.resolve("./document/recibo.pdf"), (error) =>
         console.log(error)
       );
