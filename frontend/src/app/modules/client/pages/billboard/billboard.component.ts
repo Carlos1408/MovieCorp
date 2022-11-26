@@ -56,7 +56,6 @@ export class BillboardComponent implements OnInit {
               }),
             };
           });
-          console.log(this.movies);
         })
       )
       .subscribe();

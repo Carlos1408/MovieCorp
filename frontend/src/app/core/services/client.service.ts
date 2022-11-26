@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Client } from '../interfaces/client';
 import { Ticket } from '../interfaces/ticket';
@@ -127,14 +127,12 @@ export class ClientService {
     console.log(this.mySeats.getValue());
   }
 
-  buyTicket(client: Client): void {
+  buyTicket(client: Client): Observable<any> {
     const body = {
       ...this.ticket.getValue(),
       seats: this.mySeats.getValue(),
       client: client,
     };
-    console.log('final', body);
-    // Envio de datos para la compra de entrada
-    this.http.post(this.URL_API, body);
+    return this.http.post(this.URL_API, body);
   }
 }
