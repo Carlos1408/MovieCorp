@@ -34,8 +34,8 @@ export class SeatComponent implements OnInit, OnDestroy {
   }
 
   public get seatSize(): string {
-    if (this.nCols <= 5) return 'h-5rem w-5rem';
-    return 'h-2rem w-2rem md:h-3rem md:w-3rem lg:h-5rem lg:w-5rem text-xs md:text-sm lg:text-xl';
+    if (this.nCols <= 5) return 'h-3rem w-3rem';
+    return 'h-2rem w-2rem md:h-3rem md:w-3rem lg:h-3rem lg:w-3rem text-xs md:text-sm lg:text-xl';
   }
 
   constructor(
