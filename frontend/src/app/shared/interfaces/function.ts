@@ -13,5 +13,5 @@ export interface Function {
   from: string;
   to: string;
   nSeats?: string;
-  occupiedSeats?: Number[];
+  occupiedSeats?: string[];
 }
