@@ -6,7 +6,7 @@
         </ng-template>
         <ng-template pTemplate="subtitle">
             <div class=" justify-content-center text-color">
-                <h1 class="mt-0 mb-3">{{movie.title}}</h1>
+                <h1 class="mt-0 mb-3 capitalize">{{movie.title | lowercase}}</h1>
                 <ng-container *ngIf="functions?.length">
                     <h2 class="mt-0 mb-2">Horarios: </h2>
                     <div class="flex flex-wrap justify-content-start">
