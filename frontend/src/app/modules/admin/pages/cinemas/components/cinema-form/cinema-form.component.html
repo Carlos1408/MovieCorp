@@ -26,14 +26,14 @@
                         <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)"
                             removeStyleClass="p-button-sm p-button-danger" [fileLimit]="1"
                             invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
-                            chooseLabel="Seleccionar archivo" accept="image/*"></p-fileUpload>
+                            chooseLabel="Seleccionar archivo" accept="image/*" [maxFileSize]="5000000" invalidFileSizeMessageDetail="Archivo demasiado grande, maximo 5Mb"></p-fileUpload>
                     </ng-container>
                 </ng-container>
                 <ng-container *ngIf="!editMode">
                     <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)"
                         removeStyleClass="p-button-sm p-button-danger" [fileLimit]="1"
                         invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
-                        chooseLabel="Seleccionar archivo" accept="image/*"></p-fileUpload>
+                        chooseLabel="Seleccionar archivo" accept="image/*" [maxFileSize]="5000000" invalidFileSizeMessageDetail="Archivo demasiado grande, maximo 5Mb"></p-fileUpload>
                 </ng-container>
             </div>
         </form>
