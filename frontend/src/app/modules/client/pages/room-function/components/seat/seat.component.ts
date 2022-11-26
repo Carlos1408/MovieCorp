@@ -48,8 +48,7 @@ export class SeatComponent implements OnInit, OnDestroy {
       this.nSeats = seats.length;
       this.isSelected = seats.includes(this.nSeat);
     });
-    if (this.clientService.getOccupedSeats.includes(this.nSeat))
-      this.occuped = true;
+    this.occuped = this.clientService.getOccupedSeats.includes(this.nSeat);
   }
 
   ngOnDestroy(): void {

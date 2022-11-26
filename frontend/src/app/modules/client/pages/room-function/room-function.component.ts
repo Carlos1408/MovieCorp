@@ -61,6 +61,7 @@ export class RoomFunctionComponent implements OnInit, OnDestroy {
           this.function_ = function_;
           if (function_.movie) this.movie = function_.movie;
           if (function_.room) this.room = function_.room;
+          this.clientService.setOccupedSeats(function_.occupiedSeats || []);
         })
       )
       .subscribe();

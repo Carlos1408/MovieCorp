@@ -24,9 +24,13 @@
                 </div>
             </div>
         </form>
-        <div class="flex justify-content-center">
-            <p-button class="mr-2" label="Atras" styleClass="p-button-danger" (onClick)="handleCancel()"></p-button>
-            <p-button class="ml-2" label="Aceptar" styleClass="p-button-primary" (onClick)="handleSubmit()"></p-button>
-        </div>
+        <ng-template pTemplate="footer">
+            <div class="flex justify-content-end">
+                <p-button class="mr-2" label="Atras" styleClass="p-button-danger" (onClick)="handleCancel()"></p-button>
+                <p-button class="ml-2" label="Aceptar" styleClass="p-button-primary" (onClick)="handleSubmit()">
+                </p-button>
+            </div>
+        </ng-template>
+
     </p-card>
 </div>
