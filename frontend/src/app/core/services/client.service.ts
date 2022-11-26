@@ -135,6 +135,6 @@ export class ClientService {
     };
     console.log('final', body);
     // Envio de datos para la compra de entrada
-    // this.http.post(`${this.URL_API}/`, body);
+    this.http.post(this.URL_API, body);
   }
 }

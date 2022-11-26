@@ -4,8 +4,9 @@ const pdf1 = require("html-pdf");
 const pdf2 = require("html-pdf");
 const fs = require("fs");
 const path = require("path");
+const Function = require("../models/function");
 
-function createVoucher(cinema, movie, hour, seats, price, room, userData) {
+function createVoucher(cinema, movie, hour, seats, price, room, client) {
 
     var today = new Date();
     var now = today.toLocaleDateString('en-GB');
@@ -26,9 +27,8 @@ function createVoucher(cinema, movie, hour, seats, price, room, userData) {
     </tr>`
    
     contenidoHtml = contenidoHtml.replace("{{tablaProductos}}", tabla);
-    contenidoHtml = contenidoHtml.replace("{{name}}",userData.name);
-    contenidoHtml = contenidoHtml.replace("{{lastname}}",userData.lastname);
-    contenidoHtml = contenidoHtml.replace("{{ci}}",userData.CI);
+    contenidoHtml = contenidoHtml.replace("{{names}}",client.names);
+    contenidoHtml = contenidoHtml.replace("{{ci}}",client.ci);
     contenidoHtml = contenidoHtml.replace("{{fecha}}",now);
     contenidoHtml = contenidoHtml.replace("{{nVoucher}}", 1);
     contenidoHtml = contenidoHtml.replace("{{cinema}}",cinema);
@@ -38,11 +38,11 @@ function createVoucher(cinema, movie, hour, seats, price, room, userData) {
             console.log("Error creando PDF: " + error)
         } else {
             console.log("PDF creado correctamente RECIBO");
-            createTicket(movie, cinema, room, hour, seats, userData);
+            createTicket(movie, cinema, room, hour, seats, client);
         }
     });
 }
-function createTicket(movie, cinema, room, hour, seats, userData){
+function createTicket(movie, cinema, room, hour, seats, client){
 
     const ubicacionPlantilla = require.resolve("../templates/ticket.html");
     let contenidoHtml = fs.readFileSync(ubicacionPlantilla, 'utf8');
@@ -75,12 +75,12 @@ function createTicket(movie, cinema, room, hour, seats, userData){
             console.log("Error creando PDF: " + error)
         } else {
             console.log("PDF creado correctamente BOLETOS ");
-            createMessage(userData);
+            createMessage(client);
         }
     });
 }
 
-function createMessage(userData) {
+function createMessage(client) {
 
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
@@ -93,8 +93,8 @@ function createMessage(userData) {
     });
 
     let mailOptions = {
-        from: userData.name+" "+userData.lastname,
-        to: userData.email,
+        from: client.names,
+        to: client.email,
         subject: "Comprobante de pago y boletos",
         text: "Muchas gracias por comprar en MovieCorp, le adjuntamos el recibo de su compra y sus boletos DISFRUTE SU PELíCULA!!!",
         attachments: [
@@ -115,9 +115,9 @@ function createMessage(userData) {
 
 
 const buy = async (req, res) => {
-   /*const {cinema_id, room_id, movie_id, function_id} = req.body
-    const function_ = await Function.aggregate([
-      { $match: { _id: mongoose.Types.ObjectId(id) } },
+   const {cinema_id, client, movie_id, function_id, room_id, seats} = req.body;
+    const f = await Function.aggregate([
+      { $match: { _id: mongoose.Types.ObjectId(function_id) } },
       { $limit: 1 },
       {
         $lookup: {
@@ -147,23 +147,18 @@ const buy = async (req, res) => {
       },
       { $unwind: "$movie" },
     ]);
-    const cinema = function_.cinema
-    const room = function_.room
-    const movie = function_.movie*/
-    const seats = ['110', '12', '13']
-    const cinema = {name: "Cochabamba"}
-    const room = {name: "A1", price: 25}
-    const movie = {name: "LOS VENGADORES"}
-    const userData = {name: "Victor", lastname: "Camacho", CI: 8801362, email: "vcp8801@gmail.com"}
-    //const timeStart = new Date(function_.from)
-    const timeStart = new Date();
+    const function_ = f[0]
+
+    const cinema = function_.cinema;
+    const room = function_.room;
+    const movie = function_.movie
+    const timeStart = new Date(function_.from)
     const hour = timeStart.getHours()+":"+timeStart.getMinutes();
-
-    createVoucher(cinema.name, movie.name, hour, seats, room.price, room.name, userData)
-
+    
+    createVoucher(cinema.name, movie.title, hour, seats, room.price, room.roomNum, client);
+    
     res.json(null);
-  }
-
+}
   module.exports = {
     buy
   }
