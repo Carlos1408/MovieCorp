@@ -5,7 +5,7 @@ export interface Cinema {
   _id?: string;
   name: string;
   address: string;
-  imagePath: string;
+  imagePath?: string;
   movies_ids?: String[];
   movies?: Movie[];
   rooms_ids?: String[];

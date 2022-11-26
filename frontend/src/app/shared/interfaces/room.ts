@@ -7,7 +7,7 @@ export interface Room {
   nRows: number;
   nCol: number;
   price: number;
-  timeRanges: Array<Array<string>>;
+  timeRanges: Array<{ function_id: string; from: Date; to: Date }>;
   createAt?: string;
   updateAt?: string;
 }

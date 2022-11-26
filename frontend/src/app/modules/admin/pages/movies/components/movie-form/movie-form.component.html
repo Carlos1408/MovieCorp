@@ -20,7 +20,7 @@
             </div>
             <div class="field">
                 <h4>Duracion</h4>
-                <p-inputNumber formControlName="length" [useGrouping]="false" suffix=" mins"></p-inputNumber>
+                <p-inputNumber formControlName="length" [useGrouping]="false" suffix=" mins" [min]="60"></p-inputNumber>
             </div>
             <div class="field">
                 <h4>Protagonistas</h4>
@@ -32,10 +32,22 @@
             </div>
             <div class="field">
                 <h4>Portada</h4>
-                <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)"
-                    removeStyleClass="p-button-sm p-button-danger" [fileLimit]="1"
-                    invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
-                    chooseLabel="Seleccionar archivo" accept="image/*"></p-fileUpload>
+                <ng-container *ngIf="editMode">
+                    <p-button [label]="!uploadImage? 'Actualizar portada': 'Cancelar'" (onClick)="toggleImg()">
+                    </p-button>
+                    <ng-container *ngIf="uploadImage">
+                        <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)"
+                            removeStyleClass="p-button-sm p-button-danger" [fileLimit]="1"
+                            invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
+                            chooseLabel="Seleccionar archivo" accept="image/*"></p-fileUpload>
+                    </ng-container>
+                </ng-container>
+                <ng-container *ngIf="!editMode">
+                    <p-fileUpload [auto]="true" (onSelect)="onFileChange($event)"
+                        removeStyleClass="p-button-sm p-button-danger" [fileLimit]="1"
+                        invalidFileLimitMessageSummary="Cantidad maxima de archivos excedida"
+                        chooseLabel="Seleccionar archivo" accept="image/*"></p-fileUpload>
+                </ng-container>
             </div>
             <div class="field">
                 <h4>Trailer</h4>

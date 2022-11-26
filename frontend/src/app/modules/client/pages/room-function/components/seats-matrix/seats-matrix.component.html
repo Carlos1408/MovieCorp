@@ -1,0 +1,9 @@
+<div class="mt-4">
+    <ng-container *ngFor="let col of colArr">
+        <div class="flex justify-content-around">
+            <ng-container *ngFor="let row of rowArr">
+                <app-seat [nSeat]="col.toString() + row.toString()" [nCols]="nCols"></app-seat>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>

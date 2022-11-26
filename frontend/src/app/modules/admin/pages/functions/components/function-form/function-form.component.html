@@ -21,13 +21,18 @@
             <div class="field">
                 <h4>Horario</h4>
                 <div class="p-inputgroup">
-                    <p-calendar [timeOnly]="true" placeholder="Inicio" formControlName="from" appendTo="body"
-                        [readonlyInput]="true" hourFormat="12" (onSelect)="onSelectFrom($event)">
+                    <p-calendar [timeOnly]="true" placeholder="Inicio" name="from" formControlName="from"
+                        appendTo="body" [readonlyInput]="true" (onSelect)="onSelectFrom($event)">
                     </p-calendar>
-                    <p-calendar [timeOnly]="true" placeholder="Fin" formControlName="to" appendTo="body" hourFormat="12"
+                    <p-calendar [timeOnly]="true" placeholder="Fin" formControlName="to" appendTo="body"
                         [readonlyInput]="true"></p-calendar>
                 </div>
+                <div *ngIf="functionForm.invalid" class="mt-2 ml-1">
+                    <small *ngIf="functionForm.hasError('checkTimeRangeIsAvailable')" class="text-red-500">Horario no
+                        disponible</small>
+                </div>
             </div>
+
         </form>
     </ng-template>
     <ng-template pTemplate="footer">

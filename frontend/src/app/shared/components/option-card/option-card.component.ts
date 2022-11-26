@@ -9,15 +9,10 @@ export class OptionCardComponent implements OnInit {
   @Input() name!: string;
   @Input() url!: string;
   @Input() imagePath!: string;
+  @Input() showTooltip: boolean = false;
+  @Input() tooltiptext!: string;
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.name, this.url, this.imagePath);
-    
-  }
-
-  testClick(): void {
-    console.log('FUNCIONA');
-  }
+  ngOnInit(): void {}
 }

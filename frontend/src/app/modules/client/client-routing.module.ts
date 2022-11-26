@@ -4,12 +4,16 @@ import { ClientComponent } from './client.component';
 import { BillboardComponent } from './pages/billboard/billboard.component';
 import { TheatersComponent } from './pages/theaters/theaters.component';
 import { MovieComponent } from './pages/movie/movie.component';
+import { RoomFunctionComponent } from './pages/room-function/room-function.component';
+import { VoucherComponent } from './pages/voucher/voucher.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'theaters', pathMatch: 'full' },
   { path: 'theaters', component: TheatersComponent },
-  { path: 'billboard', component: BillboardComponent },
+  { path: 'billboard/:cinema_id', component: BillboardComponent },
   { path: 'movie/:id', component: MovieComponent },
+  { path: 'room-function/:id', component: RoomFunctionComponent },
+  { path: 'voucher', component: VoucherComponent}
 ];
 
 @NgModule({

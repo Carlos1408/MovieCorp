@@ -13,16 +13,18 @@
             </div>
             <div class="field">
                 <h4>Cantidad Filas</h4>
-                <p-inputNumber formControlName="nRows" [useGrouping]="false"></p-inputNumber>
+                <p-inputNumber formControlName="nRows" [useGrouping]="false" [min]="5" [max]="15"></p-inputNumber>
             </div>
             <div class="field">
                 <h4>Cantidad Columnas</h4>
-                <p-inputNumber formControlName="nCol" [useGrouping]="false"></p-inputNumber>
+                <p-inputNumber formControlName="nCol" [useGrouping]="false" [min]="5" [max]="15"></p-inputNumber>
             </div>
             <div class="field">
                 <h4>Precio de la Entrada</h4>
                 <p-inputNumber formControlName="price" mode="currency" currency="BOB" locale="es-BO"
-                    [useGrouping]="false"></p-inputNumber>
+                    [useGrouping]="false" [min]="5" [max]="75" [showButtons]="true" buttonLayout="horizontal"
+                    decrementButtonClass="p-button-danger" incrementButtonClass="p-button-success"
+                    decrementButtonIcon="pi pi-minus" incrementButtonIcon="pi pi-plus"></p-inputNumber>
             </div>
         </form>
     </ng-template>

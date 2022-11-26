@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { Observable, Subscription, tap } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
+import { Ticket } from 'src/app/core/interfaces/ticket';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { ClientService } from 'src/app/core/services/client.service';
+import { loggedItems } from './loggedItems';
 
 @Component({
   selector: 'app-navbar',
@@ -15,94 +18,60 @@ export class NavbarComponent implements OnInit, OnDestroy {
   isLoggedIn!: boolean;
   private userRoleSubscription!: Subscription;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  ticket!: Ticket;
+  ticketSubscription!: Subscription;
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private clientService: ClientService
+  ) {}
 
   ngOnInit(): void {
+    this.ticketSubscription = this.clientService.ticket$.pipe().subscribe({
+      next: (ticket) => {
+        this.items = [
+          {
+            label: 'Cines',
+            routerLink: '/client/theaters',
+            styleClass: 'mx-1',
+          },
+        ];
+        if (ticket.cinema_id) {
+          this.items = [
+            ...this.items,
+            {
+              label: 'Cartelera',
+              routerLink: `/client/billboard/${ticket.cinema_id}`,
+              styleClass: 'mx-1',
+            },
+          ];
+        }
+        if (ticket.movie_id) {
+          this.items = [
+            ...this.items,
+            {
+              label: 'Película',
+              routerLink: `/client/movie/${ticket.movie_id}`,
+              styleClass: 'mx-1',
+            },
+          ];
+        }
+      },
+    });
+
     this.userRoleSubscription = this.authService.user$
       .pipe(
         tap((user) => {
           if (!user) {
             this.isLoggedIn = false;
-            this.items = [
-              {
-                label: 'Cines',
-                routerLink: '/client/theaters',
-                styleClass: 'mx-1',
-              },
-              {
-                label: 'Cartelera',
-                routerLink: '/client/billboard',
-                styleClass: 'mx-1',
-              },
-              {
-                label: 'Pelicula',
-                routerLink: '/client/movie',
-                styleClass: 'mx-1',
-              },
-            ];
           } else {
             this.isLoggedIn = true;
             if (user.role === 'admin') {
-              this.items = [
-                {
-                  label: 'Administrador',
-                  routerLink: '/admin',
-                  styleClass: 'mx-1',
-                  icon: 'pi pi-home text-white',
-                },
-                {
-                  label: 'Cines',
-                  routerLink: '/admin/cinemas',
-                  styleClass: 'mx-1',
-                  icon: 'pi pi-video text-white',
-                },
-                {
-                  label: 'Salas',
-                  routerLink: '/admin/rooms',
-                  styleClass: 'mx-1',
-                  icon: 'pi pi-tablet text-white',
-                },
-                {
-                  label: 'Peliculas',
-                  routerLink: '/admin/movies',
-                  styleClass: 'mx-1',
-                  icon: 'pi pi-ticket text-white',
-                },
-                {
-                  label: 'Funciones',
-                  routerLink: '/admin/functions',
-                  styleClass: 'mx-1',
-                  icon: 'pi pi-video text-white',
-                },
-                {
-                  label: 'Mi perfil',
-                  routerLink: '/profile',
-                  styleClass: 'mx-1',
-                  icon: 'pi pi-user text-white',
-                },
-              ];
+              this.items = loggedItems.admin;
             }
             if (user.role === 'manager') {
-              this.items = [
-                {
-                  label: 'Gerente',
-                  routerLink: '/management',
-                  styleClass: 'mx-1',
-                  icon: 'pi pi-home text-white',
-                },
-                {
-                  label: 'Usuarios',
-                  routerLink: '/management/users',
-                  styleClass: 'mx-1',
-                  icon: 'pi pi-users text-white',
-                },
-                {
-                  label: 'Mi perfil',
-                  routerLink: '/profile',
-                  styleClass: 'mx-1',
-                  icon: 'pi pi-user text-white',
-                },
-              ];
+              this.items = loggedItems.manager;
             }
           }
         })

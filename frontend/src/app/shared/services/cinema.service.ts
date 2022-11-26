@@ -36,8 +36,11 @@ export class CinemaService {
 
   updateCinema(cinema: Cinema): Observable<Cinema> {
     const formData = this.formGroup2formData(cinema);
-
     return this.http.put<Cinema>(`${this.URL_API}/${cinema._id}`, formData);
+  }
+
+  updateCinemaNoImg(cinema: Cinema): Observable<Cinema> {
+    return this.http.put<Cinema>(`${this.URL_API}/noimg/${cinema._id}`, cinema);
   }
 
   deleteCinema(_id: string): Observable<Cinema> {

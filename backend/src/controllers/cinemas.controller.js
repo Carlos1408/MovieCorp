@@ -2,7 +2,6 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const path = require("path");
 const Cinema = require("../models/cinema");
-const Movie = require("../models/movie");
 const Room = require("../models/room");
 const Function = require("../models/function");
 const { deleteFunctionRaw } = require("../controllers/functions.controller");
@@ -102,6 +101,23 @@ const updateCinema = async (req, res) => {
   res.json(cinema);
 };
 
+const updateCinemaNoImg = async (req, res) => {
+  const { id } = req.params;
+  const { name, address, movies_ids } = req.body;
+  const cinema = await Cinema.findById(id);
+  if (cinema) {
+    await cinema.updateOne({
+      name,
+      address,
+      movies_ids: movies_ids.map((id) => {
+        return mongoose.Types.ObjectId(id);
+      }),
+    });
+    await cinema.save();
+  }
+  res.json(cinema);
+};
+
 const deleteCinema = async (req, res) => {
   const { id } = req.params;
   const cinema = await Cinema.findByIdAndRemove(id);
@@ -130,4 +146,5 @@ module.exports = {
   deleteCinema,
   getAllCinemasLg,
   getCinemaLg,
+  updateCinemaNoImg,
 };

@@ -124,6 +124,20 @@ export class CinemasComponent implements OnInit {
     });
   }
 
+  updateCinemaNoImg(cinema: Cinema): void {
+    this.cinemaService.updateCinemaNoImg(cinema).subscribe({
+      next: (res) => {
+        this.messageSerice.add({
+          severity: 'success',
+          summary: 'Datos actualizados',
+          detail: 'Los datos del cine han sido actualizados exitosamente',
+        });
+        this.getCinemas();
+      },
+      error: (err) => console.log(err),
+    });
+  }
+
   fillCinemaForm(cinema: Cinema): void {
     this.handleCinema = cinema;
     this.openForm();

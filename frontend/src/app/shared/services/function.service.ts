@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FunctionService {
   private URL_API = `${environment.API_BASE_URL}/api/v1/functions`;
@@ -24,12 +24,23 @@ export class FunctionService {
     return this.http.get<Function>(`${this.URL_API}/${_id}`);
   }
 
+  getFunctionLg(_id: string): Observable<Function> {
+    return this.http.get<Function>(`${this.URL_API}/lg/${_id}`);
+  }
+
+  getCinemaFunctions(cinema_id: string): Observable<Function[]> {
+    return this.http.get<Function[]>(`${this.URL_API}/cinema/${cinema_id}`);
+  }
+
   createFunction(function_: Function): Observable<Function> {
     return this.http.post<Function>(this.URL_API, function_);
   }
 
   updateFunction(function_: Function): Observable<Function> {
-    return this.http.put<Function>(`${this.URL_API}/${function_._id}`, function_);
+    return this.http.put<Function>(
+      `${this.URL_API}/${function_._id}`,
+      function_
+    );
   }
 
   deleteFunction(_id: string): Observable<Function> {

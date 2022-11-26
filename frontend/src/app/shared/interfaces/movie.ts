@@ -1,3 +1,5 @@
+import { Function } from "./function";
+
 export interface Movie {
   _id?: string;
   title: string;
@@ -7,6 +9,7 @@ export interface Movie {
   rating: string;
   protagonists: string;
   director: string;
-  imagePath: string;
+  imagePath?: string;
   trailer: string;
+  functions?: Function[];
 }

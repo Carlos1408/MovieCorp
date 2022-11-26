@@ -1,5 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { tap } from 'rxjs';
+import { ClientService } from 'src/app/core/services/client.service';
 import { Cinema } from 'src/app/shared/interfaces/cinema';
 import { CinemaService } from 'src/app/shared/services/cinema.service';
 import { environment } from 'src/environments/environment';
@@ -13,10 +16,16 @@ export class TheatersComponent implements OnInit {
   API_URL = `${environment.API_BASE_URL}/`;
   cinemas!: Cinema[];
 
-  constructor(private cinemaService: CinemaService) {}
+  constructor(
+    private cinemaService: CinemaService,
+    private clientService: ClientService,
+    private cookieService: CookieService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getCinemas();
+    this.clientService.clearTicket();
   }
 
   getCinemas(): void {
@@ -26,7 +35,8 @@ export class TheatersComponent implements OnInit {
       .subscribe();
   }
 
-  click(): void {
-    console.log(this.cinemas);
+  checkCinemaSelected(): void {
+    const cinema_id = this.cookieService.get('cinema_id');
+    if (cinema_id) this.router.navigateByUrl(`/client/billboard/${cinema_id}`);
   }
 }

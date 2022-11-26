@@ -59,7 +59,7 @@ const createRoom = async (req, res) => {
   await newRoom.save();
   const cinema = await Cinema.findById(cinema_id);
   await cinema.updateOne({ rooms_ids: [...cinema.rooms_ids, newRoom._id] });
-  cinema.save();
+  await cinema.save();
   res.json(newRoom);
 };
 
@@ -90,7 +90,7 @@ const deleteRoom = async (req, res) => {
       return r.toString() !== room._id.toString();
     }),
   });
-  cinema.save();
+  await cinema.save();
 
   const functions = await Function.find({
     room_id: mongoose.Types.ObjectId(id),

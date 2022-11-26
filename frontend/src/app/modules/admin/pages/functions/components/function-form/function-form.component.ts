@@ -11,6 +11,7 @@ import { Cinema } from 'src/app/shared/interfaces/cinema';
 import { Movie } from 'src/app/shared/interfaces/movie';
 import { Room } from 'src/app/shared/interfaces/room';
 import { tap } from 'rxjs';
+import { checkTimeRangeAvailable } from '../../validators/check-timerange-available.async.validator';
 
 @Component({
   selector: 'app-function-form',
@@ -27,6 +28,7 @@ export class FunctionFormComponent implements OnInit {
   }
 
   cinemas: Cinema[] = [];
+  cinema: Cinema | null = null;
   rooms: Room[] | any = [];
   movies: Movie[] | any = [];
 
@@ -40,19 +42,32 @@ export class FunctionFormComponent implements OnInit {
 
   @Output() createFunction = new EventEmitter<Function>();
 
-  functionForm: FormGroup = new FormGroup({
-    _id: new FormControl(''),
-    cinema_id: new FormControl('', Validators.required),
-    room_id: new FormControl('', Validators.required),
-    movie_id: new FormControl('', Validators.required),
-    from: new FormControl('', Validators.required),
-    to: new FormControl('', Validators.required),
-  });
+  functionForm: FormGroup = new FormGroup(
+    {
+      _id: new FormControl(''),
+      cinema_id: new FormControl('', Validators.required),
+      room_id: new FormControl('', Validators.required),
+      room: new FormControl(''),
+      movie_id: new FormControl('', Validators.required),
+      from: new FormControl('', Validators.required),
+      to: new FormControl('', Validators.required),
+    },
+    {
+      asyncValidators: checkTimeRangeAvailable(this.roomService),
+    }
+  );
+
+  public get from(): FormControl {
+    return this.functionForm.get('from') as FormControl;
+  }
+
+  public get toControl(): FormControl {
+    return this.functionForm.get('to') as FormControl;
+  }
 
   constructor(
     private cinemaService: CinemaService,
     private roomService: RoomService,
-    private movieService: MovieService,
     private messageService: MessageService
   ) {}
 
@@ -91,7 +106,7 @@ export class FunctionFormComponent implements OnInit {
       ?.setValue(this.editMode ? new Date(this.handledFunction.from) : '');
     this.functionForm
       .get('to')
-      ?.setValue(this.editMode ? new Date(this.handledFunction.from) : '');
+      ?.setValue(this.editMode ? new Date(this.handledFunction.to) : '');
   }
 
   onSelectCinema(): void {
@@ -101,6 +116,7 @@ export class FunctionFormComponent implements OnInit {
         .getCinemaLg(cinema_id)
         .pipe(
           tap((cinema: Cinema) => {
+            this.cinema = cinema;
             this.rooms = cinema.rooms;
             this.movies = cinema.movies;
           })
@@ -113,6 +129,7 @@ export class FunctionFormComponent implements OnInit {
     this.selectedRoom = this.rooms.filter((r: Room) => {
       return r._id === id.value;
     })[0];
+    this.functionForm.get('room')?.setValue(this.selectedRoom);
   }
 
   onSelectMovie(id: any): void {
@@ -122,11 +139,9 @@ export class FunctionFormComponent implements OnInit {
   }
 
   onSelectFrom(time: any): void {
-    console.log('select ', time instanceof Date);
     const to: Date = new Date(time);
     to.setMinutes(time.getMinutes() + (this.selectedMovie.length + 30));
     this.functionForm.get('to')?.setValue(to);
-    console.log(this.functionForm.value);
   }
 
   handleSubmit() {
@@ -140,9 +155,5 @@ export class FunctionFormComponent implements OnInit {
         detail: 'Todos los datos deben ser llenados correctamente',
       });
     }
-  }
-
-  devSubmit() {
-    console.log(this.functionForm.value);
   }
 }

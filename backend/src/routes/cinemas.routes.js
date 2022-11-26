@@ -11,6 +11,7 @@ const {
   deleteCinema,
   getAllCinemasLg,
   getCinemaLg,
+  updateCinemaNoImg,
 } = require("../controllers/cinemas.controller");
 
 const { verifyToken, verifyAdmin } = require("../controllers/auth.controller");
@@ -33,6 +34,7 @@ router.put(
   multer.single("image"),
   updateCinema
 );
+router.put("/noimg/:id", verifyToken, verifyAdmin, updateCinemaNoImg);
 router.delete("/:id", verifyToken, verifyAdmin, deleteCinema);
 
 module.exports = router;
