@@ -34,7 +34,8 @@ export class RoomFormComponent implements OnInit {
     ]),
     price: new FormControl('', [
       Validators.required,
-      Validators.min(10),
+      Validators.min(5),
+      Validators.max(75),
     ]),
   });
 

@@ -30,7 +30,7 @@ export class MovieFormComponent implements OnInit {
     synopsis: new FormControl('', Validators.required),
     genre: new FormControl('', Validators.required),
     rating: new FormControl('', Validators.required),
-    length: new FormControl('', Validators.required),
+    length: new FormControl('', [Validators.required, Validators.min(60)]),
     protagonists: new FormControl('', Validators.required),
     director: new FormControl('', Validators.required),
     image: new FormControl(''),
