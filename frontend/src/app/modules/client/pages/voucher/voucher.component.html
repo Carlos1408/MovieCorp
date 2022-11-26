@@ -5,7 +5,8 @@
                 <div class="field">
                     <h4>NOMBRE Y APELLIDOS</h4>
                     <span class="p-float-label">
-                        <input type="text" pInputText class="p-inputtext-lg" formControlName="names" style="width: 400px;">
+                        <input type="text" pInputText class="p-inputtext-lg" formControlName="names"
+                            style="width: 400px;">
                     </span>
                 </div>
                 <div class="field">
@@ -17,14 +18,15 @@
                 <div class="field">
                     <h4>EMAIL</h4>
                     <span class="p-float-label">
-                        <input type="text" id="email" pInputText class="p-inputtext-lg" formControlName="email" style="width: 400px;">
+                        <input type="text" id="email" pInputText class="p-inputtext-lg" formControlName="email"
+                            style="width: 400px;">
                     </span>
                 </div>
             </div>
         </form>
-        <div class="flex justify-content-center" >
-            <p-button class="mr-2" label="Atras" styleClass="p-button-danger"></p-button>
-            <p-button class="ml-2" label="Guardar" styleClass="p-button-primary"></p-button>
+        <div class="flex justify-content-center">
+            <p-button class="mr-2" label="Atras" styleClass="p-button-danger" (onClick)="handleCancel()"></p-button>
+            <p-button class="ml-2" label="Aceptar" styleClass="p-button-primary" (onClick)="handleSubmit()"></p-button>
         </div>
     </p-card>
 </div>

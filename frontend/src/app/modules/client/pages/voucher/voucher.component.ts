@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ClientService } from 'src/app/core/services/client.service';
 
 @Component({
   selector: 'app-voucher',
@@ -13,7 +15,15 @@ export class VoucherComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
   });
 
-  constructor() {}
+  constructor(private clientService: ClientService, private router: Router) {}
 
   ngOnInit(): void {}
+
+  handleSubmit(): void {
+    this.clientService.buyTicket(this.voucherForm.value);
+  }
+
+  handleCancel(): void {
+    this.router.navigateByUrl(`/client/room-function/${this.clientService.function_id}`);
+  }
 }
